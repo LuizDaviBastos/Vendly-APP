@@ -1,0 +1,75 @@
+<ion-header no-border>
+  <div class="asm-header">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-icon (click)="goBack()" role="button" name="arrow-back-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+
+        <ion-col><ion-title><b>Compra realizada</b></ion-title></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="description-configuration">
+          <ion-label class="ion-text-wrap">Configure uma mensagem para o seu comprador receber assim que efetuar uma
+            compra</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-toggle-row">
+        <ion-col size="1" class="description-configuration">
+          <ion-toggle [checked]="true"></ion-toggle>
+        </ion-col>
+        <ion-col>
+          <ion-label>Envio ativado</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-header>
+<ion-content scrollY="true">
+  <!-- <ion-card style="background-color: rgb(248, 248, 175); border: 1px solid rgb(235, 193, 8);">
+    <ion-card-header>
+      <ion-card-title style="color: black;">Atenção</ion-card-title>
+      <ion-card-subtitle>Regras</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      Keep close to Nature's heart... and break clear away, once in awhile,
+      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+    </ion-card-content>
+  </ion-card> -->
+  <ion-list class="edit-message" lines="none">
+    <ion-item class="item-background-color header-item">
+      <ion-title>Escreva a mensagem</ion-title>
+      <ion-icon name="attach-outline"></ion-icon>
+    </ion-item>
+    <div class="horizontal-line"></div>
+    <ion-item class="item-background-color footer-item">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div class="editor">
+              <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+              <div class="horizontal-line"></div>
+              <ngx-editor [editor]="editor" (ngModelChange)="onChange" [(ngModel)]="message"></ngx-editor>
+            </div>
+            <!-- <textarea maxlength="350" #message rows="18" class="message"
+              [mention]="['PRODUTO', 'COMPRADOR']"></textarea> -->
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label>{{message?.length || 0}} de 350 caracteres</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item class="save-message-button-container">
+      <ion-button class="save-message-button " [disabled]="loading['message'] || loading['button']" expand="block" (click)="save()">
+        <div *ngIf="!loading['button']">Salvar alterações</div>
+        <ion-spinner *ngIf="loading['button']"></ion-spinner>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

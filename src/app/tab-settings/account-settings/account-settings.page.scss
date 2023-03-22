@@ -1,0 +1,112 @@
+ion-header::after {
+    background-image: none;
+}
+
+ion-content {
+    background-color: var(--background-gray);
+}
+
+.asm-header {
+    height: 123px;
+    background-color: var(--background-gray);
+
+    ion-grid,
+    ion-row,
+    ion-col {
+        padding-left: 0px;
+        padding-right: 0px;
+        margin: auto;
+    }
+
+    .description-configuration {
+        margin-left: 20px;
+        margin-right: 20px;
+
+        ion-label{
+            padding: 0px;
+            font-size: 9pt;
+        }
+        
+    }
+
+    ion-label {
+        font-size: 10pt;
+        padding: 2px;
+    }
+
+    ion-icon {
+        color: #2D2D2D;
+        float: left;
+        font-size: 18pt;
+        padding-left: 20px;
+
+    }
+}
+
+ion-title,
+ion-label {
+    color: #2D2D2D
+}
+
+.item-background-color {
+    --ion-item-background: var(--background-white);
+}
+
+ion-item {
+
+    ion-icon {
+        color: #2D2D2D;
+        max-width: 85%;
+    }
+
+    ion-label {
+        padding-top: 14px;
+        padding-bottom: 14px;
+        .item-name {
+            margin-bottom: 6px;
+        }
+
+        p {
+            font-size: 9pt;
+            margin-top: 5px;
+        }
+
+    }
+}
+
+.horizontal-line {
+    background-color: var(--background-gray);
+    height: 1px;
+}
+
+.item-settings-label {
+    color: #565656;
+}
+
+.item-setting-value {
+    color: #2D2D2D;
+    font-weight: 500;
+    text-align: right;
+    font-size: 11pt;
+    margin: auto;
+}
+
+.last-item {
+    margin-bottom: 11px;
+  }
+  
+  .delete-account-button-container {
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+  }
+  
+  .delete-account-button {
+    width: 100%;
+    background-color: var(--background-white);
+    border-radius: 10px;
+    border: 1px solid red;
+    padding: 17px;
+    color: red;
+    font-size: 9pt;
+  }

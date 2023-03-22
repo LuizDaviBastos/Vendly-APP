@@ -1,0 +1,33 @@
+.center{
+    height: 800px;
+    width: 546px;
+}
+
+ion-grid {
+    &.center-grid {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) !important;
+        display: block !important;
+        width: 100%;
+    }
+}
+.md body.yellow {
+    --ion-background-color: #dfd814!important;
+}
+
+.dark {
+    --ion-background-color: #dfd814!important;
+}
+
+body.dark {
+    --ion-background-color: #dfd814;
+}
+
+body {
+    --ion-background-color: #dfd814;
+}
+:root{
+    --ion-background-color: #dfd814!important;
+}

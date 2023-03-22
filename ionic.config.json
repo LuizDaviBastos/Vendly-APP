@@ -1,0 +1,9 @@
+{
+  "name": "Asm.App",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "6e1f9995"
+}

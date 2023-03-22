@@ -1,0 +1,135 @@
+/*Menu*/
+
+ion-header::after {
+  background-image: none;
+}
+
+.asm-header {
+  background-color: var(--ml-yellow);
+  color: black;
+  padding-bottom: 1%;
+
+  ion-grid,
+  ion-row,
+  ion-col {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: auto;
+  }
+
+  .box-account {
+    border-radius: 12px;
+    height: 50px;
+    width: 90%;
+    margin: auto;
+    background-color: #F6F6F6;
+  }
+
+  seller-avatar {
+    width: 28px;
+    height: 28px;
+    margin: auto;
+  }
+
+  ion-label {
+    font-size: 10pt;
+    padding: 2px;
+  }
+
+  ion-title {
+    font-weight: 400;
+  }
+
+  ion-icon {
+    color: #2D2D2D;
+    float: right;
+    font-size: 16pt;
+    padding-right: 20px;
+
+  }
+}
+
+/*End Menu*/
+
+
+ion-item {
+  ion-label {
+    font-size: 11pt;
+    font-weight: 400;
+    color: #4e4e4e;
+    display: block;
+    padding: 6px;
+    padding-top: 8px;
+  }
+}
+
+.item-background-color {
+  --ion-item-background: var(--background-white);
+}
+
+.icon-container {
+  width: 32px;
+  border-radius: 9px;
+  background-color: #E2E2E2;
+  padding: 5px;
+  margin: auto;
+  ion-icon {
+    color: #2D2D2D;
+    margin: auto;
+    display: block;
+    padding: 3px;
+  }
+}
+
+.messages-container {
+  ion-row {
+    border-left: 4px solid green;
+    border-radius: 3px;
+  }
+  ion-col {
+    margin: auto;
+  }
+
+}
+
+.message-title {
+
+  ion-label {
+    text-align: left;
+    font-weight: 700;
+    padding-top: 0px;
+    padding-bottom: 1px;
+  }
+
+  p {
+    padding: 6px;
+    padding-top: 0px;
+    font-size: 9pt;
+    margin-top: 0px;
+    color: green;
+    margin: auto;
+
+  }
+}
+
+.edit-container {
+  
+  ion-icon {
+    font-weight: 500;
+    font-size: 10pt;
+  }
+
+}
+
+.message-divider {
+  height: 55px;
+
+  .path-icon {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.item-background-color {
+  --ion-item-background: var(--background-white);
+}

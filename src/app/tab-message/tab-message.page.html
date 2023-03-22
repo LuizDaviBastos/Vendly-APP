@@ -1,0 +1,95 @@
+<ion-header no-border>
+  <div class="asm-header">
+    <ion-grid>
+      <ion-row>
+        <ion-col><ion-title><b>Olá, {{sellerInfo.first_name}} {{sellerInfo.last_name}}</b></ion-title></ion-col>
+        <ion-col size="2"><ion-icon role="button" (click)="navigateTo('/settings')"
+            name="settings"></ion-icon></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><ion-title style="font-size: 10pt">Conta do Mercado Livre vinculada:</ion-title></ion-col>
+      </ion-row>
+      <ion-row class="box-account">
+        <ion-col size="2" style="display: flex;">
+          <seller-avatar [url]="sellerInfo?.thumbnail?.picture_url"></seller-avatar>
+        </ion-col>
+        <ion-col>
+          <ion-row>
+            <ion-label>{{sellerInfo?.nickname || 'João César dos Santos'}}</ion-label>
+          </ion-row>
+          <ion-row>
+            <ion-label style="color: #565656">{{sellerInfo?.produtosCount || 0}} Produtos</ion-label>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-header>
+
+<ion-content scrollY="true" slot="fixed" [fullscreen]="true">
+  <ion-list class="messages-container" lines="none">
+    <ion-item>
+      <ion-label>Configure as mensagens que seus clientes recebem de acordo com o status da venda</ion-label>
+    </ion-item>
+    <ion-item [routerLink]="['edit', '1']" class="item-background-color">
+      <ion-grid>
+        <ion-row [style]="(true ? '' : 'border-color: rgb(158, 2, 2);')">
+          <ion-col size="2">
+            <div class="icon-container">
+              <ion-icon name="bag-handle"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col class="message-title">
+            <ion-label>Compra realizada</ion-label>
+            <p [style]="(true ? '' : 'color: rgb(158, 2, 2);')">{{true ? 'Ativo' : 'Inativo'}}</p>
+          </ion-col>
+          <ion-col size="1" class="edit-container">
+            <ion-icon src="assets/icon/pencil.svg"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <div class="message-divider">
+      <ion-icon class="path-icon" src="assets/icon/path.svg"></ion-icon>
+    </div>
+    <ion-item [routerLink]="['edit', '2']" class="item-background-color">
+      <ion-grid>
+        <ion-row [style]="(true ? '' : 'border-color: rgb(158, 2, 2);')">
+          <ion-col size="2">
+            <div class="icon-container">
+              <ion-icon src="assets/icon/truck.svg"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col class="message-title">
+            <ion-label>Pedido a caminho</ion-label>
+            <p [style]="(true ? '' : 'color: rgb(158, 2, 2);')">{{true ? 'Ativo' : 'Inativo'}}</p>
+          </ion-col>
+          <ion-col size="1" class="edit-container">
+            <ion-icon src="assets/icon/pencil.svg"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <div class="message-divider">
+      <ion-icon class="path-icon" src="assets/icon/path.svg"></ion-icon>
+    </div>
+    <ion-item [routerLink]="['edit', '3']" class="item-background-color">
+      <ion-grid>
+        <ion-row [style]="(true ? '' : 'border-color: rgb(158, 2, 2);')">
+          <ion-col size="2">
+            <div class="icon-container">
+              <ion-icon src="assets/icon/box.svg"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col class="message-title">
+            <ion-label>Pedido entregue</ion-label>
+            <p [style]="(true ? '' : 'color: rgb(158, 2, 2);')">{{true ? 'Ativo' : 'Inativo'}}</p>
+          </ion-col>
+          <ion-col size="1" class="edit-container">
+            <ion-icon src="assets/icon/pencil.svg"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>
