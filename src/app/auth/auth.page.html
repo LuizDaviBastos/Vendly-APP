@@ -28,6 +28,13 @@
                 </ion-button>   
               </ion-col>
             </ion-row>
+            <ion-row>
+              <ion-select [(ngModel)]="target" placeholder="Select target">
+                <ion-select-option value="_system">App_systemles</ion-select-option>
+                <ion-select-option value="_self">_self</ion-select-option>
+                <ion-select-option value="_blank">_blank</ion-select-option>
+              </ion-select>
+            </ion-row>
           </ion-card-content>
         </ion-card>
       </ion-col>

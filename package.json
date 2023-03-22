@@ -6,6 +6,7 @@
   "scripts": {
     "ng": "ng",
     "deploy": "./deploy.bat build",
+    "deploy-android": "npx cap copy & npx cap sync & npx cap open android",
     "android": "ionic capacitor run android",
     "start": "ionic serve",
     "build": "ng build",

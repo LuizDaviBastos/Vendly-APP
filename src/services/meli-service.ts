@@ -36,13 +36,13 @@ export class MeliService {
     return this.http.get<SellerInfo>(`${this.baseUrl}/api/auth/GetSellerInfoBySellerId`, { params: httpParams });
   }
 
-  public async login(country: Country = 'br', callBackLogin: CallBackLoginFunction) {
+  public async login(country: Country = 'br', callBackLogin: CallBackLoginFunction, target: string = "_self") {
     var authUrl = await this.getAuthUrl(country).toPromise();
     const options: InAppBrowserOptions = {
       zoom: "no",
+      location: "no",
     };
-
-    let browser = InAppBrowser.create(authUrl.url, "_blank", options);
+    let browser = InAppBrowser.create(authUrl.url, target, options);
 
     if(window.navigator.platform == "Win32"){
       debugger;

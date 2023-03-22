@@ -13,6 +13,7 @@ export class AuthPage implements OnInit {
 
   public loading: boolean = false;
   public loadingFake: boolean = false;
+  public target: string;
   ngOnInit(): void {
     document.body.classList.add('yellow');
     if(LocalStorage.IsLogged){
@@ -33,7 +34,7 @@ export class AuthPage implements OnInit {
       else{
         alert(`error. ${callBackParam.errorMessage}`)
       }
-    });
+    }, this.target);
   }
 
   public loginFake(){
