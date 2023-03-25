@@ -1,25 +1,26 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuardService } from './services/auth-guard.service';
+import { AuthGuardLoggedService, AuthGuardLoggoutService } from './services';
 
 const routes: Routes = [
   
   {
-    canActivate: [AuthGuardService],
+    canActivate: [AuthGuardLoggedService],
     path: 'account',
     loadChildren: () => import('./tab-account/tab-account.module').then(m => m.Tab2PageModule)
   },
   {
-    canActivate: [AuthGuardService],
+    canActivate: [AuthGuardLoggedService],
     path: 'message',
     loadChildren: () => import('./tab-message/tab-message.module').then(m => m.Tab1PageModule)
   },
   {
-    canActivate: [AuthGuardService],
+    canActivate: [AuthGuardLoggedService],
     path: 'settings',
     loadChildren: () => import('./tab-settings/tab-settings.module').then(m => m.Tab3PageModule)
   },
   {
+    canActivate: [AuthGuardLoggoutService],
       path: 'auth',
       loadChildren: () => import('./auth/auth.module').then(m => m.AuthPageModule)
   },

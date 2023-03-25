@@ -6,7 +6,7 @@ import { LocalStorage } from '../helpers/local-storage.helper';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardService implements CanActivate {
+export class AuthGuardLoggedService implements CanActivate {
   constructor(private router: Router) { }
   private get isAuthenticated(): boolean {
     return LocalStorage.IsLogged || false;
