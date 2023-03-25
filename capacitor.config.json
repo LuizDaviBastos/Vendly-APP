@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "Asm.App",
+	"appId": "asm.app",
+	"appName": "Meli: Assistente de vendas",
 	"webDir": "www",
 	"bundledWebRuntime": false
 }

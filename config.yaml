@@ -1,0 +1,20 @@
+vars:
+  BUNDLE_ID:
+    default: asm.app
+  PACKAGE_NAME:
+    default: asm.app
+
+platforms:
+
+  android:
+    packageName: $PACKAGE_NAME
+    manifest:
+    - file: AndroidManifest.xml
+      target: manifest/application/activity
+      inject: |
+       <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="asm.app" />
+        </intent-filter>

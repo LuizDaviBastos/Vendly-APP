@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable, Input } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { InAppBrowser, InAppBrowserObject, InAppBrowserOptions, InAppBrowserEvent } from '@ionic-native/in-app-browser';
 import { Country } from 'src/models/country.type';
 import { SellerInfo as SellerInfo } from 'src/models/seller-info.model';
@@ -7,19 +7,17 @@ import { environment } from '../environments/environment';
 import { CallBackLoginFunction } from 'src/models/call-back-login-function.yype';
 import { Message } from 'src/models/message.mode';
 import { Platform } from '@ionic/angular';
+import { App, URLOpenListenerEvent } from '@capacitor/app';
 
 @Injectable()
 export class MeliService {
   public baseUrl: string = environment.urlBaseApi;
-  private finishedBrowserLogin: boolean = false;
-  private accessToken: string;
-  private accessTokenSuccess: boolean = false;
-  private accessTokenError: boolean = false;
   private sellerInfo: SellerInfo = <SellerInfo>{
     success: false
   };
 
-  constructor(private http: HttpClient, private platform: Platform) {}
+  constructor(private http: HttpClient, private platform: Platform) {
+  }
 
   public getAuthUrl(countryId: string) {
     const httpParams = new HttpParams().set('countryId', countryId);
@@ -36,37 +34,25 @@ export class MeliService {
     return this.http.get<SellerInfo>(`${this.baseUrl}/api/auth/GetSellerInfoBySellerId`, { params: httpParams });
   }
 
-  public async login(country: Country = 'br', callBackLogin: CallBackLoginFunction, target: string = "_self") {
+  public async login(country: Country = 'br', callBackLogin: CallBackLoginFunction, target: string = "_system") {
     var authUrl = await this.getAuthUrl(country).toPromise();
     const options: InAppBrowserOptions = {
       zoom: "no",
       location: "no",
     };
-    let browser = InAppBrowser.create(authUrl.url, target, options);
 
-    if(window.navigator.platform == "Win32"){
-      debugger;
-      let url = prompt("setr callback url");
-      await this.onGetCode(browser, <InAppBrowserEvent>{url: url}, callBackLogin);
+    let browser = InAppBrowser.create(authUrl.url, target, options);
+    if (window.navigator.platform == "Win32") {
+      const url = prompt("set callback url");
+      await this.onGetCode(browser, url, callBackLogin);
       return;
     }
-    browser.on("loadstart").subscribe(async (x) => {
-      debugger;
-      await this.onGetCode(browser, x, callBackLogin);
-    });
 
-    browser.on("loadstop").subscribe(async (x) => {
+    App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
       debugger;
-      await this.onGetCode(browser, x, callBackLogin);
-    });
-
-    browser.on("exit").subscribe((x) => {
-      this.onGetCode(browser, x, callBackLogin);
-      if (!this.finishedBrowserLogin) {
-        callBackLogin({
-          sellerInfo: this.sellerInfo,
-          success: true
-        });
+      const code = new URL(new URL(event.url).searchParams.get("url")).searchParams.get("code");
+      if (code) {
+        this.onGetCode(browser, code, callBackLogin);
       }
     });
   }
@@ -83,40 +69,27 @@ export class MeliService {
     }).toPromise();
   }
 
-  private async onGetCode(browser: InAppBrowserObject, url: InAppBrowserEvent, callBackLogin: CallBackLoginFunction) {
-    debugger;
-    let code = new URL(url?.url).searchParams.get("code");
+  public async onGetCode(browser: InAppBrowserObject, code: string, callBackLogin: CallBackLoginFunction) {
     if (code) {
-      if (this.finishedBrowserLogin == false) {
-        this.finishedBrowserLogin = true;
-        browser?.close();
-        const accessToken = await this.getAccessToken(code).toPromise();
-        if (accessToken) {
-          this.accessToken = accessToken.access_token;
-          this.sellerInfo.id = accessToken.user_id;
-          this.sellerInfo = await this.onSuccessLogin();
+      browser?.close();
+      const accessToken = await this.getAccessToken(code).toPromise();
+      if (accessToken) {
+        this.getSellerInfo(accessToken.user_id).subscribe((result) => {
+          this.sellerInfo = result;
           callBackLogin({
             sellerInfo: this.sellerInfo,
             success: this.sellerInfo.success,
             errorMessage: this.sellerInfo.message
           });
-        }
-        else {
-          callBackLogin({
-            sellerInfo: this.sellerInfo,
-            success: false,
-            errorMessage: `access-token nullo | accessToken: ${accessToken?.access_token}`
-          });
-        }
+        });
+      }
+      else {
+        callBackLogin({
+          sellerInfo: this.sellerInfo,
+          success: false,
+          errorMessage: `access-token nullo | accessToken: ${accessToken?.access_token}`
+        });
       }
     }
-  }
-
-  private async onSuccessLogin(): Promise<SellerInfo> {
-    const sellerInfo = await this.getSellerInfo(this.sellerInfo.id).toPromise();
-    if (sellerInfo.success) {
-      return sellerInfo;
-    }
-    return this.sellerInfo;
   }
 }

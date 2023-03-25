@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { StatusBar, Style } from '@capacitor/status-bar';
+import { StatusBar } from '@capacitor/status-bar';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { StatusBar, Style } from '@capacitor/status-bar';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private router: Router) {
+  constructor(private router: Router, private zone: NgZone, private platform: Platform) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if (event.url.includes("/edit") || event.url.includes("settings")) {
