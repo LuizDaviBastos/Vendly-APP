@@ -10,7 +10,6 @@ import { Platform } from '@ionic/angular';
 import { App, URLOpenListenerEvent } from '@capacitor/app';
 import { RequestResponse } from 'src/models/request-response.model';
 import { LoginResponse } from 'src/models/login-response';
-import { Seller } from 'src/models/seller';
 import { MessageTypeEnum } from 'src/models/message-type.enum';
 import { SellerMessage } from 'src/models/seller-message';
 
@@ -74,8 +73,6 @@ export class MeliService {
       }
     });
   }
-
-
 
   public async getMessageAsync(meliSellerId: number, messageType: MessageTypeEnum) {
     const params = new HttpParams().append('sellerId', meliSellerId).append('messageType', messageType);
