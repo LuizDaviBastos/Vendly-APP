@@ -2,7 +2,7 @@
   <div class="asm-header">
     <ion-grid>
       <ion-row>
-        <ion-col><ion-title><b>Olá, {{sellerInfo.first_name}} {{sellerInfo.last_name}}</b></ion-title></ion-col>
+        <ion-col><ion-title><b>Olá, {{sellerInfo.firstName}} {{sellerInfo.lastName}}</b></ion-title></ion-col>
         <ion-col size="2"><ion-icon role="button" (click)="navigateTo('/settings')"
             name="settings"></ion-icon></ion-col>
       </ion-row>
@@ -11,14 +11,14 @@
       </ion-row>
       <ion-row class="box-account">
         <ion-col size="2" style="display: flex;">
-          <seller-avatar [url]="sellerInfo?.thumbnail?.picture_url"></seller-avatar>
+          <seller-avatar [url]="meliSellerInfo?.thumbnail?.picture_url"></seller-avatar>
         </ion-col>
         <ion-col>
           <ion-row>
-            <ion-label>{{sellerInfo?.nickname || 'João César dos Santos'}}</ion-label>
+            <ion-label>{{meliSellerInfo?.nickname || 'João César dos Santos'}}</ion-label>
           </ion-row>
           <ion-row>
-            <ion-label style="color: #565656">{{sellerInfo?.produtosCount || 0}} Produtos</ion-label>
+            <ion-label style="color: #565656">{{meliSellerInfo?.produtosCount || 0}} Produtos</ion-label>
           </ion-row>
         </ion-col>
       </ion-row>

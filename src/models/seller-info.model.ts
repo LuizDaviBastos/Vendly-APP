@@ -1,7 +1,6 @@
-import { DatetimeOptions } from "@ionic/core";
-import { RequestResponseBase } from "./request-response-base.model";
+import { RequestResponse } from "./request-response.model";
 
-export class SellerInfo extends RequestResponseBase{
+export class SellerInfo extends RequestResponse<any>{
     public id: number;
     public nickname: string;
     public registration_date: Date;

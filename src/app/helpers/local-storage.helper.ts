@@ -1,28 +1,52 @@
-import { TagPlaceholder } from '@angular/compiler/src/i18n/i18n_ast';
-import { SellerInfo } from '../../models/seller-info.model';
+import { LoginResponse } from '../../models/login-response';
 export class LocalStorage {
-
-    public static setLogin(sellerInfo: SellerInfo) {
-        const sellerInfoJson = JSON.stringify(sellerInfo);
-        localStorage.setItem(this.keys.sellerInfo, sellerInfoJson);
+    private static login: LoginResponse = null;
+    public static setLogin(login: LoginResponse) {
+        const loginJson = JSON.stringify(login);
+        localStorage.setItem(this.keys.seller, loginJson);
+        localStorage.setItem(this.keys.token, login.token);
     }
 
-    public static getLogin(): SellerInfo {
-        const sellerInfoJson = localStorage.getItem(this.keys.sellerInfo);
-        return <SellerInfo>JSON.parse(sellerInfoJson) || <SellerInfo>{ success: false };
+    public static getLogin(): LoginResponse {
+        if(!this.login) {
+            const loginJson = localStorage.getItem(this.keys.seller);
+            this.login = <LoginResponse>JSON.parse(loginJson) || <LoginResponse>{ success: false };
+        }
+        return this.login;
     }
 
     public static get IsLogged(): boolean {
-        const sellerInfo = this.getLogin();
-        return sellerInfo?.success || false;
+        const loginInfo = this.getLogin();
+        return loginInfo?.success || false;
+    }
+
+    public static selectMeliAccount(meliSellerId: number){
+        localStorage.setItem(this.keys.meliSeller, `${meliSellerId}`);
+    }
+
+    public static getSelectedMeliAccount(): number | undefined {
+        let meliSellerId: number = +localStorage.getItem(this.keys.meliSeller) || null;
+        if(!meliSellerId) {
+            const login = this.getLogin();
+            meliSellerId = login.data.meliAccounts[0].meliSellerId;
+            this.selectMeliAccount(meliSellerId);
+        }
+        return meliSellerId;
+    }
+
+
+    public static get token(): string {
+        return localStorage.getItem(this.keys.token);
     }
 
     public static logout() {
-        localStorage.setItem(this.keys.sellerInfo, null);
+        localStorage.setItem(this.keys.seller, null);
     }
 
-    public static keys = {
-        sellerInfo: 'seller-info'
+    private static keys = {
+        seller: 'seller-login',
+        token: 'asm-token',
+        meliSeller: 'meli-seller-id'
     }
 
     public static get settings(): ConfigurationStorage {
@@ -31,11 +55,11 @@ export class LocalStorage {
 
     //FAKE
     public static fake() {
-        return new LocalStorage();
-    }
-
-    public setLogin() {
-        localStorage.setItem('seller-info', '{"success":true}');
+        return  {
+            setLogin() {
+                localStorage.setItem(this.keys.seller, '{"success":true}');
+            }
+        }
     }
 }
 export class ConfigurationStorage {

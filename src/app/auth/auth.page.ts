@@ -14,20 +14,24 @@ export class AuthPage implements OnInit {
   public loading: boolean = false;
   public loadingFake: boolean = false;
   public target: string;
+  public email: string;
+  public password: string;
+
   ngOnInit(): void { }
 
   public async login() {
     this.loading = true;
-    this.meliService.login('br', (callBackParam) => {
-      if (callBackParam.success) {
-        LocalStorage.setLogin(callBackParam.sellerInfo);
-        this.loading = false;
+
+    this.meliService.login(this.email, this.password).subscribe((response) => {
+      if (response.success) {
+        LocalStorage.setLogin(response.data);
         this.route.navigateByUrl('/message');
       }
-      else {
-        alert(`error. ${callBackParam.errorMessage}`)
-      }
-    }, this.target);
+    }, (error) => {
+      console.log(error);
+    }, () => {
+      this.loading = false;
+    })
   }
 
   public loginFake() {

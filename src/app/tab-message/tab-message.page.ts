@@ -1,10 +1,11 @@
 import { LocalStorage as LocalStorage } from '../helpers/local-storage.helper';
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { ToastController } from '@ionic/angular';
 import { MeliService } from 'src/services/meli-service';
 import { KeyValue } from '@angular/common';
+import { Seller } from 'src/models/seller';
 import { SellerInfo } from 'src/models/seller-info.model';
+import { AlertService } from 'src/services/alert-service';
 
 @Component({
   selector: "app-message",
@@ -13,78 +14,22 @@ import { SellerInfo } from 'src/models/seller-info.model';
 })
 export class TabMessagePage implements OnInit {
 
-  public get isLogged(): boolean {
-    return LocalStorage.IsLogged;
-  }
-
-  public get sellerInfo(): SellerInfo {
-    return LocalStorage.getLogin() || new SellerInfo();
-  }
-
+  public get isLogged(): boolean { return LocalStorage.IsLogged;   }
+  public get sellerInfo(): Seller { return LocalStorage.getLogin().data || new Seller(); }
   public loading: KeyValue<string, boolean>[] = [];
-
-  constructor(private route: Router, private toastController: ToastController, private meliService: MeliService) {
- 
-  }
-
-  public message: string;
+  public get meliSellerInfo(): SellerInfo { return this.meliService.selectedMeliAccount; }
+  
+  constructor(private route: Router, private alertService: AlertService, private meliService: MeliService) { }
 
   async ngOnInit(): Promise<void> {
-    this.loading['message'] = true;
-   
-    this.loading['message'] = false;
-  }
-
-  public async save() {
-    this.loading['button'] = true;
-    this.meliService.saveMessageAsync(LocalStorage.getLogin().id, this.message).then((response) => {
-      this.presentToast();
-    }).catch((err) => {
-      this.presentToastError();
-    }).finally(() => {
-      this.loading['button'] = false;
-    });
-  }
-
-  public setTag(tag: string) {
-    this.message = `${this.message}${tag}`;
-  }
-
-  async presentToastError() {
-    const toast = await this.toastController.create({
-      message: 'An error occurred while save the message',
-      duration: 5000,
-      position: 'top',
-      keyboardClose: true,
-      buttons: [
-        {
-          text: 'Ok',
-          role: 'cancel'
-        },
-      ],
-    });
-    toast.present();
-  }
-
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: 'Your message have been saved.',
-      duration: 5000,
-      position: 'top',
-      keyboardClose: true,
-      buttons: [
-        {
-          text: 'Done',
-          role: 'cancel'
-        },
-      ],
-    });
-    toast.present();
-  }
-
-  public buildMessage(message: string) {
-    this.message = message?.replace("@COMPRADOR", "<h1>COMPRADOR</h1>");
-    return message;
+    this.meliService.getMeliAccountInfo(LocalStorage.getSelectedMeliAccount()).subscribe((response) => {
+      if (response.success) {
+        this.meliService.selectedMeliAccount = response.data;
+      }
+      else {
+        this.alertService.showToastAlert('Um erro ocorreu ao obter suas informações.');
+      }
+    })
   }
 
   public navigateTo(route: string) {
