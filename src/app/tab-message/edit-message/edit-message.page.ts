@@ -25,7 +25,7 @@ export class EditMessagePage implements OnInit {
   }
 
   public get meliSeller(): SellerInfo {
-    return this.meliService.selectedMeliAccount;
+    return LocalStorage.getSelectedMeliAccount();
   }
 
   public loading: KeyValue<string, boolean>[] = [];
@@ -67,35 +67,46 @@ export class EditMessagePage implements OnInit {
     this.editor.valueChanges.subscribe((jsonDoc) => {
       let html = toHTML(jsonDoc);
       console.log(html);
+      this.message.message = html;
     })
 
     this.getMessage(this.messageType);
   }
 
   public async save() {
-    this.loading['button'] = true;
-    this.message.message = this.prepareToSendMessage(this.message.message);
-    this.meliService.saveMessage(this.message).subscribe((response) => {
-      if(response.success) {
-        this.alertService.showToastAlert('Mensagem salva com sucesso.');
-      }
-      else {
-        this.alertService.showToastAlert('Houve um erro ao tentar salvar a mensagem.');  
-      }
-      
-    }, (err) => {
-      this.alertService.showToastAlert('Houve um erro ao tentar salvar a mensagem.');
-    }, () => {
+    try {
+      this.loading['button'] = true;
+      this.message.message = this.prepareToSendMessage(this.message.message);
+      this.meliService.saveMessage(this.message).subscribe((response) => {
+        if (response.success) {
+          this.message = response.data;
+          this.alertService.showToastAlert('Mensagem salva com sucesso.');
+          LocalStorage.updateMessage(response.data);
+        }
+        else {
+          this.alertService.showToastAlert('Houve um erro ao tentar salvar a mensagem.');
+        }
+
+      }, (err) => {
+        this.alertService.showToastAlert('Houve um erro ao tentar salvar a mensagem.');
+        this.loading['button'] = false;
+      }, () => {
+        this.loading['button'] = false;
+      });
+    } catch {
       this.loading['button'] = false;
-    });
+    }
   }
 
   public getMessage(messageType: MessageTypeEnum) {
-    const currentAccount = this.sellerInfo.meliAccounts.find(x => x.meliSellerId == this.meliSeller.id);
-    const message = currentAccount.messages?.length > 0 && currentAccount.messages.find(x => x.messageType == messageType);
-    if (message) {
-      this.message = { ...message, message: this.prepareToReceiveMessage(message.message) }
-    }
+    this.meliService.getMessage(LocalStorage.meliAccountId, messageType).subscribe((response) => {
+      if (response.success) {
+        this.message = response.data;
+      }
+      else {
+        this.alertService.showToastAlert('Houve um erro ao buscar a mensagem.');
+      }
+    });
   }
 
   public navigateTo(route: string) {
@@ -107,6 +118,7 @@ export class EditMessagePage implements OnInit {
   }
 
   public prepareToReceiveMessage(message: string) {
+    if (!message) return message;
     let newMessage = message;
     newMessage = newMessage.replace('@COMPRADOR', `<span data-mention-id="101" data-mention-name="COMPRADOR" data-mention-email="" class="prosemirror-mention-node">@COMPRADOR</span>`)
     newMessage = newMessage.replace('@PRODUTO', `<span data-mention-id="102" data-mention-name="PRODUTO" data-mention-email="" class="prosemirror-mention-node">@PRODUTO</span>`)
@@ -114,6 +126,7 @@ export class EditMessagePage implements OnInit {
   }
 
   public prepareToSendMessage(message: string) {
+    if (!message) return message;
     let newMessage = message;
     newMessage = newMessage.replace('<span data-mention-id="101" data-mention-name="COMPRADOR" data-mention-email="" class="prosemirror-mention-node">@COMPRADOR</span>', '@COMPRADOR')
     newMessage = newMessage.replace(`<span data-mention-id="102" data-mention-name="PRODUTO" data-mention-email="" class="prosemirror-mention-node">@PRODUTO</span>`, '@PRODUTO')

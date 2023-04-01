@@ -8,14 +8,12 @@ import { LocalStorage } from '../helpers/local-storage.helper';
 })
 export class AuthGuardLoggoutService implements CanActivate {
   constructor(private router: Router) { }
-  private get isAuthenticated(): boolean {
-    return LocalStorage.IsLogged || false;
-  }
+
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
 
-    if (this.isAuthenticated) {
+    if (LocalStorage.IsLogged && LocalStorage.getLogin().hasMeliAccount) {
       this.router.navigate(['/message']);
-      return false
+      return false;
     }
     else {
       return true;

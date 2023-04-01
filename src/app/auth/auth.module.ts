@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { AuthPage } from './auth.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { AuthPageRoutingModule } from './auth-routing.module';
-import { HttpClientModule } from '@angular/common/http';
 import { MeliLogoComponent } from 'src/components/meli-logo/meli-logo.component';
 
 
@@ -16,8 +15,7 @@ import { MeliLogoComponent } from 'src/components/meli-logo/meli-logo.component'
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    AuthPageRoutingModule,
-    HttpClientModule
+    AuthPageRoutingModule
   ],
   declarations:[AuthPage, MeliLogoComponent],
   providers:[MeliService]

@@ -6,7 +6,6 @@ import { TabMessagePage } from './tab-message.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { Tab1PageRoutingModule } from './tab-message-routing.module';
 import { MeliService } from '../../services/meli-service';
-import { HttpClientModule } from '@angular/common/http';
 import { SellerAvatarComponent } from 'src/components/seller-avatar/seller-avatar.component';
 
 @NgModule({
@@ -14,7 +13,6 @@ import { SellerAvatarComponent } from 'src/components/seller-avatar/seller-avata
     IonicModule,
     CommonModule,
     FormsModule,
-    HttpClientModule,
     ExploreContainerComponentModule,
     Tab1PageRoutingModule
   ],

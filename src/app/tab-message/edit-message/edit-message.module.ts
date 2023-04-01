@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MeliService } from '../../../services/meli-service';
-import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { EditMessagePage } from './edit-message.page';
 import { MentionModule } from 'angular-mentions';
@@ -14,7 +13,6 @@ import { NgxEditorModule } from 'ngx-editor';
     IonicModule,
     CommonModule,
     FormsModule,
-    HttpClientModule,
     MentionModule,
     NgxEditorModule.forRoot({
       locals: {

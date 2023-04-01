@@ -10,26 +10,41 @@ import { map } from 'rxjs/operators';
 })
 export class AuthGuardLoggedService implements CanActivate {
   constructor(private router: Router, private meliService: MeliService) { }
-  private get isAuthenticated(): boolean {
-    return LocalStorage.IsLogged || false;
-  }
+ 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     
-    if(!this.isAuthenticated){
+    if(!LocalStorage.IsLogged){
       this.router.navigate(['/auth']);
       return false;
     }
-   
+
+    if(!LocalStorage.getLogin()?.hasMeliAccount) {
+      debugger;
+      return this.meliService.hasMeliAccount(LocalStorage.getLogin().data.id).pipe(
+        map((hasMeliAccount) => {
+          if (!hasMeliAccount) {
+            this.meliService.addMeliAccount(LocalStorage.getCountry())
+            return false;
+          } else {
+            this.router.navigate(['/auth']);
+            return false;
+          }
+        })
+      );
+    }
+    return LocalStorage.IsLogged;
     return this.meliService.isAuthenticated(LocalStorage.token).pipe(
-      map((response) => {
-        if (response) {
+      map((isAuthenticated) => {
+        if(isAuthenticated) {
           return true;
-        } else {
+        }
+        else {
+          LocalStorage.setToken(null);
           this.router.navigate(['/auth']);
           return false;
         }
-      })
-    );
 
+      }) 
+    )
   }
 }

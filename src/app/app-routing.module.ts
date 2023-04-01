@@ -3,12 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuardLoggedService, AuthGuardLoggoutService } from './services';
 
 const routes: Routes = [
-  
-  {
-    canActivate: [AuthGuardLoggedService],
-    path: 'account',
-    loadChildren: () => import('./tab-account/tab-account.module').then(m => m.Tab2PageModule)
-  },
+ 
   {
     canActivate: [AuthGuardLoggedService],
     path: 'message',

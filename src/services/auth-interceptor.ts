@@ -3,16 +3,14 @@ import { Observable } from "rxjs";
 import { LocalStorage } from "src/app/helpers/local-storage.helper";
 
 export class AuthInterceptor implements HttpInterceptor {
-    constructor() {}
-  
+    constructor() { }
+
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const authToken = LocalStorage.token;
-        if (authToken) {
-            request = request.clone({
-                setHeaders: {
-                    Authorization: `Bearer ${authToken}`
-                }
-            });
+        const token = LocalStorage.token;
+        if (token) {
+            const headers = request.headers.set('Authorization', `Bearer ${token}`);
+            const req = request.clone({ headers });
+            return next.handle(req);
         }
         return next.handle(request);
     }

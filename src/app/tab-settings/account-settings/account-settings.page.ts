@@ -1,8 +1,8 @@
 import { Router } from '@angular/router';
 import { LocalStorage } from '../../helpers/local-storage.helper';
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { NavController, Platform } from '@ionic/angular';
-import { SellerInfo } from 'src/models/seller-info.model';
+import { Seller } from 'src/models/seller';
 
 @Component({
   selector: 'account-tab-settings',
@@ -11,11 +11,11 @@ import { SellerInfo } from 'src/models/seller-info.model';
 })
 export class AccountSettingsPage implements OnInit {
 
-  public get sellerInfo(): SellerInfo {
-    return LocalStorage.getLogin() || new SellerInfo();
+  public get sellerInfo(): Seller {
+    return LocalStorage.getLogin().data || new Seller();
   }
 
-  constructor(private route: Router, private platform: Platform, private navCtrl: NavController) { }
+  constructor(private route: Router, private platform: Platform, private navCtrl: NavController, private zone: NgZone) { }
 
   ngOnInit(): void {
 
@@ -23,7 +23,10 @@ export class AccountSettingsPage implements OnInit {
 
   public logout() {
     LocalStorage.logout();
-    this.route.navigateByUrl('/auth');
+    this.zone.run(() => {
+      this.route.navigate(['/auth']);
+    })
+    
   }
 
   public goBack() {

@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchTagsDirective } from './directives/search-tags.directive';
 import { AuthInterceptor } from '../services/auth-interceptor';
-import { AlertService } from 'src/services/alert-service';
 
 @NgModule({
   declarations: [AppComponent, SearchTagsDirective],
