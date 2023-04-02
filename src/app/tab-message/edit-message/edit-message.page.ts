@@ -32,7 +32,6 @@ export class EditMessagePage implements OnInit, OnDestroy {
   public loading: KeyValue<string, boolean>[] = [];
   public messageType: MessageTypeEnum;
   public editor: Editor;
-  public html = 'Hello world!';
   public message: SellerMessage = new SellerMessage();
   public toolbar: Toolbar = [
     ['bold', 'italic', 'underline'],
@@ -45,6 +44,7 @@ export class EditMessagePage implements OnInit, OnDestroy {
     comprador: '<span data-mention-id="101" data-mention-name="COMPRADOR" data-mention-email="" class="prosemirror-mention-node">@COMPRADOR</span>',
     produto: '<span data-mention-id="102" data-mention-name="PRODUTO" data-mention-email="" class="prosemirror-mention-node">@PRODUTO</span>'
   }
+  public loadingKeys = {button: 'button', message: 'message'}
 
   constructor(private route: Router,
     private meliService: MeliService,
@@ -61,6 +61,7 @@ export class EditMessagePage implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
+    this.loading[this.loadingKeys.message] = true;
     this.editor = new Editor({
       schema,
       plugins
@@ -75,12 +76,12 @@ export class EditMessagePage implements OnInit, OnDestroy {
 
   public async save() {
     try {
-      this.loading['button'] = true;
+      this.loading[this.loadingKeys.button] = true;
       this.message.message = this.prepareToSendMessage(this.message.message);
       this.meliService.saveMessage(this.message).subscribe((response) => {
         if (response.success) {
           this.message = response.data;
-          this.alertService.showToastAlert('Mensagem salva com sucesso.', 3000);
+          this.alertService.showToastAlert('Mensagem salva com sucesso.', 2000, 'bottom');
           LocalStorage.updateMessage(response.data);
           this.onChangeMessage.emit(response.data);
         }
@@ -90,12 +91,12 @@ export class EditMessagePage implements OnInit, OnDestroy {
 
       }, (err) => {
         this.alertService.showToastAlert('Houve um erro ao tentar salvar a mensagem.');
-        this.loading['button'] = false;
+        this.loading[this.loadingKeys.button] = false;
       }, () => {
-        this.loading['button'] = false;
+        this.loading[this.loadingKeys.button] = false;
       });
     } catch {
-      this.loading['button'] = false;
+      this.loading[this.loadingKeys.button] = false;
     }
   }
 
@@ -109,6 +110,10 @@ export class EditMessagePage implements OnInit, OnDestroy {
       else {
         this.alertService.showToastAlert('Houve um erro ao buscar a mensagem.');
       }
+    }, (error) => {
+      this.loading[this.loadingKeys.message] = false;
+    }, () => {
+      this.loading[this.loadingKeys.message] = false;
     });
   }
 

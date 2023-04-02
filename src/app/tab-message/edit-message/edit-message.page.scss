@@ -45,6 +45,16 @@ ion-content {
     padding-left: 20px;
 
   }
+
+  ul {
+    list-style: none;
+    margin-left: 17px;
+    padding-left: 0px;
+    
+    li {
+      margin-bottom: 15px;
+    }
+  }
 }
 
 ion-col {
@@ -170,4 +180,21 @@ ion-label {
   font-size: 11pt;
   --color: #e3e3e3;
   --background: #3B3F4C;
+}
+
+.loading-toggle {
+  width: 50px;
+  margin: auto;
+  height: 20px;
+  border-radius: 8px;
+}
+
+.loading-toggle-text {
+  width: 36%;
+  height: 10px;
+}
+
+.mention-title {
+  font-weight: 500;
+  font-size: 12pt!important;
 }

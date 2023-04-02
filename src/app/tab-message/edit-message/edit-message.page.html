@@ -7,7 +7,6 @@
         </ion-col>
       </ion-row>
       <ion-row>
-
         <ion-col><ion-title><b>{{getTitle()}}</b></ion-title></ion-col>
       </ion-row>
       <ion-row>
@@ -15,12 +14,24 @@
           <ion-label class="ion-text-wrap">{{getDescriptionInstruction()}}</ion-label>
         </ion-col>
       </ion-row>
+      <ion-row>
+        <ion-label>
+          <ul>
+            <li><span class="prosemirror-mention-node">@COMPRADOR</span> - Renderiza o nome do comprador.</li>
+            <li><span class="prosemirror-mention-node">@PRODUTO</span> - Renderiza o nome do produto.</li>
+          </ul>
+        </ion-label>
+      </ion-row>
       <ion-row class="ion-toggle-row">
         <ion-col size="1" class="description-configuration">
-          <ion-toggle [(ngModel)]="message.activated"></ion-toggle>
+          <ion-skeleton-text *ngIf="loading[loadingKeys.message]" class="loading-toggle"
+            [animated]="true"></ion-skeleton-text>
+          <ion-toggle *ngIf="!loading[loadingKeys.message]" [(ngModel)]="message.activated"></ion-toggle>
         </ion-col>
         <ion-col>
-          <ion-label>Envio ativado</ion-label>
+          <ion-skeleton-text *ngIf="loading[loadingKeys.message]" class="loading-toggle-text"
+            [animated]="true"></ion-skeleton-text>
+          <ion-label *ngIf="!loading[loadingKeys.message]">Envio ativado</ion-label>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -36,6 +47,7 @@
     <ion-card-content>
       Keep close to Nature's heart... and break clear away, once in awhile,
       and climb a mountain or spend a week in the woods. Wash your spirit clean.
+
     </ion-card-content>
   </ion-card> -->
   <ion-list class="edit-message" lines="none">
@@ -53,16 +65,15 @@
               <div class="horizontal-line"></div>
               <ngx-editor [editor]="editor"></ngx-editor>
             </div>
-            <!-- <textarea maxlength="350" #message rows="18" class="message"
-              [mention]="['PRODUTO', 'COMPRADOR']"></textarea> -->
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-item>
     <ion-item class="save-message-button-container">
-      <ion-button class="save-message-button " [disabled]="loading['message'] || loading['button']" expand="block" (click)="save()">
-        <div *ngIf="!loading['button']">Salvar alterações</div>
-        <ion-spinner *ngIf="loading['button']"></ion-spinner>
+      <ion-button class="save-message-button " [disabled]="loading['message'] || loading[loadingKeys.button]"
+        expand="block" (click)="save()">
+        <div *ngIf="!loading[loadingKeys.button]">Salvar alterações</div>
+        <ion-spinner *ngIf="loading[loadingKeys.button]"></ion-spinner>
       </ion-button>
     </ion-item>
   </ion-list>
