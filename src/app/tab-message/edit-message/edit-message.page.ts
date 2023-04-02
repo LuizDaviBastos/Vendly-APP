@@ -1,5 +1,5 @@
 import { LocalStorage as LocalStorage } from '../../helpers/local-storage.helper';
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from "@angular/core";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { NavController } from '@ionic/angular';
 import { MeliService } from '../../../services/meli-service';
@@ -12,13 +12,12 @@ import { AlertService } from 'src/services/alert-service';
 import { Seller } from 'src/models/seller';
 import { SellerInfo } from 'src/models/seller-info.model';
 import { SellerMessage } from 'src/models/seller-message';
-
 @Component({
   selector: "edit-message",
   templateUrl: "edit-message.page.html",
   styleUrls: ["edit-message.page.scss"],
 })
-export class EditMessagePage implements OnInit {
+export class EditMessagePage implements OnInit, OnDestroy {
 
   @Output('onChangeMessage') onChangeMessage: EventEmitter<SellerMessage> = new EventEmitter<SellerMessage>();
 
@@ -42,6 +41,10 @@ export class EditMessagePage implements OnInit {
     ['align_left', 'align_center', 'align_right'],
     //[{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
   ];
+  private spans = {
+    comprador: '<span data-mention-id="101" data-mention-name="COMPRADOR" data-mention-email="" class="prosemirror-mention-node">@COMPRADOR</span>',
+    produto: '<span data-mention-id="102" data-mention-name="PRODUTO" data-mention-email="" class="prosemirror-mention-node">@PRODUTO</span>'
+  }
 
   constructor(private route: Router,
     private meliService: MeliService,
@@ -51,10 +54,6 @@ export class EditMessagePage implements OnInit {
     this.activateRoute.paramMap.subscribe((params: ParamMap) => {
       this.messageType = +params.get('id');
     })
-  }
-
-  public onChange(html: string) {
-    console.log(this.html);
   }
 
   ngOnDestroy(): void {
@@ -67,10 +66,9 @@ export class EditMessagePage implements OnInit {
       plugins
     });
     this.editor.valueChanges.subscribe((jsonDoc) => {
-      let html = toHTML(jsonDoc);
-      console.log(html);
+      let html = toHTML(jsonDoc, schema);
       this.message.message = html;
-    })
+    });
 
     this.getMessage(this.messageType);
   }
@@ -105,6 +103,8 @@ export class EditMessagePage implements OnInit {
     this.meliService.getMessage(LocalStorage.meliAccountId, messageType).subscribe((response) => {
       if (response.success) {
         this.message = response.data;
+        this.message.message = this.prepareToReceiveMessage(this.message.message);
+        this.editor.setContent(this.message.message);
       }
       else {
         this.alertService.showToastAlert('Houve um erro ao buscar a mensagem.');
@@ -123,32 +123,32 @@ export class EditMessagePage implements OnInit {
   public prepareToReceiveMessage(message: string) {
     if (!message) return message;
     let newMessage = message;
-    newMessage = newMessage.replace('@COMPRADOR', `<span data-mention-id="101" data-mention-name="COMPRADOR" data-mention-email="" class="prosemirror-mention-node">@COMPRADOR</span>`)
-    newMessage = newMessage.replace('@PRODUTO', `<span data-mention-id="102" data-mention-name="PRODUTO" data-mention-email="" class="prosemirror-mention-node">@PRODUTO</span>`)
+    newMessage = newMessage.replace('@COMPRADOR', this.spans.comprador);
+    newMessage = newMessage.replace('@PRODUTO', this.spans.produto);
     return newMessage;
   }
 
   public prepareToSendMessage(message: string) {
     if (!message) return message;
     let newMessage = message;
-    newMessage = newMessage.replace('<span data-mention-id="101" data-mention-name="COMPRADOR" data-mention-email="" class="prosemirror-mention-node">@COMPRADOR</span>', '@COMPRADOR')
-    newMessage = newMessage.replace(`<span data-mention-id="102" data-mention-name="PRODUTO" data-mention-email="" class="prosemirror-mention-node">@PRODUTO</span>`, '@PRODUTO')
+    newMessage = newMessage.replace(this.spans.comprador, '@COMPRADOR')
+    newMessage = newMessage.replace(this.spans.produto, '@PRODUTO')
     return newMessage;
   }
 
   public getDescriptionInstruction() {
     let desc = "Configure uma mensagem para o seu comprador.";
-    if(this.messageType == MessageTypeEnum.AfterSeller) desc = "Configure uma mensagem para o seu comprador receber assim que efetuar uma compra.";
-    else if(this.messageType == MessageTypeEnum.Sent) desc = "Configure uma mensagem para o seu comprador receber assim que o pedido sair para entrega.";
-    else if(this.messageType == MessageTypeEnum.Completed) desc = "Configure uma mensagem para o seu comprador receber assim que o pedido for entregue.";
+    if (this.messageType == MessageTypeEnum.AfterSeller) desc = "Configure uma mensagem para o seu comprador receber assim que efetuar uma compra.";
+    else if (this.messageType == MessageTypeEnum.Sent) desc = "Configure uma mensagem para o seu comprador receber assim que o pedido sair para entrega.";
+    else if (this.messageType == MessageTypeEnum.Completed) desc = "Configure uma mensagem para o seu comprador receber assim que o pedido for entregue.";
     return desc;
   }
 
   public getTitle() {
     let title = "Compra realizada";
-    if(this.messageType == MessageTypeEnum.AfterSeller) title = "Compra realizada";
-    else if(this.messageType == MessageTypeEnum.Sent) title = "Pedido a caminho";
-    else if(this.messageType == MessageTypeEnum.Completed) title = "Pedido entregue";
+    if (this.messageType == MessageTypeEnum.AfterSeller) title = "Compra realizada";
+    else if (this.messageType == MessageTypeEnum.Sent) title = "Pedido a caminho";
+    else if (this.messageType == MessageTypeEnum.Completed) title = "Pedido entregue";
     return title;
   }
 }
