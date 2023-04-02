@@ -61,6 +61,26 @@ ion-item {
     padding: 6px;
     padding-top: 8px;
   }
+
+  .item-desc {
+    font-size: 9pt;
+    line-height: 16px;
+    color: #4e4e4e;
+    font-weight: 400;
+
+    span {
+      background: #DEDEDE;
+      color: #2D2D2D;
+      font-weight: 700;
+      font-size: 8pt;
+      padding: 2px;
+      border-radius: 8px;
+    }
+
+    .desc {
+      margin-bottom: 5px;
+    }
+  }
 }
 
 .item-background-color {
@@ -82,7 +102,7 @@ ion-item {
 }
 
 .messages-container {
-  ion-row {
+  .row-border {
     border-left: 4px solid green;
     border-radius: 3px;
   }
@@ -133,3 +153,5 @@ ion-item {
 .item-background-color {
   --ion-item-background: var(--background-white);
 }
+
+

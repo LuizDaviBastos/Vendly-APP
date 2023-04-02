@@ -1,5 +1,5 @@
 import { LocalStorage as LocalStorage } from '../../helpers/local-storage.helper';
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { NavController } from '@ionic/angular';
 import { MeliService } from '../../../services/meli-service';
@@ -20,6 +20,8 @@ import { SellerMessage } from 'src/models/seller-message';
 })
 export class EditMessagePage implements OnInit {
 
+  @Output('onChangeMessage') onChangeMessage: EventEmitter<SellerMessage> = new EventEmitter<SellerMessage>();
+
   public get sellerInfo(): Seller {
     return LocalStorage.getLogin().data || new Seller();
   }
@@ -35,10 +37,10 @@ export class EditMessagePage implements OnInit {
   public message: SellerMessage = new SellerMessage();
   public toolbar: Toolbar = [
     ['bold', 'italic', 'underline'],
-    ['ordered_list', 'bullet_list'],
+    ['bullet_list'],
     ['text_color', 'background_color'],
-    ['align_left', 'align_center', 'align_right', 'align_justify'],
-    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['align_left', 'align_center', 'align_right'],
+    //[{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
   ];
 
   constructor(private route: Router,
@@ -80,8 +82,9 @@ export class EditMessagePage implements OnInit {
       this.meliService.saveMessage(this.message).subscribe((response) => {
         if (response.success) {
           this.message = response.data;
-          this.alertService.showToastAlert('Mensagem salva com sucesso.');
+          this.alertService.showToastAlert('Mensagem salva com sucesso.', 3000);
           LocalStorage.updateMessage(response.data);
+          this.onChangeMessage.emit(response.data);
         }
         else {
           this.alertService.showToastAlert('Houve um erro ao tentar salvar a mensagem.');
@@ -131,5 +134,21 @@ export class EditMessagePage implements OnInit {
     newMessage = newMessage.replace('<span data-mention-id="101" data-mention-name="COMPRADOR" data-mention-email="" class="prosemirror-mention-node">@COMPRADOR</span>', '@COMPRADOR')
     newMessage = newMessage.replace(`<span data-mention-id="102" data-mention-name="PRODUTO" data-mention-email="" class="prosemirror-mention-node">@PRODUTO</span>`, '@PRODUTO')
     return newMessage;
+  }
+
+  public getDescriptionInstruction() {
+    let desc = "Configure uma mensagem para o seu comprador.";
+    if(this.messageType == MessageTypeEnum.AfterSeller) desc = "Configure uma mensagem para o seu comprador receber assim que efetuar uma compra.";
+    else if(this.messageType == MessageTypeEnum.Sent) desc = "Configure uma mensagem para o seu comprador receber assim que o pedido sair para entrega.";
+    else if(this.messageType == MessageTypeEnum.Completed) desc = "Configure uma mensagem para o seu comprador receber assim que o pedido for entregue.";
+    return desc;
+  }
+
+  public getTitle() {
+    let title = "Compra realizada";
+    if(this.messageType == MessageTypeEnum.AfterSeller) title = "Compra realizada";
+    else if(this.messageType == MessageTypeEnum.Sent) title = "Pedido a caminho";
+    else if(this.messageType == MessageTypeEnum.Completed) title = "Pedido entregue";
+    return title;
   }
 }

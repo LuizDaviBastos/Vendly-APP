@@ -19,16 +19,22 @@ export class AuthGuardLoggedService implements CanActivate {
     }
 
     if(!LocalStorage.getLogin()?.hasMeliAccount) {
-      debugger;
       return this.meliService.hasMeliAccount(LocalStorage.getLogin().data.id).pipe(
         map((hasMeliAccount) => {
           if (!hasMeliAccount) {
+            //TODO SHOW MESSAGE FOR USER EXPLANING THAT HE NEED SYNC A MELI ACCOUNT
             this.meliService.addMeliAccount(LocalStorage.getCountry())
-            return false;
           } else {
+            /*const login = LocalStorage.getLogin();
+            this.meliService.login(login.data.email, login.data.password).subscribe((response) => {
+              if(response.success) {
+                LocalStorage.setLogin(response.data);
+                this.router.navigate(['/message']);
+              }
+            })*/
             this.router.navigate(['/auth']);
-            return false;
           }
+          return false;
         })
       );
     }

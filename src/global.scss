@@ -44,6 +44,7 @@ ion-label {
     border-top-right-radius: 4px;
     //border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     background-color: var(--background-white);
+    flex-wrap: wrap;
   }
 
   .NgxEditor {
@@ -52,7 +53,7 @@ ion-label {
     border: none;
     background-color: var(--background-white);
     font-size: 10pt;
-    font-weight: 500;
+    font-weight: 400;
     color: #424242;
     height: 280px;
     overflow-y: auto;
@@ -60,6 +61,7 @@ ion-label {
 
   .NgxEditor__Content {
     padding-left: 0px;
+    line-height: 18px;
   }
 
   .CodeMirror {

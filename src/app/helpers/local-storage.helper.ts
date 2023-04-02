@@ -44,7 +44,6 @@ export class LocalStorage {
     }
 
     public static getSelectedMeliAccount(): SellerInfo {
-        debugger;
         if (!this.seletectMeliSellerInfo) {
             this.seletectMeliSellerInfo = <SellerInfo>JSON.parse(localStorage.getItem(this.keys.meliSeller));
             if (!this.seletectMeliSellerInfo) return <SellerInfo>{ id: this.getLogin().data.meliAccounts[0].meliSellerId };

@@ -14,7 +14,7 @@ export class AlertService {
             keyboardClose: true,
             buttons: [
                 {
-                    text: 'Done',
+                    text: 'Ok',
                     role: 'cancel'
                 },
             ],

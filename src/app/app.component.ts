@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { App, URLOpenListenerEvent } from '@capacitor/app';
 import { StatusBar } from '@capacitor/status-bar';
@@ -10,12 +10,13 @@ import { Platform } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private router: Router, private zone: NgZone, private platform: Platform) {
+  constructor(private router: Router, private zone: NgZone, private platform: Platform, private cdr: ChangeDetectorRef) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if(window.navigator.platform == "Win32") {
           return;
         }
+        this.cdr.detectChanges();
         if (event.url.includes("/edit") || event.url.includes("settings")) {
           
           StatusBar.setBackgroundColor({

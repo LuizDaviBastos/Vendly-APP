@@ -91,11 +91,12 @@ ion-item {
 }
 
 .logout-account-button {
-    width: 100%;
+    width: 80%;
     float: right;
+    height: 33px;
     text-transform: inherit;
     --border-radius: 10px;
     --border-width: 1px;
-    --font-size: 9pt;
-    --border-color: #898888;
+    --height: 20px;
+    --font-size: 10pt;
 }

@@ -8,12 +8,11 @@
       </ion-row>
       <ion-row>
 
-        <ion-col><ion-title><b>Compra realizada</b></ion-title></ion-col>
+        <ion-col><ion-title><b>{{getTitle()}}</b></ion-title></ion-col>
       </ion-row>
       <ion-row>
         <ion-col class="description-configuration">
-          <ion-label class="ion-text-wrap">Configure uma mensagem para o seu comprador receber assim que efetuar uma
-            compra</ion-label>
+          <ion-label class="ion-text-wrap">{{getDescriptionInstruction()}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row class="ion-toggle-row">
@@ -56,11 +55,6 @@
             </div>
             <!-- <textarea maxlength="350" #message rows="18" class="message"
               [mention]="['PRODUTO', 'COMPRADOR']"></textarea> -->
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-label>{{message?.message?.length || 0}} de 350 caracteres</ion-label>
           </ion-col>
         </ion-row>
       </ion-grid>
