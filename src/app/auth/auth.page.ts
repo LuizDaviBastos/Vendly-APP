@@ -1,6 +1,7 @@
 import { LocalStorage } from '../helpers/local-storage.helper';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RequestResponse } from 'src/models/request-response.model';
 import { AlertService } from 'src/services/alert-service';
 import { MeliService } from 'src/services/meli-service';
 
@@ -33,7 +34,7 @@ export class AuthPage implements OnInit {
           this.alertService.showToastAlert(response.message);
         }
       }, (error) => {
-        this.alertService.showToastAlert('Houve um erro ao tentar fazer login');
+        this.alertService.showToastAlert(error?.error?.message || 'Houve um erro ao tentar fazer login');
         this.loading = false;
       }, () => {
         this.loading = false;

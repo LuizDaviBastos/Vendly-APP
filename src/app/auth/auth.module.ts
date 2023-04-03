@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthPage } from './auth.page';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { AuthPageRoutingModule } from './auth-routing.module';
 import { MeliLogoComponent } from 'src/components/meli-logo/meli-logo.component';
 
@@ -14,7 +13,6 @@ import { MeliLogoComponent } from 'src/components/meli-logo/meli-logo.component'
     IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
     AuthPageRoutingModule
   ],
   declarations:[AuthPage, MeliLogoComponent],

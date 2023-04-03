@@ -11,14 +11,18 @@
       </ion-row>
       <ion-row class="box-account">
         <ion-col size="2" style="display: flex;">
-          <seller-avatar [url]="meliSellerInfo?.thumbnail?.picture_url"></seller-avatar>
+          <seller-avatar [url]="meliSellerInfo()?.thumbnail?.picture_url"></seller-avatar>
         </ion-col>
         <ion-col>
           <ion-row>
-            <ion-label>{{meliSellerInfo?.nickname || 'João César dos Santos'}}</ion-label>
+            <ion-label *ngIf="meliSellerInfo()?.nickname">{{meliSellerInfo()?.nickname}}</ion-label>
+            <ion-skeleton-text *ngIf="!meliSellerInfo()?.nickname" style="width: 174px; border-radius: 6px;"
+            [animated]="true"></ion-skeleton-text>
           </ion-row>
           <ion-row>
-            <ion-label style="color: #565656">{{meliSellerInfo?.produtosCount || 0}} Produtos</ion-label>
+            <ion-skeleton-text *ngIf="!meliSellerInfo()?.produtosCount" style="width: 70px; border-radius: 6px;"
+            [animated]="true"></ion-skeleton-text>
+            <ion-label *ngIf="meliSellerInfo()?.produtosCount" style="color: #565656">{{meliSellerInfo()?.produtosCount}} Produtos</ion-label>
           </ion-row>
         </ion-col>
       </ion-row>

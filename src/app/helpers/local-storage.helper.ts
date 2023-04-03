@@ -51,6 +51,11 @@ export class LocalStorage {
         return this.seletectMeliSellerInfo;
     }
 
+    public static meliInfoStored(): boolean {
+        const meliInfo = <SellerInfo>JSON.parse(localStorage.getItem(this.keys.meliSeller));
+        return this.seletectMeliSellerInfo != null || meliInfo != null;
+    }
+
     public static getMessage(messageType: MessageTypeEnum) {
         const meliAccount = this.getSelectedMeliAccount();
         const login = this.getLogin();

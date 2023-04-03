@@ -1,5 +1,5 @@
 import { LocalStorage as LocalStorage } from '../helpers/local-storage.helper';
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { MeliService } from 'src/services/meli-service';
 import { KeyValue } from '@angular/common';
@@ -13,28 +13,25 @@ import { MessageTypeEnum } from 'src/models/message-type.enum';
   templateUrl: "tab-message.page.html",
   styleUrls: ["tab-message.page.scss"],
 })
-export class TabMessagePage implements OnInit {
+export class TabMessagePage implements OnInit, AfterViewInit {
 
   public get isLogged(): boolean { return LocalStorage.IsLogged;   }
   public get sellerInfo(): Seller { return LocalStorage.getLogin().data || new Seller(); }
   public loading: KeyValue<string, boolean>[] = [];
-  public get meliSellerInfo(): SellerInfo { return LocalStorage.getSelectedMeliAccount(); }
   
-  constructor(private route: Router, private alertService: AlertService, private meliService: MeliService) { }
+  constructor(private route: Router, private alertService: AlertService, private meliService: MeliService, private cdr: ChangeDetectorRef) { }
 
-  async ngOnInit(): Promise<void> {
-    this.meliService.getMeliAccountInfo(LocalStorage.getSelectedMeliAccount().id).subscribe((response) => {
-      if (response.success) {
-        LocalStorage.selectMeliAccount(response.data);
-      }
-      else {
-        this.alertService.showToastAlert('Um erro ocorreu ao obter suas informações.');
-      }
-    }, (error) => {
-      this.alertService.showToastAlert('Um erro ocorreu ao obter suas informações.');
-    })
+  ngAfterViewInit(): void {
+   
   }
 
+  async ngOnInit(): Promise<void> {
+    
+  }
+
+  public meliSellerInfo() {
+    return LocalStorage.getSelectedMeliAccount();
+  }
   public getMessage(messageType: MessageTypeEnum) {
     return LocalStorage.getMessage(messageType);
   }
