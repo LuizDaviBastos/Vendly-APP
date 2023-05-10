@@ -7,53 +7,48 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col><ion-title><b>{{getTitle()}}</b></ion-title></ion-col>
+        <ion-col><ion-title><b>{{title}}</b></ion-title></ion-col>
       </ion-row>
       <ion-row>
         <ion-col class="description-configuration">
-          <ion-label class="ion-text-wrap">{{getDescriptionInstruction()}}</ion-label>
+          <ion-label class="ion-text-wrap">{{instructionDesc}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-label>
           <ul>
-            <li><span class="prosemirror-mention-node">@COMPRADOR</span> - Renderiza o nome do comprador.</li>
-            <li><span class="prosemirror-mention-node">@PRODUTO</span> - Renderiza o nome do produto.</li>
+            <li><span class="prosemirror-mention-node">@COMPRADOR</span> - Menciona o nome do comprador.</li>
+            <li><span class="prosemirror-mention-node">@PRODUTO</span> - Menciona o nome do produto.</li>
           </ul>
         </ion-label>
       </ion-row>
       <ion-row class="ion-toggle-row">
         <ion-col size="1" class="description-configuration">
-          <ion-skeleton-text *ngIf="loading[loadingKeys.message]" class="loading-toggle"
+          <ion-skeleton-text *ngIf="loading[loadingKeys.message]; else SwitchControl" class="loading-toggle"
             [animated]="true"></ion-skeleton-text>
-          <ion-toggle *ngIf="!loading[loadingKeys.message]" [(ngModel)]="message.activated"></ion-toggle>
+          <ng-template #SwitchControl>
+            <ion-toggle [(ngModel)]="message.activated"></ion-toggle>
+          </ng-template>
         </ion-col>
         <ion-col>
-          <ion-skeleton-text *ngIf="loading[loadingKeys.message]" class="loading-toggle-text"
+          <ion-skeleton-text *ngIf="loading[loadingKeys.message]; else SwitchLabel" class="loading-toggle-text"
             [animated]="true"></ion-skeleton-text>
-          <ion-label *ngIf="!loading[loadingKeys.message]">Envio ativado</ion-label>
+          <ng-template #SwitchLabel>
+            <ion-label>{{getSwitchLabel()}}</ion-label>
+          </ng-template>
         </ion-col>
       </ion-row>
     </ion-grid>
   </div>
 </ion-header>
 <ion-content scrollY="true">
-  <!-- <ion-card style="background-color: rgb(248, 248, 175); border: 1px solid rgb(235, 193, 8);">
-    <ion-card-header>
-      <ion-card-title style="color: black;">Atenção</ion-card-title>
-      <ion-card-subtitle>Regras</ion-card-subtitle>
-    </ion-card-header>
-
-    <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
-
-    </ion-card-content>
-  </ion-card> -->
   <ion-list class="edit-message" lines="none">
     <ion-item class="item-background-color header-item">
       <ion-title>Escreva a mensagem</ion-title>
-      <ion-icon name="attach-outline"></ion-icon>
+      <div class="edit-msg-icon-container">
+        <ion-icon name="pricetag"></ion-icon>
+        <ion-icon name="attach-outline"></ion-icon>
+      </div>
     </ion-item>
     <div class="horizontal-line"></div>
     <ion-item class="item-background-color footer-item">
@@ -63,7 +58,7 @@
             <div class="editor">
               <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
               <div class="horizontal-line"></div>
-              <ngx-editor [editor]="editor"></ngx-editor>
+              <ngx-editor [placeholder]="placeholder" [editor]="editor"></ngx-editor>
             </div>
           </ion-col>
         </ion-row>
@@ -77,4 +72,8 @@
       </ion-button>
     </ion-item>
   </ion-list>
+
+  <ion-button (click)="presentModal()" id="open-modal" expand="block">Open Sheet Modal</ion-button>
+
+  
 </ion-content>

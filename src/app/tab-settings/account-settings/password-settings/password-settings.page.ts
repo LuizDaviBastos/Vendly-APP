@@ -10,6 +10,7 @@ import { NavController, Platform } from '@ionic/angular';
 })
 export class PasswordSettingsPage implements OnInit {
 
+  public password: string;
   constructor(private route: Router, private platform: Platform, private navCtrl: NavController) { }
   ngOnInit(): void {
 

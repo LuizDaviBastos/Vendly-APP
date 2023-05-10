@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { EditMessagePage } from './edit-message.page';
 import { MentionModule } from 'angular-mentions';
 import { NgxEditorModule } from 'ngx-editor';
+import { ModalPage } from 'src/app/modals/modal-page.component';
 
 @NgModule({
   imports: [
@@ -51,7 +52,7 @@ import { NgxEditorModule } from 'ngx-editor';
     }),
     RouterModule.forChild([{ path: '', component: EditMessagePage }]),
   ],
-  declarations: [EditMessagePage],
+  declarations: [EditMessagePage, ModalPage],
   providers: [MeliService]
 })
 export class EditMessagePageModule { }

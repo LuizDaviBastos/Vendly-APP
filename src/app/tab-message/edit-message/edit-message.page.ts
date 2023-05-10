@@ -1,5 +1,5 @@
 import { LocalStorage as LocalStorage } from '../../helpers/local-storage.helper';
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from "@angular/core";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { NavController } from '@ionic/angular';
 import { MeliService } from '../../../services/meli-service';
@@ -12,6 +12,8 @@ import { AlertService } from 'src/services/alert-service';
 import { Seller } from 'src/models/seller';
 import { SellerInfo } from 'src/models/seller-info.model';
 import { SellerMessage } from 'src/models/seller-message';
+import { ModalController } from '@ionic/angular';
+import { ModalPage } from 'src/app/modals/modal-page.component';
 @Component({
   selector: "edit-message",
   templateUrl: "edit-message.page.html",
@@ -29,6 +31,9 @@ export class EditMessagePage implements OnInit, OnDestroy {
     return LocalStorage.getSelectedMeliAccount();
   }
 
+  public placeholder: string = '';
+  public title: string = '';
+  public instructionDesc: string = '';
   public loading: KeyValue<string, boolean>[] = [];
   public messageType: MessageTypeEnum;
   public editor: Editor;
@@ -50,7 +55,8 @@ export class EditMessagePage implements OnInit, OnDestroy {
     private meliService: MeliService,
     private navCtrl: NavController,
     private activateRoute: ActivatedRoute,
-    private alertService: AlertService) {
+    private alertService: AlertService,
+    private modalController: ModalController) {
     this.activateRoute.paramMap.subscribe((params: ParamMap) => {
       this.messageType = +params.get('id');
     })
@@ -71,6 +77,7 @@ export class EditMessagePage implements OnInit, OnDestroy {
       this.message.message = html;
     });
 
+    this.setMessageTypeDescription();
     this.getMessage(this.messageType);
   }
 
@@ -141,19 +148,35 @@ export class EditMessagePage implements OnInit, OnDestroy {
     return newMessage;
   }
 
-  public getDescriptionInstruction() {
-    let desc = "Configure uma mensagem para o seu comprador.";
-    if (this.messageType == MessageTypeEnum.AfterSeller) desc = "Configure uma mensagem para o seu comprador receber assim que efetuar uma compra.";
-    else if (this.messageType == MessageTypeEnum.Sent) desc = "Configure uma mensagem para o seu comprador receber assim que o pedido sair para entrega.";
-    else if (this.messageType == MessageTypeEnum.Completed) desc = "Configure uma mensagem para o seu comprador receber assim que o pedido for entregue.";
-    return desc;
+  public setMessageTypeDescription() {
+    switch(this.messageType) {
+      case MessageTypeEnum.AfterSeller:
+          this.instructionDesc = "Configure uma mensagem para o seu comprador receber assim que efetuar uma compra.";
+          this.title = "Compra realizada";
+          this.placeholder = "Olá @COMPRADOR. Acabei de receber seu pedido!";
+        break;
+      case MessageTypeEnum.Sent: 
+        this.instructionDesc = "Configure uma mensagem para o seu comprador receber assim que o pedido sair para entrega.";
+        this.title = "Pedido a caminho";
+        this.placeholder = "Seu @PRODUTO acabou de sair para entrega."
+      break;
+      case MessageTypeEnum.Completed:
+        this.instructionDesc = "Configure uma mensagem para o seu comprador receber assim que o pedido for entregue.";
+        this.title = "Pedido entregue";
+        this.placeholder = "Esperamos que desfrute do seu novo produto."
+      break;
+
+    }
   }
 
-  public getTitle() {
-    let title = "Compra realizada";
-    if (this.messageType == MessageTypeEnum.AfterSeller) title = "Compra realizada";
-    else if (this.messageType == MessageTypeEnum.Sent) title = "Pedido a caminho";
-    else if (this.messageType == MessageTypeEnum.Completed) title = "Pedido entregue";
-    return title;
+  public getSwitchLabel() {
+    return !!this.message.activated ? "Envio ativado" : "Envio desativado"
+  }
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: ModalPage
+    });
+    return await modal.present();
   }
 }
