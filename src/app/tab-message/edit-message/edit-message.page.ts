@@ -49,7 +49,7 @@ export class EditMessagePage implements OnInit, OnDestroy {
     comprador: '<span data-mention-id="101" data-mention-name="COMPRADOR" data-mention-email="" class="prosemirror-mention-node">@COMPRADOR</span>',
     produto: '<span data-mention-id="102" data-mention-name="PRODUTO" data-mention-email="" class="prosemirror-mention-node">@PRODUTO</span>'
   }
-  public loadingKeys = {button: 'button', message: 'message'}
+  public loadingKeys = { button: 'button', message: 'message' }
 
   constructor(private route: Router,
     private meliService: MeliService,
@@ -149,22 +149,22 @@ export class EditMessagePage implements OnInit, OnDestroy {
   }
 
   public setMessageTypeDescription() {
-    switch(this.messageType) {
+    switch (this.messageType) {
       case MessageTypeEnum.AfterSeller:
-          this.instructionDesc = "Configure uma mensagem para o seu comprador receber assim que efetuar uma compra.";
-          this.title = "Compra realizada";
-          this.placeholder = "Olá @COMPRADOR. Acabei de receber seu pedido!";
+        this.instructionDesc = "Configure uma mensagem para o seu comprador receber assim que efetuar uma compra.";
+        this.title = "Compra realizada";
+        this.placeholder = "Olá @COMPRADOR. Acabei de receber seu pedido!";
         break;
-      case MessageTypeEnum.Sent: 
+      case MessageTypeEnum.Sent:
         this.instructionDesc = "Configure uma mensagem para o seu comprador receber assim que o pedido sair para entrega.";
         this.title = "Pedido a caminho";
         this.placeholder = "Seu @PRODUTO acabou de sair para entrega."
-      break;
+        break;
       case MessageTypeEnum.Completed:
         this.instructionDesc = "Configure uma mensagem para o seu comprador receber assim que o pedido for entregue.";
         this.title = "Pedido entregue";
         this.placeholder = "Esperamos que desfrute do seu novo produto."
-      break;
+        break;
 
     }
   }
@@ -173,10 +173,20 @@ export class EditMessagePage implements OnInit, OnDestroy {
     return !!this.message.activated ? "Envio ativado" : "Envio desativado"
   }
 
-  async presentModal() {
+  public async openAttachmentModal() {
     const modal = await this.modalController.create({
-      component: ModalPage
+      component: ModalPage,
+      initialBreakpoint: 0.55,
+      canDismiss: true,
+      backdropDismiss: true
     });
-    return await modal.present();
+    modal.present();
+  }
+
+  @ViewChild('popover') popover;
+  public isOpen: boolean;
+  presentPopover(e: Event) {
+    this.popover.event = e;
+    this.isOpen = true;
   }
 }
