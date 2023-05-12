@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { AuthPage } from './auth.page';
 import { AuthPageRoutingModule } from './auth-routing.module';
 import { MeliLogoComponent } from 'src/components/meli-logo/meli-logo.component';
+import { SignupComponent } from './login/signup/signup.component';
+import { Step1Component, Step2Component } from './login/signup/steps';
 
 
 @NgModule({
@@ -15,7 +17,7 @@ import { MeliLogoComponent } from 'src/components/meli-logo/meli-logo.component'
     FormsModule,
     AuthPageRoutingModule
   ],
-  declarations:[AuthPage, MeliLogoComponent],
+  declarations:[AuthPage, MeliLogoComponent, SignupComponent, Step1Component, Step2Component],
   providers:[MeliService]
 })
 export class AuthPageModule {}

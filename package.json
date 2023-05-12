@@ -7,7 +7,7 @@
     "ng": "ng",
     "deploy": "./deploy.bat build",
     "deploy-android": "npm run build-android & npx cap copy & npx cap sync & npx cap open android",
-    "android": "npm run build-android & ionic capacitor run android",
+    "android": "npm run build-android & npm run build & ionic capacitor run android",
     "build-android": "./build.bat",
     "start": "ionic serve",
     "build": "ng build",
