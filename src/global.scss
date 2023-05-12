@@ -26,6 +26,7 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 html {
   font-family: 'Roboto', sans-serif;
 }
@@ -107,4 +108,19 @@ ion-label {
 .suggestion-item:hover {
   background-color: #f1f1f1;
   cursor: pointer;
+}
+
+button.alert-button.delete-button-confirm {
+  background-color: #b92222;
+  color: var(--ion-color-success-contrast);
+  border-radius: 12px;
+  text-transform: inherit;
+  height: 32px;
+
+}
+
+button.alert-button.delete-button-cancel {
+  border-radius: 12px;
+  text-transform: inherit;
+  height: 32px;
 }

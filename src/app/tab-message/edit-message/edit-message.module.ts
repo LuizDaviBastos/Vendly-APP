@@ -1,4 +1,4 @@
-import { IonicModule } from '@ionic/angular';
+import { AlertController, IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,7 +7,8 @@ import { RouterModule } from '@angular/router';
 import { EditMessagePage } from './edit-message.page';
 import { MentionModule } from 'angular-mentions';
 import { NgxEditorModule } from 'ngx-editor';
-import { ModalPage } from 'src/app/modals/modal-page.component';
+import { AttachmentService } from '../../../services/attachment-service';
+import { AttachmentModal } from 'src/app/modals/attachment-modal/attachment-modal.component';
 
 @NgModule({
   imports: [
@@ -52,7 +53,7 @@ import { ModalPage } from 'src/app/modals/modal-page.component';
     }),
     RouterModule.forChild([{ path: '', component: EditMessagePage }]),
   ],
-  declarations: [EditMessagePage, ModalPage],
-  providers: [MeliService]
+  declarations: [EditMessagePage, AttachmentModal],
+  providers: [MeliService, AttachmentService]
 })
 export class EditMessagePageModule { }

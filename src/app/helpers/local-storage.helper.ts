@@ -8,6 +8,10 @@ export class LocalStorage {
     private static country: Country = null;
     private static seletectMeliSellerInfo: SellerInfo = null;
 
+    public static get sellerId(): string {
+        return this.getLogin().data.id;
+    }
+
     public static setLogin(login: LoginResponse) {
         const loginJson = JSON.stringify(login);
         localStorage.setItem(this.keys.seller, loginJson);

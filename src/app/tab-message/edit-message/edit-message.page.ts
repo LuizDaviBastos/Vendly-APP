@@ -13,7 +13,7 @@ import { Seller } from 'src/models/seller';
 import { SellerInfo } from 'src/models/seller-info.model';
 import { SellerMessage } from 'src/models/seller-message';
 import { ModalController } from '@ionic/angular';
-import { ModalPage } from 'src/app/modals/modal-page.component';
+import { AttachmentModal } from 'src/app/modals/attachment-modal/attachment-modal.component';
 @Component({
   selector: "edit-message",
   templateUrl: "edit-message.page.html",
@@ -175,7 +175,10 @@ export class EditMessagePage implements OnInit, OnDestroy {
 
   public async openAttachmentModal() {
     const modal = await this.modalController.create({
-      component: ModalPage,
+      component: AttachmentModal,
+      componentProps: {
+        message: this.message
+      },
       initialBreakpoint: 0.55,
       canDismiss: true,
       backdropDismiss: true
