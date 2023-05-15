@@ -33,7 +33,10 @@
                 </ion-button>
               </ion-col>
             </ion-row>
-            <div *ngIf="false">
+            <ion-row>
+              <a class="signup" href="auth/signup">signup</a>
+            </ion-row>
+            <div *ngIf="true">
               <ion-row>
                 <ion-col size="12">
                   <ion-button [disabled]="loadingFake" (click)="loginFake()">
@@ -42,13 +45,7 @@
                   </ion-button>
                 </ion-col>
               </ion-row>
-              <ion-row>
-                <ion-select [(ngModel)]="target" value="_system" placeholder="Select target">
-                  <ion-select-option value="_system">_system</ion-select-option>
-                  <ion-select-option value="_self">_self</ion-select-option>
-                  <ion-select-option value="_blank">_blank</ion-select-option>
-                </ion-select>
-              </ion-row>
+              
             </div>
           </ion-card-content>
         </ion-card>

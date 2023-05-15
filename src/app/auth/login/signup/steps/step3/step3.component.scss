@@ -1,0 +1,29 @@
+
+ion-content {
+  height: 300px;
+}
+
+.description {
+  margin-left: 14px!important;
+  ion-icon {
+    margin: auto;
+    width: 20px;
+    height: 20px;
+    scale: 1.1;
+    display: flex;
+  }
+}
+
+.valid {
+  background-color: #E1EAE2;
+  color: #009E10;
+}
+
+.invalid {
+  color: #EA3333;
+  background-color: #F3E2E2;
+}
+
+
+
+

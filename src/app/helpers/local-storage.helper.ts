@@ -124,7 +124,7 @@ export class LocalStorage {
     public static fake() {
         return {
             setLogin() {
-                localStorage.setItem(this.keys.seller, '{"success":true}');
+                localStorage.setItem(this.keys.seller, '{"success":true, "token": true}');
             }
         }
     }

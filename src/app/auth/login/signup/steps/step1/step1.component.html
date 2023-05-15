@@ -3,7 +3,7 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-icon role="button" name="arrow-back-outline"></ion-icon>
+          <ion-icon (click)="goBack()" role="button" name="arrow-back-outline"></ion-icon>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -22,10 +22,13 @@
 </ion-header>
 <ion-content scrollY="true">
   <ion-list class="content-item" lines="none">
-    <ion-item lines="none" class="item-background-color">
-      <ion-label position="stacked">Qual o seu e-mail?</ion-label>
-      <ion-input class="input" type="email" [clearInput]="true" placeholder="Digite seu e-mail"></ion-input>
-    </ion-item>
+    <form [formGroup]="formGroup">
+      <ion-item lines="none" class="item-background-color">
+        <ion-label position="stacked">Qual o seu e-mail?</ion-label>
+        <ion-input class="input" type="email" [clearInput]="true" placeholder="Digite seu e-mail" formControlName="email"></ion-input>
+        <label class="feedback-validation" *ngIf="emailInvalid()">Endereço de e-mail inválido.</label>
+      </ion-item>
+    </form>
   </ion-list>
 
 </ion-content>

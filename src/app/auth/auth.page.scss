@@ -1,4 +1,4 @@
-.center{
+.center {
     height: 800px;
     width: 546px;
 }
@@ -13,12 +13,13 @@ ion-grid {
         width: 100%;
     }
 }
+
 .md body.yellow {
-    --ion-background-color: #dfd814!important;
+    --ion-background-color: #dfd814 !important;
 }
 
 .dark {
-    --ion-background-color: #dfd814!important;
+    --ion-background-color: #dfd814 !important;
 }
 
 body.dark {
@@ -28,6 +29,12 @@ body.dark {
 body {
     --ion-background-color: #dfd814;
 }
-:root{
-    --ion-background-color: #dfd814!important;
+
+:root {
+    --ion-background-color: #dfd814 !important;
+}
+
+.signup {
+    margin: auto;
+    
 }

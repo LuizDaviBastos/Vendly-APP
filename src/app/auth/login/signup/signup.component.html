@@ -1,13 +1,15 @@
-<app-step1></app-step1>
+<app-step1 *ngIf="currentStep == 1" [form]="stepsFormGroup[1]" [previous]="previousStep.bind(this)" [next]="nextStep.bind(this)"></app-step1>
+<app-step2 *ngIf="currentStep == 2" [form]="stepsFormGroup[2]" [previous]="previousStep.bind(this)" [next]="nextStep.bind(this)"></app-step2>
+<app-step3 *ngIf="currentStep == 3" [form]="stepsFormGroup[3]" [previous]="previousStep.bind(this)" [next]="nextStep.bind(this)"></app-step3>
   
-<ion-footer>
+<ion-footer lines="none">
   <ion-item lines="none" class="continue-buttom-container">
-    <ion-button class="continue-buttom" expand="block">
+    <ion-button [disabled]="formInvalid()" (click)="nextStep()" class="continue-buttom" expand="block">
       Continuar cadastro
       <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
     </ion-button>
   </ion-item>
-  <ion-item lines="none">
+  <ion-item lines="none" *ngIf="currentStep == 1">
     <ion-label class="footer-description">Entrar com minha conta</ion-label>
   </ion-item>
 </ion-footer>

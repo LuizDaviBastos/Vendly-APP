@@ -1,0 +1,55 @@
+<ion-header no-border>
+  <div class="asm-header">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-icon (click)="previousStep()" role="button" name="arrow-back-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-icon class="steps" src="assets/icon/steps/step3.svg"></ion-icon>
+      </ion-row>
+      <ion-row>
+        <ion-col><ion-title><b>Agora crie uma senha</b></ion-title></ion-col>
+      </ion-row>
+      <div class="description">
+        <ion-row>
+          <ion-col size="1">
+            <ion-icon src="assets/icon/status-icons/valid.svg"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <ion-label class="ion-text-wrap">Use no mínimo 8 caracteres</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="1">
+            <ion-icon src="assets/icon/status-icons/invalid.svg"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <ion-label class="ion-text-wrap">Um número</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="1">
+            <ion-icon src="assets/icon/status-icons/default.svg"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <ion-label class="ion-text-wrap">Um carácter especial</ion-label>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-grid>
+  </div>
+</ion-header>
+<ion-content scrollY="true">
+  <ion-list class="content-item" lines="none">
+    <form [formGroup]="formGroup">
+      <ion-item lines="none" class="item-background-color">
+        <ion-label position="stacked">Escolha uma senha</ion-label>
+        <app-show-hide-password class="input">
+          <ion-input type="password" placeholder="Digite sua senha"></ion-input>
+        </app-show-hide-password>
+      </ion-item>
+    </form>
+  </ion-list>
+</ion-content>

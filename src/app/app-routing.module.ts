@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuardLoggedService, AuthGuardLoggoutService } from './services';
+import { ShowHidePasswordComponent } from './components/show-hide-password/show-hide-password.component';
 
 const routes: Routes = [
  

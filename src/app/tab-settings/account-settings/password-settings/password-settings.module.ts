@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PasswordSettingsPage } from './password-settings.page';
-
 import { PasswordRoutingModule } from './password-settings-routing.module';
+import { ShowHidePasswordModule } from '../../../components/show-hide-password/show-hide-password.module';
 
 @NgModule({
   imports: [
@@ -13,7 +13,8 @@ import { PasswordRoutingModule } from './password-settings-routing.module';
     CommonModule,
     FormsModule,
     RouterModule.forChild([{ path: '', component: PasswordSettingsPage }]),
-    PasswordRoutingModule
+    PasswordRoutingModule,
+    ShowHidePasswordModule
   ],
   declarations: [PasswordSettingsPage]
 })
