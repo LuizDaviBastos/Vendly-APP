@@ -8,7 +8,7 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn,
 })
 export class SignupComponent implements OnInit {
 
-  public currentStep: 1 | 2 | 3 | 4 = 4;
+  public currentStep: 1 | 2 | 3 | 4 | 5 = 5;
   public stepsFormGroup = {
     1: new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -22,7 +22,10 @@ export class SignupComponent implements OnInit {
       confirmPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
     }),
     4: new FormGroup({
-      code: new FormControl('', [Validators.required])
+      code: new FormControl('', [Validators.required, Validators.maxLength(6), Validators.minLength(6), Validators.pattern("^[0-9]*$")])
+    }),
+    5: new FormGroup({
+      sync: new FormControl('', [Validators.required, Validators.pattern("^(true)$")])
     })
   }
 
@@ -31,7 +34,7 @@ export class SignupComponent implements OnInit {
   ngOnInit() { }
 
   public nextStep() {
-    if (this.currentStep >= 4) return;
+    if (this.currentStep >= 5) return;
     this.currentStep++;
   }
 
@@ -43,7 +46,9 @@ export class SignupComponent implements OnInit {
   public formInvalid() {
     return (this.stepsFormGroup[this.currentStep].status == "INVALID")
   }
+  public finish() {
 
+  }
 }
 
 export function matchValidator(matchTo: string, reverse?: boolean): ValidatorFn {

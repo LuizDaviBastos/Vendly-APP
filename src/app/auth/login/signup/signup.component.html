@@ -1,14 +1,29 @@
-<app-step1 *ngIf="currentStep == 1" [form]="stepsFormGroup[1]" [previous]="previousStep.bind(this)" [next]="nextStep.bind(this)"></app-step1>
-<app-step2 *ngIf="currentStep == 2" [form]="stepsFormGroup[2]" [previous]="previousStep.bind(this)" [next]="nextStep.bind(this)"></app-step2>
-<app-step3 *ngIf="currentStep == 3" [form]="stepsFormGroup[3]" [previous]="previousStep.bind(this)" [next]="nextStep.bind(this)"></app-step3>
-<app-step4 *ngIf="currentStep == 4" [form]="stepsFormGroup[4]" [email]="stepsFormGroup[1].get('email')?.value" [previous]="previousStep.bind(this)" [next]="nextStep.bind(this)"></app-step4>
-  
-<ion-footer lines="none">
+<app-step1 *ngIf="currentStep == 1" [form]="stepsFormGroup[1]" [previous]="previousStep.bind(this)"
+  [next]="nextStep.bind(this)"></app-step1>
+<app-step2 *ngIf="currentStep == 2" [form]="stepsFormGroup[2]" [previous]="previousStep.bind(this)"
+  [next]="nextStep.bind(this)"></app-step2>
+<app-step3 *ngIf="currentStep == 3" [form]="stepsFormGroup[3]" [previous]="previousStep.bind(this)"
+  [next]="nextStep.bind(this)"></app-step3>
+<app-step4 *ngIf="currentStep == 4" [form]="stepsFormGroup[4]" [previous]="previousStep.bind(this)"
+  [next]="nextStep.bind(this)"></app-step4>
+<app-step5 *ngIf="currentStep == 5" [form]="stepsFormGroup[5]" [previous]="previousStep.bind(this)"
+  [next]="nextStep.bind(this)"></app-step5>
+
+<ion-footer lines="none" class="ion-no-border">
   <ion-item lines="none" class="continue-buttom-container">
-    <ion-button [disabled]="formInvalid()" (click)="nextStep()" class="continue-buttom" expand="block">
-      Continuar cadastro
-      <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
-    </ion-button>
+    <ng-container *ngIf="currentStep != 5; else finishButton">
+      <ion-button [disabled]="formInvalid()" (click)="nextStep()" class="continue-buttom" expand="block">
+        Continuar cadastro
+        <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ng-container>
+    <ng-template #finishButton>
+      <ion-button [disabled]="formInvalid()" (click)="finish()" class="continue-buttom" expand="block">
+        <ion-icon slot="start" name="checkmark-outline"></ion-icon>
+        Finalizar cadastro
+      </ion-button>
+    </ng-template>
+   
   </ion-item>
   <ion-item lines="none" *ngIf="currentStep == 1">
     <ion-label class="footer-description">Entrar com minha conta</ion-label>

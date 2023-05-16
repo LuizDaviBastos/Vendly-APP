@@ -1,0 +1,56 @@
+ion-content {
+  height: 300px;
+}
+
+.title {
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: auto;
+  display: flex;
+  font-size: 24px;
+  font-weight: 700;
+  color: #2D2D2D;
+}
+
+.description {
+  margin-left: 20px !important;
+}
+
+.link-account-button-container {
+  margin-bottom: 0px !important;
+
+  .link-account-button {
+    width: 100%;
+    text-transform: inherit;
+    --border-radius: 10px;
+    font-size: 12pt;
+    --color: #e3e3e3;
+    --background: #3B3F4C;
+    height: 56px;
+  }
+}
+
+.content-item .link-account-label {
+  text-align: center;
+  text-decoration: underline;
+  font-size: 12pt;
+  font-weight: 400;
+}
+
+.scroll {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+ion-list {
+  margin: auto;
+  height: 100%;
+  display: flex;
+}
+
+form {
+  margin: auto;
+  width: 100%;
+}
+

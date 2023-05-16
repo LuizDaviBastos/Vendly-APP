@@ -19,7 +19,6 @@
           <ion-row>
             <ion-label class="ion-text-wrap">Verifique o código que foi enviado para o seu email.</ion-label>
           </ion-row>
-          
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -30,7 +29,7 @@
     <form [formGroup]="formGroup">
       <ion-item lines="none" class="item-background-color">
         <ion-label position="stacked">Digite o código de verificação</ion-label>
-        <ion-input class="input" type="text" formControlName="code"></ion-input>
+        <ion-input placeholder="000000" clearInput="true" class="input" type="text" formControlName="code" [minlength]="6" [maxlength]="6"></ion-input>
       </ion-item>
     </form>
   </ion-list>

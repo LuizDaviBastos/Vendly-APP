@@ -147,6 +147,13 @@ form {
         margin-bottom: 16px;
     }
 }
+
 ion-footer {
     margin-bottom: 20px;
 }
+
+app-step4, app-step5 {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+  }
