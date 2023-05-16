@@ -8,7 +8,7 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn,
 })
 export class SignupComponent implements OnInit {
 
-  public currentStep: 1 | 2 | 3 | 4 = 3;
+  public currentStep: 1 | 2 | 3 | 4 = 4;
   public stepsFormGroup = {
     1: new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -22,13 +22,11 @@ export class SignupComponent implements OnInit {
       confirmPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
     }),
     4: new FormGroup({
-      country: new FormControl('', [Validators.required]),
-      name: new FormControl('', [Validators.required]),
+      code: new FormControl('', [Validators.required])
     })
   }
 
   constructor() { }
-
 
   ngOnInit() { }
 

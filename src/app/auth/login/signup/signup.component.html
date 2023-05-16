@@ -1,6 +1,7 @@
 <app-step1 *ngIf="currentStep == 1" [form]="stepsFormGroup[1]" [previous]="previousStep.bind(this)" [next]="nextStep.bind(this)"></app-step1>
 <app-step2 *ngIf="currentStep == 2" [form]="stepsFormGroup[2]" [previous]="previousStep.bind(this)" [next]="nextStep.bind(this)"></app-step2>
 <app-step3 *ngIf="currentStep == 3" [form]="stepsFormGroup[3]" [previous]="previousStep.bind(this)" [next]="nextStep.bind(this)"></app-step3>
+<app-step4 *ngIf="currentStep == 4" [form]="stepsFormGroup[4]" [email]="stepsFormGroup[1].get('email')?.value" [previous]="previousStep.bind(this)" [next]="nextStep.bind(this)"></app-step4>
   
 <ion-footer lines="none">
   <ion-item lines="none" class="continue-buttom-container">

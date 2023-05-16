@@ -1,16 +1,17 @@
-import { ChangeDetectorRef, Component, ContentChild, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-step3',
-  templateUrl: './step3.component.html',
-  styleUrls: ['../../signup.component.scss', './step3.component.scss'],
+  selector: 'app-step4',
+  templateUrl: './step4.component.html',
+  styleUrls: ['../../signup.component.scss', './step4.component.scss'],
 })
-export class Step3Component implements OnInit {
+export class Step4Component implements OnInit {
 
   @Input('form') formGroup: FormGroup;
   @Input('previous') previousStep: () => void;
   @Input('next') nextStep: () => void;
+  @Input('email') email: string;
 
   constructor(private cdr: ChangeDetectorRef) { }
 

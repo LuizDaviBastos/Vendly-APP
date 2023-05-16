@@ -1,0 +1,37 @@
+<ion-header no-border>
+  <div class="asm-header">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-icon (click)="previousStep()" role="button" name="arrow-back-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-icon class="steps" src="assets/icon/steps/step3.svg"></ion-icon>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-title><b>Confirme seu email</b></ion-title>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="description">
+          <ion-row>
+            <ion-label class="ion-text-wrap">Verifique o código que foi enviado para o seu email.</ion-label>
+          </ion-row>
+          
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-header>
+<ion-content scrollY="true">
+  <ion-list class="content-item" lines="none">
+    <form [formGroup]="formGroup">
+      <ion-item lines="none" class="item-background-color">
+        <ion-label position="stacked">Digite o código de verificação</ion-label>
+        <ion-input class="input" type="text" formControlName="code"></ion-input>
+      </ion-item>
+    </form>
+  </ion-list>
+</ion-content>
