@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -15,11 +15,11 @@ export class SignupComponent implements OnInit {
     }),
     2: new FormGroup({
       country: new FormControl('', [Validators.required]),
-      name: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required, Validators.minLength(4)]),
     }),
     3: new FormGroup({
-      country: new FormControl('', [Validators.required]),
-      name: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      confirmPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
     }),
     4: new FormGroup({
       country: new FormControl('', [Validators.required]),
@@ -38,7 +38,7 @@ export class SignupComponent implements OnInit {
   }
 
   public previousStep() {
-    if(this.currentStep <= 1) return;
+    if (this.currentStep <= 1) return;
     this.currentStep--;
   }
 
@@ -46,4 +46,21 @@ export class SignupComponent implements OnInit {
     return (this.stepsFormGroup[this.currentStep].status == "INVALID")
   }
 
+}
+
+export function matchValidator(matchTo: string, reverse?: boolean): ValidatorFn {
+  return (control: AbstractControl):
+    ValidationErrors | null => {
+    if (control.parent && reverse) {
+      const c = (control.parent?.controls as any)[matchTo] as AbstractControl;
+      if (c) {
+        c.updateValueAndValidity();
+      }
+      return null;
+    }
+    return !!control.parent &&
+      !!control.parent.value &&
+      control.value ===
+      (control.parent?.controls as any)[matchTo].value ? null : { matching: true };
+  };
 }

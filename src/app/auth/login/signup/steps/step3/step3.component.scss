@@ -12,6 +12,10 @@ ion-content {
     scale: 1.1;
     display: flex;
   }
+
+  ion-label {
+    margin-left: 6px;
+  }
 }
 
 .valid {
@@ -22,6 +26,10 @@ ion-content {
 .invalid {
   color: #EA3333;
   background-color: #F3E2E2;
+}
+
+.input {
+  pointer-events: visible!important;
 }
 
 

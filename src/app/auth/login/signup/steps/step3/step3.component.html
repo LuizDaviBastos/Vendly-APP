@@ -15,7 +15,11 @@
       <div class="description">
         <ion-row>
           <ion-col size="1">
-            <ion-icon src="assets/icon/status-icons/valid.svg"></ion-icon>
+            <ion-icon *ngIf="!touched; else status1" src="assets/icon/status-icons/default.svg"></ion-icon>
+            <ng-template #status1>
+              <ion-icon *ngIf="errors['minLength']" src="assets/icon/status-icons/valid.svg"></ion-icon>
+              <ion-icon *ngIf="!errors['minLength']" src="assets/icon/status-icons/invalid.svg"></ion-icon>
+            </ng-template>
           </ion-col>
           <ion-col>
             <ion-label class="ion-text-wrap">Use no mínimo 8 caracteres</ion-label>
@@ -23,7 +27,11 @@
         </ion-row>
         <ion-row>
           <ion-col size="1">
-            <ion-icon src="assets/icon/status-icons/invalid.svg"></ion-icon>
+            <ion-icon *ngIf="!touched; else status2" src="assets/icon/status-icons/default.svg"></ion-icon>
+            <ng-template #status2>
+              <ion-icon *ngIf="errors['number']" src="assets/icon/status-icons/valid.svg"></ion-icon>
+              <ion-icon *ngIf="!errors['number']" src="assets/icon/status-icons/invalid.svg"></ion-icon>
+            </ng-template>
           </ion-col>
           <ion-col>
             <ion-label class="ion-text-wrap">Um número</ion-label>
@@ -31,7 +39,11 @@
         </ion-row>
         <ion-row>
           <ion-col size="1">
-            <ion-icon src="assets/icon/status-icons/default.svg"></ion-icon>
+            <ion-icon *ngIf="!touched; else status3" src="assets/icon/status-icons/default.svg"></ion-icon>
+            <ng-template #status3>
+              <ion-icon *ngIf="errors['special']" src="assets/icon/status-icons/valid.svg"></ion-icon>
+              <ion-icon *ngIf="!errors['special']" src="assets/icon/status-icons/invalid.svg"></ion-icon>
+            </ng-template>
           </ion-col>
           <ion-col>
             <ion-label class="ion-text-wrap">Um carácter especial</ion-label>
@@ -47,8 +59,17 @@
       <ion-item lines="none" class="item-background-color">
         <ion-label position="stacked">Escolha uma senha</ion-label>
         <app-show-hide-password class="input">
-          <ion-input type="password" placeholder="Digite sua senha"></ion-input>
+          <ion-input (ionChange)="changeDetected()" type="password" placeholder="Digite sua senha"
+            formControlName="password"></ion-input>
         </app-show-hide-password>
+      </ion-item>
+      <ion-item lines="none" class="item-background-color">
+        <ion-label position="stacked">Repita sua senha</ion-label>
+        <app-show-hide-password class="input">
+          <ion-input (ionChange)="changeDetected()" placeholder="Digite sua senha"
+            formControlName="confirmPassword"></ion-input>
+        </app-show-hide-password>
+        <label class="feedback-validation" *ngIf="hasErrorMatching()">As senhas não coincidem</label>
       </ion-item>
     </form>
   </ion-list>
