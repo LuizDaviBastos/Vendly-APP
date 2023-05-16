@@ -1,6 +1,5 @@
-import { ChangeDetectorRef, Component, ContentChild, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { IonInput } from '@ionic/angular';
 
 @Component({
   selector: 'app-step3',
