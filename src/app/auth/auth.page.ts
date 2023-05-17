@@ -11,17 +11,25 @@ import { MeliService } from 'src/services/meli-service';
   styleUrls: ['auth.page.scss']
 })
 export class AuthPage implements OnInit {
-  constructor(private route: Router, 
+  constructor(private route: Router,
     private meliService: MeliService,
     private alertService: AlertService) { }
 
   public loading: boolean = false;
   public loadingFake: boolean = false;
   public target: string;
-  public email: string = "";
-  public password: string = "";
+  public email: string = "davi-sdb@hotmail.com";
+  public password: string = "80849903Dd@";
 
-  ngOnInit(): void { }
+  public navigateUrl: string;
+
+  public navigate() {
+    this.route.navigateByUrl(this.navigateUrl);
+  }
+
+  ngOnInit(): void {
+    
+  }
 
   public async login() {
     try {
@@ -34,7 +42,7 @@ export class AuthPage implements OnInit {
           this.alertService.showToastAlert(response.message);
         }
       }, (error) => {
-        this.alertService.showToastAlert(error?.error?.message || 'Houve um erro ao tentar fazer login');
+        this.alertService.errorAlert(error);
         this.loading = false;
       }, () => {
         this.loading = false;
@@ -42,7 +50,7 @@ export class AuthPage implements OnInit {
     }
     catch {
       this.loading = false;
-    } 
+    }
   }
 
   public loginFake() {

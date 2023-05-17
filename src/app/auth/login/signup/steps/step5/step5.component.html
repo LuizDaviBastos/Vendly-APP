@@ -3,7 +3,7 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-icon (click)="previousStep()" role="button" name="arrow-back-outline"></ion-icon>
+          <!--<ion-icon (click)="previousStep()" role="button" name="arrow-back-outline"></ion-icon>-->
         </ion-col>
       </ion-row>
       <ion-row>
@@ -28,12 +28,23 @@
 <ion-content [scrollY]="true">
   <ion-list class="content-item" lines="none">
     <form slot="fixed" [formGroup]="formGroup">
-      <ion-item lines="none" class="link-account-button-container">
-        <ion-button (click)="syncAccount()" class="link-account-button" expand="block">Vincular conta</ion-button>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label class="link-account-label">Não tenho conta no Mercado Livre</ion-label>
-      </ion-item>
+      <div *ngIf="synState(); else sync">
+        <ion-item lines="none" class="link-account-button-container ">
+          <ion-button [disabled]="true" (click)="syncAccount()" class="link-account-button sync" expand="block">
+            Conta vinculada
+            <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+          </ion-button>
+          
+        </ion-item>
+      </div>
+      <ng-template #sync>
+        <ion-item lines="none" class="link-account-button-container">
+          <ion-button (click)="syncAccount()" class="link-account-button" expand="block">Vincular conta</ion-button>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="link-account-label">Não tenho conta no Mercado Livre</ion-label>
+        </ion-item>
+      </ng-template>
     </form>
   </ion-list>
 </ion-content>

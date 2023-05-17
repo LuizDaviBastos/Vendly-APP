@@ -11,17 +11,37 @@
 
 <ion-footer lines="none" class="ion-no-border">
   <ion-item lines="none" class="continue-buttom-container">
-    <ng-container *ngIf="currentStep != 5; else finishButton">
-      <ion-button [disabled]="formInvalid()" (click)="nextStep()" class="continue-buttom" expand="block">
-        Continuar cadastro
-        <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+    <ng-container [ngSwitch]="currentStep">
+
+      <ion-button *ngSwitchCase="4" (click)="confirmEmail()" [disabled]="formInvalid() || loading['confirm']" class="continue-buttom" expand="block">
+        <ion-spinner *ngIf="loading['confirm']; else label" name="crescent"></ion-spinner>
+        <ng-template #label>
+          Confirmar
+        </ng-template>
       </ion-button>
+
+      <ion-button *ngSwitchDefault [disabled]="formInvalid() || loading['nextStep']" (click)="nextStep()" class="continue-buttom" expand="block">
+        <ion-spinner *ngIf="loading['nextStep']; else label" name="crescent"></ion-spinner>
+          <ng-template #label>
+            Continuar cadastro
+            <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+          </ng-template>
+      </ion-button>
+
+      <ion-button *ngSwitchCase="5" [disabled]="formInvalid() || loading['finish']" (click)="finish()" class="continue-buttom" expand="block">
+        <ion-spinner *ngIf="loading['finish']; else finishLabel" name="crescent"></ion-spinner>
+          <ng-template #finishLabel>
+            <ion-icon slot="start" name="checkmark-outline"></ion-icon>
+            Finalizar cadastro
+          </ng-template>
+       
+      </ion-button>
+
     </ng-container>
     <ng-template #finishButton>
-      <ion-button [disabled]="formInvalid()" (click)="finish()" class="continue-buttom" expand="block">
-        <ion-icon slot="start" name="checkmark-outline"></ion-icon>
-        Finalizar cadastro
-      </ion-button>
+
+      
+      
     </ng-template>
    
   </ion-item>

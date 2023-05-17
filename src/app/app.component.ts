@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { App, URLOpenListenerEvent } from '@capacitor/app';
 import { StatusBar } from '@capacitor/status-bar';
 import { Platform } from '@ionic/angular';
+import { MeliService } from 'src/services/meli-service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { Platform } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private router: Router, private zone: NgZone, private platform: Platform, private cdr: ChangeDetectorRef) {
+  constructor(private router: Router, private zone: NgZone, private platform: Platform, private cdr: ChangeDetectorRef, private meliService: MeliService) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if(window.navigator.platform == "Win32") {
@@ -32,7 +33,10 @@ export class AppComponent {
 
     App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
       const url = new URL(event.url);
-      this.router.navigateByUrl(url.pathname);
+      const params = url.searchParams.get('step');
+      const navigateTo = url.pathname + ((!!params) ? `?step=${params}` : '');
+      debugger;
+      this.router.navigateByUrl(navigateTo);
     });
   }
 }

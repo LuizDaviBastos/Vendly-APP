@@ -13,14 +13,15 @@ export class AuthGuardLoggedService implements CanActivate {
   constructor(private router: Router, private meliService: MeliService, private alertService: AlertService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-
+debugger;
     if (!LocalStorage.IsLogged) {
       this.router.navigate(['/auth']);
       return false;
     }
     else {
-      if (!LocalStorage.meliInfoStored()) {
+      if (!LocalStorage.meliInfoStored() && !!LocalStorage.getLogin()?.hasMeliAccount) {
         this.meliService.getMeliAccountInfo(LocalStorage.getSelectedMeliAccount().id).subscribe((response) => {
+          debugger;
           if (response.success) {
             LocalStorage.selectMeliAccount(response.data);
           }
@@ -38,15 +39,8 @@ export class AuthGuardLoggedService implements CanActivate {
         map((hasMeliAccount) => {
           if (!hasMeliAccount) {
             //TODO SHOW MESSAGE FOR USER EXPLANING THAT HE NEED SYNC A MELI ACCOUNT
-            this.meliService.addMeliAccount(LocalStorage.getCountry())
+            this.router.navigateByUrl('auth/signup?step=5')
           } else {
-            /*const login = LocalStorage.getLogin();
-            this.meliService.login(login.data.email, login.data.password).subscribe((response) => {
-              if(response.success) {
-                LocalStorage.setLogin(response.data);
-                this.router.navigate(['/message']);
-              }
-            })*/
             this.router.navigate(['/auth']);
           }
           return false;

@@ -25,7 +25,6 @@ export class Step1Component implements OnInit {
 
   public emailInvalid() {
     const control = this.formGroup.get('email');
-    console.log(control);
     return (control.touched && control.status == "INVALID");
   }
 }

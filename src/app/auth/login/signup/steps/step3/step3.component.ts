@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, ContentChild, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ContentChild, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-
+import { AuthService } from 'src/services/auth-service';
 @Component({
   selector: 'app-step3',
   templateUrl: './step3.component.html',
@@ -51,7 +51,7 @@ export class Step3Component implements OnInit {
   public lengthGreaterOrEqual8(str: string) {
     return str.length >= 8
   }
-  
+
   public matchPassword() {
     let password = this.formGroup.get('password').value;
     let confirmPassword = this.formGroup.get('confirmPassword').value;
@@ -59,7 +59,7 @@ export class Step3Component implements OnInit {
   }
 
   public changeState(name: string) {
-    if(!this.formGroup.errors) {
+    if (!this.formGroup.errors) {
       this.formGroup.setErrors({});
     }
 
@@ -69,7 +69,7 @@ export class Step3Component implements OnInit {
       delete this.formGroup.errors[name];
     }
 
-    if(Object.keys(this.formGroup.errors).length == 0) {
+    if (Object.keys(this.formGroup.errors).length == 0) {
       this.formGroup.setErrors(null);
     }
   }

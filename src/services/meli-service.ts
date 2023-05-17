@@ -11,6 +11,7 @@ import { SellerMessage } from 'src/models/seller-message';
 import { LocalStorage } from 'src/app/helpers/local-storage.helper';
 import { isAuthenticatedResponse } from 'src/models/is-authenticated-response';
 import { MessageTypeEnum } from 'src/models/message-type.enum';
+import { Seller } from 'src/models/seller';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,11 @@ export class MeliService {
   public hasMeliAccount(sellerId: string) {
     const params = new HttpParams().append('sellerId', sellerId);
     return this.http.get<boolean>(`${this.apiHost}/api/account/hasMeliAccount`, { params: params });
+  }
+
+  public getSellerInfo(sellerId: string) {
+    const params = new HttpParams().append('sellerId', sellerId);
+    return this.http.get<RequestResponse<Seller>>(`${this.apiHost}/api/account/GetSellerInfo`, { params: params });
   }
 
   getMessage(meliAccountId: string, messageType: MessageTypeEnum) {
