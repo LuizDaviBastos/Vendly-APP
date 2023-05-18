@@ -226,3 +226,29 @@ ion-label {
 .trash-icon {
   color: #b92222;
 }
+
+ion-progress-bar {
+  height: 50px;
+  border-radius: 10px;
+  text-transform: inherit;
+  font-size: 12pt;
+  --progress-background: #3B3F4C;
+
+}
+
+.percent {
+  text-align: center;
+  width: 98%;
+  position: absolute;
+  color: white;
+}
+
+// .ruler {
+//   position: absolute;
+//   top: 0;
+//   left: 50%;
+//   width: 1px;
+//   height: 100%;
+//   background-color: red;
+//   z-index: 9999;
+// }

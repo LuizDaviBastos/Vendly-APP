@@ -12,18 +12,19 @@ import { LocalStorage } from 'src/app/helpers/local-storage.helper';
 import { isAuthenticatedResponse } from 'src/models/is-authenticated-response';
 import { MessageTypeEnum } from 'src/models/message-type.enum';
 import { Seller } from 'src/models/seller';
+import { SettingsService } from './settings-service';
+import { HttpClientBase } from './http-base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MeliService {
-  public apiHost: string = environment.urlBaseApi;
+export class MeliService  {
 
-  constructor(private http: HttpClient, private platform: Platform) {
+  constructor(private http: HttpClientBase, private platform: Platform, private settingsService: SettingsService) {
   }
 
   public login(email: string, password: string) {
-    return this.http.post<RequestResponse<LoginResponse>>(`${this.apiHost}/api/auth/login`, {
+    return this.http.post<RequestResponse<LoginResponse>>(`api/auth/login`, {
       email: email,
       password: password
     });
@@ -31,7 +32,7 @@ export class MeliService {
 
   public getMeliAccountInfo(meliSellerId: number) {
     const httpParams = new HttpParams().set('meliSellerId', meliSellerId);
-    return this.http.get<RequestResponse<SellerInfo>>(`${this.apiHost}/api/account/GetMeliSellerInfo`, { params: httpParams });
+    return this.http.get<RequestResponse<SellerInfo>>(`api/account/GetMeliSellerInfo`, { params: httpParams });
   }
 
   public addMeliAccount(country: Country = 'br', browserTarget: string = "_system") {
@@ -39,31 +40,31 @@ export class MeliService {
       zoom: "no",
       location: "no"
     };
-    InAppBrowser.create(`${this.apiHost}/api/auth/SyncMeli?countryId=${country}&token=${LocalStorage.token}`, browserTarget, options);
+    InAppBrowser.create(`api/auth/SyncMeli?countryId=${country}&token=${LocalStorage.token}`, browserTarget, options);
   }
 
   public saveMessage(message: SellerMessage) {
-    return this.http.post<RequestResponse<SellerMessage>>(`${this.apiHost}/api/Message/Update`, message);
+    return this.http.post<RequestResponse<SellerMessage>>(`api/Message/Update`, message);
   }
 
   public isAuthenticated(token: string) {
     const params = new HttpParams().append('token', token);
-    return this.http.get<isAuthenticatedResponse>(`${this.apiHost}/api/auth/IsAuthenticated`, { params: params });
+    return this.http.get<isAuthenticatedResponse>(`api/auth/IsAuthenticated`, { params: params });
   }
 
   public hasMeliAccount(sellerId: string) {
     const params = new HttpParams().append('sellerId', sellerId);
-    return this.http.get<boolean>(`${this.apiHost}/api/account/hasMeliAccount`, { params: params });
+    return this.http.get<boolean>(`api/account/hasMeliAccount`, { params: params });
   }
 
   public getSellerInfo(sellerId: string) {
     const params = new HttpParams().append('sellerId', sellerId);
-    return this.http.get<RequestResponse<Seller>>(`${this.apiHost}/api/account/GetSellerInfo`, { params: params });
+    return this.http.get<RequestResponse<Seller>>(`api/account/GetSellerInfo`, { params: params });
   }
 
-  getMessage(meliAccountId: string, messageType: MessageTypeEnum) {
+  public getMessage(meliAccountId: string, messageType: MessageTypeEnum) {
     const params = new HttpParams().set('meliAccountId', meliAccountId).append('messageType', messageType);
-    return this.http.get<RequestResponse<SellerMessage>>(`${this.apiHost}/api/message/get`, { params: params });
+    return this.http.get<RequestResponse<SellerMessage>>(`api/message/get`, { params: params });
   }
 
 }

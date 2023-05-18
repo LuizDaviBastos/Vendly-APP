@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { RequestResponse } from 'src/models/request-response.model';
 import { AlertService } from 'src/services/alert-service';
 import { MeliService } from 'src/services/meli-service';
+import { SettingsService } from 'src/services/settings-service';
 
 @Component({
   selector: 'app-auth',
@@ -13,7 +14,8 @@ import { MeliService } from 'src/services/meli-service';
 export class AuthPage implements OnInit {
   constructor(private route: Router,
     private meliService: MeliService,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private settingsService: SettingsService) { }
 
   public loading: boolean = false;
   public loadingFake: boolean = false;
@@ -28,7 +30,7 @@ export class AuthPage implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
   }
 
   public async login() {
@@ -47,6 +49,7 @@ export class AuthPage implements OnInit {
       }, () => {
         this.loading = false;
       })
+
     }
     catch {
       this.loading = false;

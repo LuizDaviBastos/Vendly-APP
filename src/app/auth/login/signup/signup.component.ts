@@ -145,7 +145,6 @@ export class SignupComponent implements OnInit {
   private saveAccountAndSendEmailConfirmationCode() {
     this.loading['nextStep'] = true;
     this.authService.saveAccount(this.getSellerEntity()).subscribe((loginResponse) => {
-      debugger
       if (loginResponse.success) {
         LocalStorage.setLogin(loginResponse.data);
         this.authService.sendEmailConfirmationCode(loginResponse.data.data.id).subscribe((sendConfirmationResponse) => {
