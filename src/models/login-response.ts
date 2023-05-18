@@ -6,4 +6,5 @@ export class LoginResponse {
     public message: string;
     public data: Seller;
     public token: string;
+    public emailNotConfirmed: boolean;
 }

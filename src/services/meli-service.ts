@@ -1,9 +1,8 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import { Country } from 'src/models/country.type';
 import { SellerInfo as SellerInfo } from 'src/models/seller-info.model';
-import { environment } from '../environments/environment';
 import { Platform } from '@ionic/angular';
 import { RequestResponse } from 'src/models/request-response.model';
 import { LoginResponse } from 'src/models/login-response';
@@ -12,7 +11,6 @@ import { LocalStorage } from 'src/app/helpers/local-storage.helper';
 import { isAuthenticatedResponse } from 'src/models/is-authenticated-response';
 import { MessageTypeEnum } from 'src/models/message-type.enum';
 import { Seller } from 'src/models/seller';
-import { SettingsService } from './settings-service';
 import { HttpClientBase } from './http-base.service';
 
 @Injectable({
@@ -20,7 +18,7 @@ import { HttpClientBase } from './http-base.service';
 })
 export class MeliService  {
 
-  constructor(private http: HttpClientBase, private platform: Platform, private settingsService: SettingsService) {
+  constructor(private http: HttpClientBase, private platform: Platform) {
   }
 
   public login(email: string, password: string) {

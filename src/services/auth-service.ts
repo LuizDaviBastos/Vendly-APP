@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import { Country } from 'src/models/country.type';
@@ -8,7 +8,6 @@ import { LoginResponse } from 'src/models/login-response';
 import { LocalStorage } from 'src/app/helpers/local-storage.helper';
 import { isAuthenticatedResponse } from 'src/models/is-authenticated-response';
 import { Seller } from 'src/models/seller';
-import { SettingsService } from './settings-service';
 import { HttpClientBase } from './http-base.service';
 
 @Injectable({
@@ -16,7 +15,7 @@ import { HttpClientBase } from './http-base.service';
 })
 export class AuthService {
  
-    constructor(private http: HttpClientBase, private platform: Platform, private settingsService: SettingsService) {
+    constructor(private http: HttpClientBase, private platform: Platform) {
        
     }
 

@@ -1,10 +1,8 @@
 import { LocalStorage } from '../helpers/local-storage.helper';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RequestResponse } from 'src/models/request-response.model';
 import { AlertService } from 'src/services/alert-service';
 import { MeliService } from 'src/services/meli-service';
-import { SettingsService } from 'src/services/settings-service';
 
 @Component({
   selector: 'app-auth',
@@ -14,8 +12,7 @@ import { SettingsService } from 'src/services/settings-service';
 export class AuthPage implements OnInit {
   constructor(private route: Router,
     private meliService: MeliService,
-    private alertService: AlertService,
-    private settingsService: SettingsService) { }
+    private alertService: AlertService) { }
 
   public loading: boolean = false;
   public loadingFake: boolean = false;
@@ -38,8 +35,13 @@ export class AuthPage implements OnInit {
       this.loading = true;
       this.meliService.login(this.email, this.password).subscribe((response) => {
         if (response.success) {
-          LocalStorage.setLogin(response.data);
-          this.route.navigate(['/message']);
+          if (response.data.emailNotConfirmed) {
+            this.route.navigateByUrl(`auth/signup?step=4&sellerId=${response.data.data.id}`);
+          } else {
+            LocalStorage.setLogin(response.data);
+            this.route.navigate(['/message']);
+          }
+
         } else {
           this.alertService.showToastAlert(response.message);
         }

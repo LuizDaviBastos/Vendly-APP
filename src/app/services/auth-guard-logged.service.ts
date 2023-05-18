@@ -5,13 +5,12 @@ import { LocalStorage } from '../helpers/local-storage.helper';
 import { MeliService } from 'src/services/meli-service';
 import { map } from 'rxjs/operators';
 import { AlertService } from 'src/services/alert-service';
-import { SettingsService } from 'src/services/settings-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuardLoggedService implements CanActivate {
-  constructor(private router: Router, private meliService: MeliService, private alertService: AlertService, private settingsService: SettingsService) { }
+  constructor(private router: Router, private meliService: MeliService, private alertService: AlertService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     if (!LocalStorage.IsLogged) {
@@ -37,7 +36,6 @@ export class AuthGuardLoggedService implements CanActivate {
       return this.meliService.hasMeliAccount(LocalStorage.getLogin().data.id).pipe(
         map((hasMeliAccount) => {
           if (!hasMeliAccount) {
-            //TODO SHOW MESSAGE FOR USER EXPLANING THAT HE NEED SYNC A MELI ACCOUNT
             this.router.navigateByUrl('auth/signup?step=5')
           } else {
             this.router.navigate(['/auth']);
@@ -46,7 +44,7 @@ export class AuthGuardLoggedService implements CanActivate {
         })
       );
     }
-    
+
     return LocalStorage.IsLogged;
     return this.meliService.isAuthenticated(LocalStorage.token).pipe(
       map((isAuthenticated) => {

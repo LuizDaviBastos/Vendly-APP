@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { LocalStorage } from 'src/app/helpers/local-storage.helper';
 import { Seller } from 'src/models/seller';
@@ -74,6 +74,14 @@ export class SignupComponent implements OnInit {
         
         this.currentStep = step;
         loading.dismiss();
+      } else if(step == 4) {
+        this.currentStep = step;
+        const id = params.get('sellerId');
+        if(!id) {
+          this.alertService.showToastAlert(`Não foi possível obter os dados do usuario. Experimente apagar o cache do aplicativo e tentar novamente.`)
+          this.router.navigateByUrl('/auth');
+        }
+        this.sendEmailConfirmationCode(id);
       }
     })
 
@@ -147,22 +155,31 @@ export class SignupComponent implements OnInit {
     this.authService.saveAccount(this.getSellerEntity()).subscribe((loginResponse) => {
       if (loginResponse.success) {
         LocalStorage.setLogin(loginResponse.data);
-        this.authService.sendEmailConfirmationCode(loginResponse.data.data.id).subscribe((sendConfirmationResponse) => {
-          this.loading['nextStep'] = false;
-          if (sendConfirmationResponse.success) {
-            this._nextStep();
-          } else {
-            this.alertService.showToastAlert(sendConfirmationResponse.message);
-          }
-        }, (err) => {
-          this.loading['nextStep'] = false;
-          this.alertService.errorAlert(err);
+        this.sendEmailConfirmationCode(loginResponse.data.data.id, () => {
+          this._nextStep();
         })
       } else {
         this.alertService.showToastAlert(loginResponse.message);
       }
     }, (err: HttpErrorResponse ) => {
       this.loading['nextStep'] = false;
+      this.alertService.errorAlert(err);
+    })
+  }
+
+  private sendEmailConfirmationCode(id: string, onSucess?: () => void) {
+    this.loading['confirm'] = true;
+    this.authService.sendEmailConfirmationCode(id).subscribe((sendConfirmationResponse) => {
+      this.loading['confirm'] = false;
+      if (sendConfirmationResponse.success) {
+        this.alertService.showToastAlert(`Enviamos um código para o seu email.`, 2000, "top");
+        onSucess && onSucess();
+        
+      } else {
+        this.alertService.showToastAlert(sendConfirmationResponse.message);
+      }
+    }, (err) => {
+      this.loading['confirm'] = false;
       this.alertService.errorAlert(err);
     })
   }

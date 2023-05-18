@@ -39,7 +39,7 @@ export class LocalStorage {
 
     public static get IsLogged(): boolean {
         const loginInfo = this.getLogin();
-        return (loginInfo?.success || false) && !!this.token;
+        return (loginInfo?.success || false) && !!this.token && !loginInfo.emailNotConfirmed;
     }
 
     public static selectMeliAccount(meliSellerInfo: SellerInfo) {

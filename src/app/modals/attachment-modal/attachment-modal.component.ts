@@ -113,8 +113,6 @@ export class AttachmentModal implements OnInit {
             this.setStatusDefault();
             this.alertService.errorAlert(err);
         });
-
-
     }
 
     private setStatusDefault() {
