@@ -69,10 +69,6 @@ ion-label {
 
 .ion-toggle-row {
 
-  ion-col {
-    margin-left: 15px;
-  }
-
   ion-toggle {
     display: block;
     height: 23px;
@@ -110,6 +106,7 @@ ion-list {
   .edit-msg-icon-container {
     display: flex;
     width: 25%;
+    max-width: 90px;
     color: #2D2D2D;
   }
   ion-icon[name="attach-outline"] {

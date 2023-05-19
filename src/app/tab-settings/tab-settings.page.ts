@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { LocalStorage } from '../helpers/local-storage.helper';
 import { Component, OnInit } from '@angular/core';
-import { NavController, Platform } from '@ionic/angular';
+import { AlertController, NavController, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab-settings',
@@ -10,14 +10,27 @@ import { NavController, Platform } from '@ionic/angular';
 })
 export class TabSettingsPage implements OnInit {
 
-  constructor(private route: Router, private platform: Platform, private navCtrl: NavController) { }
+  constructor(private route: Router, private platform: Platform, private navCtrl: NavController,
+    private alertController: AlertController) { }
   ngOnInit(): void {
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.goBack();
     });
   }
 
-  public logout() {
+  public async logout() {
+    const dialog = await this.alertController.create({
+      header: 'Deseja sair da sua conta?',
+      buttons: [
+        { text: 'Voltar' },
+        { text: 'Sim, sair', handler: this._logout.bind(this) }
+      ],
+      cssClass: 'logout-alert',
+    });
+    dialog.present();
+  }
+
+  private _logout() {
     LocalStorage.logout();
     this.route.navigateByUrl('/auth');
   }

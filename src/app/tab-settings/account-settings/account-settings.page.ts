@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { LocalStorage } from '../../helpers/local-storage.helper';
 import { Component, NgZone, OnInit } from '@angular/core';
-import { NavController, Platform } from '@ionic/angular';
+import { AlertController, NavController, Platform } from '@ionic/angular';
 import { Seller } from 'src/models/seller';
 
 @Component({
@@ -15,18 +15,11 @@ export class AccountSettingsPage implements OnInit {
     return LocalStorage.getLogin().data || new Seller();
   }
 
-  constructor(private route: Router, private platform: Platform, private navCtrl: NavController, private zone: NgZone) { }
+  constructor(private route: Router, private platform: Platform, private navCtrl: NavController, private zone: NgZone,
+    private alertController: AlertController) { }
 
   ngOnInit(): void {
 
-  }
-
-  public logout() {
-    LocalStorage.logout();
-    this.zone.run(() => {
-      this.route.navigate(['/auth']);
-    })
-    
   }
 
   public goBack() {

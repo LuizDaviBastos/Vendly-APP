@@ -15,7 +15,7 @@
         </ion-col>
       </ion-row>
       <ion-row class="ion-toggle-row">
-        <ion-col size="1" class="description-configuration">
+        <ion-col size="auto" class="description-configuration">
           <ion-skeleton-text *ngIf="loading[loadingKeys.message]; else SwitchControl" class="loading-toggle"
             [animated]="true"></ion-skeleton-text>
           <ng-template #SwitchControl>

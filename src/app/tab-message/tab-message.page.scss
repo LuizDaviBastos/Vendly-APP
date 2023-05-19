@@ -9,12 +9,21 @@ ion-header::after {
   color: black;
   padding-bottom: 1%;
 
+  ion-row {
+    max-width: 90%;
+    margin-left: 20px!important;
+  }
+  ion-title {
+    padding: 0px;
+  }
+  
   ion-grid,
   ion-row,
   ion-col {
     padding-left: 0px;
     padding-right: 0px;
     margin: auto;
+    min-width: 60px;
   }
 
   .box-account {
@@ -23,6 +32,10 @@ ion-header::after {
     width: 90%;
     margin: auto;
     background-color: #F6F6F6;
+
+    ion-row {
+      margin-left: 0px!important;
+    }
   }
 
   seller-avatar {
@@ -44,7 +57,7 @@ ion-header::after {
     color: #2D2D2D;
     float: right;
     font-size: 16pt;
-    padding-right: 20px;
+    //padding-right: 20px;
 
   }
 }
@@ -92,7 +105,8 @@ ion-item {
   border-radius: 9px;
   background-color: #E2E2E2;
   padding: 5px;
-  margin: auto;
+  //margin: auto;
+  margin-left: 8px!important;
 
   ion-icon {
     color: #2D2D2D;
