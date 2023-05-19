@@ -17,12 +17,13 @@
           <ion-row>
             <ion-label *ngIf="meliSellerInfo()?.nickname">{{meliSellerInfo()?.nickname}}</ion-label>
             <ion-skeleton-text *ngIf="!meliSellerInfo()?.nickname" style="width: 174px; border-radius: 6px;"
-            [animated]="true"></ion-skeleton-text>
+              [animated]="true"></ion-skeleton-text>
           </ion-row>
           <ion-row>
             <ion-skeleton-text *ngIf="!meliSellerInfo()?.produtosCount" style="width: 70px; border-radius: 6px;"
-            [animated]="true"></ion-skeleton-text>
-            <ion-label *ngIf="meliSellerInfo()?.produtosCount" style="color: #565656">{{meliSellerInfo()?.produtosCount}} Produtos</ion-label>
+              [animated]="true"></ion-skeleton-text>
+            <ion-label *ngIf="meliSellerInfo()?.produtosCount"
+              style="color: #565656">{{meliSellerInfo()?.produtosCount}} Produtos</ion-label>
           </ion-row>
         </ion-col>
       </ion-row>
@@ -32,83 +33,96 @@
 
 <ion-content scrollY="true" slot="fixed" [fullscreen]="true">
   <ion-list class="messages-container" lines="none">
-    <ion-item>
-      <ion-label>Configure as mensagens que seus clientes recebem de acordo com o status da venda</ion-label>
-    </ion-item>
-    <ion-item [routerLink]="['edit', '0']" class="item-background-color">
-      <ion-grid>
-        <ion-row class="row-border" [style]="(getMessage(0).activated ? '' : 'border-color: rgb(158, 2, 2);')">
-          <ion-col size="2">
-            <div class="icon-container">
-              <ion-icon name="bag-handle"></ion-icon>
-            </div>
-          </ion-col>
-          <ion-col class="message-title">
-            <ion-label>Compra realizada</ion-label>
-            <p [style]="(getMessage(0).activated ? '' : 'color: rgb(158, 2, 2);')">{{getMessage(0).activated ? 'Ativo' : 'Inativo'}}</p>
-          </ion-col>
-          <ion-col size="1" class="edit-container">
-            <ion-icon src="assets/icon/pencil.svg"></ion-icon>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-label class="item-desc"><div class="desc">Seu comprador receberá a mensagem assim que efetuar uma compra.</div>
-            <!-- <b>Ex:</b> Olá <span>@Comprador</span>! Acabei de receber seu pedido!-->
-          </ion-label>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-    <div class="message-divider">
-      <ion-icon class="path-icon" src="assets/icon/path.svg"></ion-icon>
+    <div style="display: flex; flex-direction: column; height: 100%; margin: auto;">
+      <ion-item>
+        <ion-label>Configure as mensagens que seus clientes recebem de acordo com o status da venda</ion-label>
+      </ion-item>
+      <div style="margin: auto;">
+        <ion-item [routerLink]="['edit', '0']" class="item-background-color">
+          <ion-grid>
+            <ion-row class="row-border" [style]="(getMessage(0).activated ? '' : 'border-color: rgb(158, 2, 2);')">
+              <ion-col size="2">
+                <div class="icon-container">
+                  <ion-icon name="bag-handle"></ion-icon>
+                </div>
+              </ion-col>
+              <ion-col class="message-title">
+                <ion-label>Compra realizada</ion-label>
+                <p [style]="(getMessage(0).activated ? '' : 'color: rgb(158, 2, 2);')">{{getMessage(0).activated ?
+                  'Ativo'
+                  : 'Inativo'}}</p>
+              </ion-col>
+              <ion-col size="1" class="edit-container">
+                <ion-icon src="assets/icon/pencil.svg"></ion-icon>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-label class="item-desc">
+                <div class="desc">Seu comprador receberá a mensagem assim que efetuar uma compra.</div>
+                <!-- <b>Ex:</b> Olá <span>@Comprador</span>! Acabei de receber seu pedido!-->
+              </ion-label>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <div class="message-divider">
+          <ion-icon class="path-icon" src="assets/icon/path.svg"></ion-icon>
+        </div>
+        <ion-item [routerLink]="['edit', '1']" class="item-background-color">
+          <ion-grid>
+            <ion-row class="row-border" [style]="(getMessage(1).activated ? '' : 'border-color: rgb(158, 2, 2);')">
+              <ion-col size="2">
+                <div class="icon-container">
+                  <ion-icon src="assets/icon/truck.svg"></ion-icon>
+                </div>
+              </ion-col>
+              <ion-col class="message-title">
+                <ion-label>Pedido a caminho</ion-label>
+                <p [style]="(getMessage(1).activated ? '' : 'color: rgb(158, 2, 2);')">{{getMessage(1).activated ?
+                  'Ativo'
+                  : 'Inativo'}}</p>
+              </ion-col>
+              <ion-col size="1" class="edit-container">
+                <ion-icon src="assets/icon/pencil.svg"></ion-icon>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-label class="item-desc">
+                <div class="desc">Seu comprador receberá a mensagem assim que o pedido sair para entrega.</div>
+                <!-- <b>Ex:</b> Seu <span>@Produto</span> acabou de sair para entrega. -->
+              </ion-label>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <div class="message-divider">
+          <ion-icon class="path-icon" src="assets/icon/path.svg"></ion-icon>
+        </div>
+        <ion-item [routerLink]="['edit', '2']" class="item-background-color">
+          <ion-grid>
+            <ion-row class="row-border" [style]="(getMessage(2).activated ? '' : 'border-color: rgb(158, 2, 2);')">
+              <ion-col size="2">
+                <div class="icon-container">
+                  <ion-icon src="assets/icon/box.svg"></ion-icon>
+                </div>
+              </ion-col>
+              <ion-col class="message-title">
+                <ion-label>Pedido entregue</ion-label>
+                <p [style]="(getMessage(2).activated ? '' : 'color: rgb(158, 2, 2);')">{{getMessage(2).activated ?
+                  'Ativo'
+                  : 'Inativo'}}</p>
+              </ion-col>
+              <ion-col size="1" class="edit-container">
+                <ion-icon src="assets/icon/pencil.svg"></ion-icon>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-label class="item-desc">
+                <div class="desc">Seu comprador receberá a mensagem assim que o pedido for entregue.</div>
+                <!-- <b>Ex:</b> <span>@Comprador</span> esperamos que você desfrute do seu novo produto.-->
+              </ion-label>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </div>
     </div>
-    <ion-item [routerLink]="['edit', '1']" class="item-background-color">
-      <ion-grid>
-        <ion-row class="row-border" [style]="(getMessage(1).activated ? '' : 'border-color: rgb(158, 2, 2);')">
-          <ion-col size="2">
-            <div class="icon-container">
-              <ion-icon src="assets/icon/truck.svg"></ion-icon>
-            </div>
-          </ion-col>
-          <ion-col class="message-title">
-            <ion-label>Pedido a caminho</ion-label>
-            <p [style]="(getMessage(1).activated ? '' : 'color: rgb(158, 2, 2);')">{{getMessage(1).activated ? 'Ativo' : 'Inativo'}}</p>
-          </ion-col>
-          <ion-col size="1" class="edit-container">
-            <ion-icon src="assets/icon/pencil.svg"></ion-icon>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-label class="item-desc"><div class="desc">Seu comprador receberá a mensagem assim que o pedido sair para entrega.</div>
-            <!-- <b>Ex:</b> Seu <span>@Produto</span> acabou de sair para entrega. -->
-          </ion-label>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-    <div class="message-divider">
-      <ion-icon class="path-icon" src="assets/icon/path.svg"></ion-icon>
-    </div>
-    <ion-item [routerLink]="['edit', '2']" class="item-background-color">
-      <ion-grid>
-        <ion-row class="row-border" [style]="(getMessage(2).activated ? '' : 'border-color: rgb(158, 2, 2);')">
-          <ion-col size="2">
-            <div class="icon-container">
-              <ion-icon src="assets/icon/box.svg"></ion-icon>
-            </div>
-          </ion-col>
-          <ion-col class="message-title">
-            <ion-label>Pedido entregue</ion-label>
-            <p [style]="(getMessage(2).activated ? '' : 'color: rgb(158, 2, 2);')">{{getMessage(2).activated ? 'Ativo' : 'Inativo'}}</p>
-          </ion-col>
-          <ion-col size="1" class="edit-container">
-            <ion-icon src="assets/icon/pencil.svg"></ion-icon>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-label class="item-desc"><div class="desc">Seu comprador receberá a mensagem assim que o pedido for entregue.</div>
-            <!-- <b>Ex:</b> <span>@Comprador</span> esperamos que você desfrute do seu novo produto.-->
-          </ion-label>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
   </ion-list>
 </ion-content>

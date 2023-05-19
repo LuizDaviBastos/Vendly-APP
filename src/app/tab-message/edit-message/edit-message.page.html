@@ -57,15 +57,19 @@
         </ion-row>
       </ion-grid>
     </ion-item>
-    <ion-item class="save-message-button-container">
-      <ion-button class="save-message-button " [disabled]="loading['message'] || loading[loadingKeys.button]"
-        expand="block" (click)="save()">
-        <div *ngIf="!loading[loadingKeys.button]">Salvar alterações</div>
-        <ion-spinner *ngIf="loading[loadingKeys.button]"></ion-spinner>
-      </ion-button>
-    </ion-item>
+
   </ion-list>
 </ion-content>
+
+<ion-footer style="margin-bottom: 20px;" lines="none" class="ion-no-border">
+  <ion-item class="save-message-button-container" lines="none">
+    <ion-button class="save-message-button " [disabled]="loading['message'] || loading[loadingKeys.button]"
+      expand="block" (click)="save()">
+      <div *ngIf="!loading[loadingKeys.button]">Salvar alterações</div>
+      <ion-spinner *ngIf="loading[loadingKeys.button]"></ion-spinner>
+    </ion-button>
+  </ion-item>
+</ion-footer>
 
 <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false">
   <ng-template>
