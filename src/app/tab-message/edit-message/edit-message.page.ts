@@ -39,11 +39,11 @@ export class EditMessagePage implements OnInit, OnDestroy {
   public editor: Editor;
   public message: SellerMessage = new SellerMessage();
   public toolbar: Toolbar = [
-    ['bold', 'italic', 'underline'],
-    ['bullet_list'],
+    ['bold', 'italic', 'underline', 'link'],
+    ['bullet_list', 'ordered_list'],
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right'],
-    //[{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
   ];
   private spans = {
     comprador: '<span data-mention-id="101" data-mention-name="COMPRADOR" data-mention-email="" class="prosemirror-mention-node">@COMPRADOR</span>',
