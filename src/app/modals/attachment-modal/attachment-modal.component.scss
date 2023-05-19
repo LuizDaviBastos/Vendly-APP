@@ -98,15 +98,6 @@ ion-label {
   }
 }
 
-ion-list {
-  padding: 0px;
-
-  .item-background-color {
-    --ion-item-background: var(--background-white);
-  }
-}
-
-
 .anexo {
   .edit-msg-icon-container {
     display: flex;
@@ -241,6 +232,28 @@ ion-progress-bar {
   width: 98%;
   position: absolute;
   color: white;
+}
+
+ion-list {
+  padding: 0px;
+  height: 100%;
+
+  .item-background-color {
+    --ion-item-background: var(--background-white);
+  }
+}
+
+.attachment-content-container {
+  height: 80%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+
+  .attachment-content {
+    align-self: end;
+    width: 100%;
+    text-align: center;
+  }
 }
 
 // .ruler {

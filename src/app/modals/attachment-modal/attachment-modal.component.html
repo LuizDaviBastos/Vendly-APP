@@ -12,57 +12,56 @@
             </div>
         </ion-item>
         <div class="horizontal-line"></div>
-        <ion-item class="item-background-color footer-item bg-white"
-            style="max-height: 250px; min-height: 250px; overflow: auto;">
-            <div class="attachment-content-container" style="width: 100%;">
+        <ion-item class="item-background-color footer-item bg-white attachment-content-container">
+            <div class="attachment-content">
                 <div *ngIf="attachments.length > 0; else loadingattachments">
-                    <ion-item class="border-bottom" *ngFor="let item of attachments; let index = index;"
-                        lines="none">
+                    <ion-item class="border-bottom" *ngFor="let item of attachments; let index = index;" lines="none">
                         <ion-icon name="document" slot="start"></ion-icon>
                         <ion-label>
                             <h3>{{item.name}}</h3>
                             <p>{{item.size}}</p>
                         </ion-label>
-                        <ion-icon class="trash-icon" *ngIf="!loading['delete' + item.id]"
-                            (click)="confirmDelete(item)" name="trash-outline" slot="end"></ion-icon>
+                        <ion-icon class="trash-icon" *ngIf="!loading['delete' + item.id]" (click)="confirmDelete(item)"
+                            name="trash-outline" slot="end"></ion-icon>
                         <ion-spinner name="crescent" *ngIf="loading['delete' + item.id]"></ion-spinner>
-
                     </ion-item>
                 </div>
                 <ng-template #loadingattachments>
-                    <div style="width: 100%;
-                        height: 250px;
-                        display: flex;
-                        align-items: center;">
+                    <div>
                         <ng-container *ngIf="loading['attachments']; else notfoundattachment">
-                            <ion-spinner style="margin: auto;" name="crescent"></ion-spinner>
+                            <ion-spinner style="text-align: center; margin: auto" name="crescent"></ion-spinner>
                         </ng-container>
                         <ng-template #notfoundattachment>
-                            <ion-label style="text-align: center;">Nenhum arquivo encontrado.</ion-label>
+                            <ion-label style="text-align: center; margin: auto">Nenhum arquivo encontrado.</ion-label>
                         </ng-template>
                     </div>
+
                 </ng-template>
             </div>
         </ion-item>
-        <ion-item class="save-message-button-container bg-white">
-            <input accept=".jpg, .jpeg, .png, .pdf, .txt" (change)="onFileSelected($event)" type="file" #inputFile
-                hidden="hidden">
 
-            <ion-button *ngIf="!loading['upload']; else loadingupload" [disabled]="loading['upload']"
-                (click)="chooseFile()" class="save-message-button " expand="block">
-                <ng-container>
-                    Carregar arquivo
-                    <ion-icon slot="end" name="cloud-upload"></ion-icon>
-                </ng-container>
-                <ng-template>
-                    <ion-spinner></ion-spinner>
-                </ng-template>
-            </ion-button>
-            <ng-template #loadingupload>
-                <ion-progress-bar [value]="uploadProgress">{{progressText}}</ion-progress-bar>
-                <div class="percent">{{progressText}}</div>
-            </ng-template>
-        </ion-item>
     </ion-list>
-    
+
 </ion-content>
+
+<ion-footer class="ion-no-border">
+    <ion-item lines="none" class="save-message-button-container bg-white">
+        <input accept=".jpg, .jpeg, .png, .pdf, .txt" (change)="onFileSelected($event)" type="file" #inputFile
+            hidden="hidden">
+
+        <ion-button *ngIf="!loading['upload']; else loadingupload" [disabled]="loading['upload']" (click)="chooseFile()"
+            class="save-message-button " expand="block">
+            <ng-container>
+                Carregar arquivo
+                <ion-icon slot="end" name="cloud-upload"></ion-icon>
+            </ng-container>
+            <ng-template>
+                <ion-spinner></ion-spinner>
+            </ng-template>
+        </ion-button>
+        <ng-template #loadingupload>
+            <ion-progress-bar [value]="uploadProgress">{{progressText}}</ion-progress-bar>
+            <div class="percent">{{progressText}}</div>
+        </ng-template>
+    </ion-item>
+</ion-footer>

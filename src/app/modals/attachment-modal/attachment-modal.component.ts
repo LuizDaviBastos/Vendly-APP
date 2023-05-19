@@ -67,10 +67,12 @@ export class AttachmentModal implements OnInit {
             const file: File = this.inputFile.nativeElement.files[0];
             if (!this.isFileFormatValid(file.name)) {
                 this.alertService.showToastAlert("O arquivo deve ter um dos seguintes formatos: jpg, jpeg, png, pdf, txt.", 10000);
+                this.setInputStatusDefault();
                 return;
             }
             if (file.size > 26214400) {
                 this.alertService.showToastAlert("O arquivo deve ter um tamanho máximo de 20MB.", 8000);
+                this.setInputStatusDefault();
                 return;
             }
 
@@ -96,7 +98,6 @@ export class AttachmentModal implements OnInit {
     }
 
     public saveAttachment(formData: FormData) {
-        debugger;
         if(!this.message.id || this.message.id == '00000000-0000-0000-0000-000000000000') {
             this.saveMessage((messageId: string) => {
                 this.message.id = messageId;
@@ -112,7 +113,7 @@ export class AttachmentModal implements OnInit {
                 this.progressText = `${percentDone}%`;
                 this.uploadProgress = percentDone / 100;
             } else if (event.type === HttpEventType.Response) {
-                this.setStatusDefault();
+                this.setInputStatusDefault();
                 if (event.body?.success) {
                     this.attachments.push(event.body.data);
                 } else {
@@ -120,12 +121,12 @@ export class AttachmentModal implements OnInit {
                 }
             }
         }, (err) => {
-            this.setStatusDefault();
+            this.setInputStatusDefault();
             this.alertService.errorAlert(err);
         });
     }
 
-    private setStatusDefault() {
+    private setInputStatusDefault() {
         this.loading['upload'] = false;
         this.inputFile.nativeElement.value = '';
         this.progressText = '0%';
