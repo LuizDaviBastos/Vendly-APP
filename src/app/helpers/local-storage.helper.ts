@@ -72,7 +72,7 @@ export class LocalStorage {
         this.meliAccountId
         const login = this.getLogin();
         let meliAccount = login.data.meliAccounts.find(x => x.id == this.meliAccountId);
-        let messages = meliAccount?.messages?.filter(x => x.type != sellerMessage.type);
+        let messages = meliAccount?.messages?.filter(x => x.type != sellerMessage.type) || [];
         messages.push(sellerMessage);
         meliAccount.messages = messages;
         this.setLogin(login);

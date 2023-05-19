@@ -9,13 +9,14 @@ import { LocalStorage } from 'src/app/helpers/local-storage.helper';
 import { isAuthenticatedResponse } from 'src/models/is-authenticated-response';
 import { Seller } from 'src/models/seller';
 import { HttpClientBase } from './http-base.service';
+import { SettingsService } from './settings-service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
  
-    constructor(private http: HttpClientBase, private platform: Platform) {
+    constructor(private http: HttpClientBase, private platform: Platform, private settingsService: SettingsService) {
        
     }
 
@@ -46,11 +47,14 @@ export class AuthService {
     }
 
     public addMeliAccount(signup: boolean = false, country: Country = 'br', browserTarget: string = "_system") {
-        const options: InAppBrowserOptions = {
-            zoom: "no",
-            location: "no"
-        };
-        InAppBrowser.create(`api/auth/SyncMeli?countryId=${country}&token=${LocalStorage.token}&signup=${signup}`, browserTarget, options);
+        this.settingsService.loadSettings().subscribe((settings) => {
+            const options: InAppBrowserOptions = {
+                zoom: "no",
+                location: "no"
+            };
+            InAppBrowser.create(`${settings.urlBaseApi}/api/auth/SyncMeli?countryId=${country}&token=${LocalStorage.token}&signup=${signup}`, browserTarget, options);
+        })
+        
     }
 
 }

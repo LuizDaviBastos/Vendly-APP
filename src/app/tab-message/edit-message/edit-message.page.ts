@@ -81,7 +81,7 @@ export class EditMessagePage implements OnInit, OnDestroy {
     this.getMessage(this.messageType);
   }
 
-  public async save() {
+  public save(onSave?: (messageId: string) => void) {
     try {
       this.loading[this.loadingKeys.button] = true;
       this.message.message = this.prepareToSendMessage(this.message.message);
@@ -91,6 +91,7 @@ export class EditMessagePage implements OnInit, OnDestroy {
           this.alertService.showToastAlert('Mensagem salva com sucesso.', 2000, 'bottom');
           LocalStorage.updateMessage(response.data);
           this.onChangeMessage.emit(response.data);
+          onSave && onSave(this.message.id);
         }
         else {
           this.alertService.showToastAlert('Houve um erro ao tentar salvar a mensagem.');
@@ -177,7 +178,8 @@ export class EditMessagePage implements OnInit, OnDestroy {
     const modal = await this.modalController.create({
       component: AttachmentModal,
       componentProps: {
-        message: this.message
+        message: this.message,
+        saveMessage: this.save.bind(this)
       },
       initialBreakpoint: 0.55,
       canDismiss: true,

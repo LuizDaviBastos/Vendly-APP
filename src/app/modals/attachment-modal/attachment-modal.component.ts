@@ -1,10 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { AttachmentService } from 'src/services/attachment-service';
 import { Attachment } from 'src/models/attachment.model';
 import { SellerMessage } from 'src/models/seller-message';
-import { HttpEvent, HttpEventType } from '@angular/common/http';
-import { RequestResponse } from 'src/models/request-response.model';
+import { HttpEventType } from '@angular/common/http';
 import { AlertService } from 'src/services/alert-service';
 
 @Component({
@@ -13,6 +12,8 @@ import { AlertService } from 'src/services/alert-service';
     styleUrls: ['./attachment-modal.component.scss']
 })
 export class AttachmentModal implements OnInit {
+
+    @Input('saveMessage') saveMessage: (onSave?: (messageId: string) => void) => void;
 
     @ViewChild('inputFile') inputFile: ElementRef<HTMLInputElement>;
     public attachments: Attachment[] = [];
@@ -95,6 +96,15 @@ export class AttachmentModal implements OnInit {
     }
 
     public saveAttachment(formData: FormData) {
+        debugger;
+        if(!this.message.id || this.message.id == '00000000-0000-0000-0000-000000000000') {
+            this.saveMessage((messageId: string) => {
+                this.message.id = messageId;
+                this.saveAttachment(formData)
+            });
+            return;
+        }
+
         this.loading['upload'] = true;
         this.attachmentService.saveAttachmentProgress(this.message, formData).subscribe((event) => {
             if (event.type === HttpEventType.UploadProgress) {
