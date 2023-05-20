@@ -4,6 +4,23 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
+    "paths": {
+      "ngx-editor": [
+        "dist/ngx-editor"
+      ],
+      "ngx-editor/utils": [
+        "dist/ngx-editor/utils"
+      ],
+      "ngx-editor/helpers": [
+        "dist/ngx-editor/helpers"
+      ],
+      "ngx-editor/schema": [
+        "dist/ngx-editor/schema"
+      ],
+      "ngx-editor/commands": [
+        "dist/ngx-editor/commands"
+      ]
+    },
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
