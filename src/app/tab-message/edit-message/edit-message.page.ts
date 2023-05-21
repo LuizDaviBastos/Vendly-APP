@@ -39,7 +39,7 @@ export class EditMessagePage implements OnInit, OnDestroy {
   public editor: Editor;
   public message: SellerMessage = new SellerMessage();
   public toolbar: Toolbar = [
-    ['bold', 'link'],
+    ['bold', 'italic', 'link'],
     ['bullet_list', 'ordered_list'],
     //['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right'],
