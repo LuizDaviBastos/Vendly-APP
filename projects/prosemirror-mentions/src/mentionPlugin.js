@@ -302,7 +302,7 @@ export function getMentionsPlugin(opts) {
         down = e.keyCode === 40;
         up = e.keyCode === 38;
         esc = e.keyCode === 27;
-        space = e.keyCode === 32 || e.keyCode === 229;
+        //space = e.keyCode === 32 || e.keyCode === 229;
 
         if (down) {
           goNext(view, state, opts);
@@ -311,9 +311,6 @@ export function getMentionsPlugin(opts) {
           goPrev(view, state, opts);
           return true;
         } else if (enter) {
-          select(view, state, opts);
-          return true;
-        } else if (space) {
           select(view, state, opts);
           return true;
         } else if (esc) {
