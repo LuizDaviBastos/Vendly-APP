@@ -39,16 +39,13 @@ export class EditMessagePage implements OnInit, OnDestroy {
   public editor: Editor;
   public message: SellerMessage = new SellerMessage();
   public toolbar: Toolbar = [
-    ['bold', 'italic', 'underline', 'link'],
+    ['bold', 'link'],
     ['bullet_list', 'ordered_list'],
-    ['text_color', 'background_color'],
+    //['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right'],
     [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
   ];
-  private spans = {
-    comprador: '<span data-mention-id="101" data-mention-name="COMPRADOR" data-mention-email="" class="prosemirror-mention-node">@COMPRADOR</span>',
-    produto: '<span data-mention-id="102" data-mention-name="PRODUTO" data-mention-email="" class="prosemirror-mention-node">@PRODUTO</span>'
-  }
+
   public loadingKeys = { button: 'button', message: 'message' }
 
   constructor(private route: Router,
@@ -85,7 +82,6 @@ export class EditMessagePage implements OnInit, OnDestroy {
   public save(onSave?: (messageId: string) => void) {
     try {
       this.loading[this.loadingKeys.button] = true;
-      this.message.message = this.prepareToSendMessage(this.message.message);
       this.meliService.saveMessage(this.message).subscribe((response) => {
         if (response.success) {
           this.message = response.data;
@@ -113,7 +109,6 @@ export class EditMessagePage implements OnInit, OnDestroy {
     this.meliService.getMessage(LocalStorage.meliAccountId, messageType).subscribe((response) => {
       if (response.success) {
         this.message = response.data;
-        this.message.message = this.prepareToReceiveMessage(this.message.message);
         this.editor.setContent(this.message.message);
       }
       else {
@@ -132,22 +127,6 @@ export class EditMessagePage implements OnInit, OnDestroy {
 
   public goBack() {
     this.navCtrl.back();
-  }
-
-  public prepareToReceiveMessage(message: string) {
-    if (!message) return message;
-    let newMessage = message;
-    //newMessage = newMessage.replace('@COMPRADOR', this.spans.comprador);
-    //newMessage = newMessage.replace('@PRODUTO', this.spans.produto);
-    return newMessage;
-  }
-
-  public prepareToSendMessage(message: string) {
-    if (!message) return message;
-    let newMessage = message;
-    //newMessage = newMessage.replace(this.spans.comprador, '@COMPRADOR')
-    //newMessage = newMessage.replace(this.spans.produto, '@PRODUTO')
-    return newMessage;
   }
 
   public setMessageTypeDescription() {

@@ -18,7 +18,8 @@ export const mentionNode = {
       "label",
       {
         "name": `mention-${node.attrs.name}`,
-        class: "prosemirror-mention-node"
+        class: "prosemirror-mention-node",
+        style: 'font-style: normal'
       },
       "@" + node.attrs.name
     ];
