@@ -45,7 +45,7 @@
     "@ionic/angular": "^6.1.9",
     "angular-mentions": "1.4.0",
     "cordova-android": "9.1.0",
-    "prosemirror-mentions": "^1.0.2",
+    
     "prosemirror-model": "^1.19.0",
     "rxjs": "~7.5.0",
     "zone.js": "^0.11.6"
@@ -53,7 +53,7 @@
   "devDependencies": {
 
     "@angular-devkit/build-angular": "^14.1.2",
-    "@angular-eslint/builder": "^14.4.0",
+    "@angular-eslint/builder": "14.4.0",
     "@angular-eslint/eslint-plugin": "^14.4.0",
     "@angular-eslint/eslint-plugin-template": "^14.4.0",
     "@angular-eslint/schematics": "^14.4.0",
@@ -75,10 +75,9 @@
     "cordova-plugin-ionic-webview": "^4.2.1",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
-    "eslint": "8.0.0",
-    "eslint-plugin-import": "2.22.1",
-    "eslint-plugin-jsdoc": "30.7.6",
-    "eslint-plugin-prefer-arrow": "1.2.2",
+    "eslint": "^8.0.0",
+    
+
     "execa": "^7.1.1",
     "jasmine-core": "~3.8.0",
     "jasmine-spec-reporter": "~5.0.0",

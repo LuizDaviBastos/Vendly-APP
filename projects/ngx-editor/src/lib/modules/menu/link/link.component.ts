@@ -109,7 +109,6 @@ export class LinkComponent implements OnInit, OnDestroy {
     const { selection } = state;
 
     const attrs = {
-      title: href,
       href,
       target: openInNewTab ? '_blank' : '_self',
     };

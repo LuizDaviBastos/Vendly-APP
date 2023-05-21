@@ -73,6 +73,7 @@ export class EditMessagePage implements OnInit, OnDestroy {
       plugins
     });
     this.editor.valueChanges.subscribe((jsonDoc) => {
+      this.editor.commands.focus();
       let html = toHTML(jsonDoc, schema);
       this.message.message = html;
     });
@@ -136,16 +137,16 @@ export class EditMessagePage implements OnInit, OnDestroy {
   public prepareToReceiveMessage(message: string) {
     if (!message) return message;
     let newMessage = message;
-    newMessage = newMessage.replace('@COMPRADOR', this.spans.comprador);
-    newMessage = newMessage.replace('@PRODUTO', this.spans.produto);
+    //newMessage = newMessage.replace('@COMPRADOR', this.spans.comprador);
+    //newMessage = newMessage.replace('@PRODUTO', this.spans.produto);
     return newMessage;
   }
 
   public prepareToSendMessage(message: string) {
     if (!message) return message;
     let newMessage = message;
-    newMessage = newMessage.replace(this.spans.comprador, '@COMPRADOR')
-    newMessage = newMessage.replace(this.spans.produto, '@PRODUTO')
+    //newMessage = newMessage.replace(this.spans.comprador, '@COMPRADOR')
+    //newMessage = newMessage.replace(this.spans.produto, '@PRODUTO')
     return newMessage;
   }
 

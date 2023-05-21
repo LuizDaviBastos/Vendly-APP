@@ -12,7 +12,6 @@ const defaultOptions = {
 
 export interface LinkAttrs {
   href: string;
-  title?: string;
   target?: string;
 }
 
@@ -45,7 +44,6 @@ class Link {
 
       const linkAttrs: LinkAttrs = {
         href: attrs.href,
-        title: attrs.title ?? text,
         target: attrs.target ?? '_blank',
       };
 

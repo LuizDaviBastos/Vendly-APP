@@ -48,7 +48,7 @@ ngx-editor-menu {
   border-radius: 5px;
 
   .NgxEditor__MenuBar {
-    flex-wrap: inherit!important;
+    flex-wrap: inherit !important;
     border-top-left-radius: 10px !important;
     border-top-right-radius: 4px;
     background-color: var(--background-white);
@@ -70,6 +70,14 @@ ngx-editor-menu {
   .NgxEditor__Content {
     padding-left: 0px;
     line-height: 18px;
+
+    a {
+      color: #3880ff;
+
+      span {
+        color: #3880ff;
+      }
+    }
   }
 
   .CodeMirror {
