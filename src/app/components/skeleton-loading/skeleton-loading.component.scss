@@ -1,0 +1,46 @@
+ion-skeleton-text {
+    border-radius: 20px;
+    margin-bottom: 10px;
+    height: 10px;
+}
+
+.loading-toggle-text {
+    width: 100%;
+    height: 10px;
+}
+
+.loading-toggle-text-md {
+    width: 40%;
+    height: 10px;
+}
+
+.loading-toggle-text-lg {
+    width: 60%;
+    height: 10px;
+}
+
+.loading-toggle-text-sm {
+    width: 20%;
+    height: 10px;
+}
+
+
+
+.loading-toggle {
+    width: 50px;
+    margin: auto;
+    height: 20px;
+    border-radius: 8px;
+}
+
+.container-loading-horizontal-items {
+    display: flex;
+
+    .loading-horizontal-items {
+        height: 30px;
+        width: 30px;
+        border-radius: 8px;
+        margin-right: 16px;
+        margin-bottom: 4px;
+    }
+}

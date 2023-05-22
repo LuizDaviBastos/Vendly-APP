@@ -5,20 +5,13 @@
 <app-step3 *ngIf="currentStep == 3" [form]="stepsFormGroup[3]" [previous]="previousStep.bind(this)"
   [next]="nextStep.bind(this)"></app-step3>
 <app-step4 *ngIf="currentStep == 4" [form]="stepsFormGroup[4]" [previous]="previousStep.bind(this)"
-  [next]="nextStep.bind(this)"></app-step4>
+  [next]="nextStep.bind(this)" [sellerId]="sellerId"></app-step4>
 <app-step5 *ngIf="currentStep == 5" [form]="stepsFormGroup[5]" [previous]="previousStep.bind(this)"
-  [next]="nextStep.bind(this)"></app-step5>
+  [next]="nextStep.bind(this)" [sync]="sync"></app-step5>
 
-<ion-footer lines="none" class="ion-no-border">
+<ion-footer *ngIf="currentStep != 4" lines="none" class="ion-no-border">
   <ion-item lines="none" class="continue-buttom-container">
     <ng-container [ngSwitch]="currentStep">
-
-      <ion-button *ngSwitchCase="4" (click)="confirmEmail()" [disabled]="formInvalid() || loading['confirm']" class="continue-buttom" expand="block">
-        <ion-spinner *ngIf="loading['confirm']; else label" name="crescent"></ion-spinner>
-        <ng-template #label>
-          Confirmar
-        </ng-template>
-      </ion-button>
 
       <ion-button *ngSwitchDefault [disabled]="formInvalid() || loading['nextStep']" (click)="nextStep()" class="continue-buttom" expand="block">
         <ion-spinner *ngIf="loading['nextStep']; else label" name="crescent"></ion-spinner>
@@ -38,11 +31,6 @@
       </ion-button>
 
     </ng-container>
-    <ng-template #finishButton>
-
-      
-      
-    </ng-template>
    
   </ion-item>
   <ion-item lines="none" *ngIf="currentStep == 1">

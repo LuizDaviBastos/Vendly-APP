@@ -94,8 +94,8 @@ ion-label {
   }
 }
 
-ion-list {
-
+ion-list,
+.edit-container {
   .item-background-color {
     --ion-item-background: var(--background-white);
   }
@@ -105,10 +105,11 @@ ion-list {
 .edit-message {
   .edit-msg-icon-container {
     display: flex;
-    width: 25%;
-    max-width: 90px;
+    width: 36%;
+    max-width: 150px;
     color: #2D2D2D;
   }
+
   ion-icon[name="attach-outline"] {
     font-size: 20pt;
     transform: rotate(90deg);
@@ -117,6 +118,14 @@ ion-list {
   }
 
   ion-icon[name="pricetag"] {
+    font-size: 16pt;
+    transform: rotate(-89deg);
+    font-weight: 700;
+    margin: auto;
+  }
+
+  ion-icon[name="expand-sharp"],
+  ion-icon[name="contract-sharp"] {
     font-size: 16pt;
     transform: rotate(-89deg);
     font-weight: 700;
@@ -193,19 +202,31 @@ ion-label {
   --background: #3B3F4C;
 }
 
-.loading-toggle {
-  width: 50px;
-  margin: auto;
-  height: 20px;
-  border-radius: 8px;
-}
 
-.loading-toggle-text {
-  width: 36%;
-  height: 10px;
-}
 
 .mention-title {
   font-weight: 500;
   font-size: 12pt !important;
+}
+
+ion-footer[class^="fullscreen"] {
+  background-color: var(--background-white) !important;
+}
+
+.background-white {
+  background-color: var(--background-white) !important;
+  --ion-background-color: var(--background-white) !important
+}
+
+.fullscreen {
+  .header-item {
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+  }
+
+}
+
+.fullscreen-footer {
+  color: #2D2D2D;
+  width: 100%;
 }

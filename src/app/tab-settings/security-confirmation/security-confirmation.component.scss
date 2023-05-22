@@ -1,5 +1,6 @@
 /*Menu*/
 
+
 ion-header::after {
     background-image: none;
 }
@@ -152,15 +153,58 @@ ion-footer {
     margin-bottom: 20px;
 }
 
-app-step4,
-app-step5 {
+app-step4, app-step5 {
     display: flex;
     height: 100%;
     flex-direction: column;
-}
+  }
 
-security-confirmation {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
+
+
+
+
+  ion-content {
+    height: 300px;
+  }
+  
+  .description {
+    margin-left: 20px !important;
+  
+    ion-icon {
+      margin: auto;
+      width: 20px;
+      height: 20px;
+      scale: 1.1;
+      display: flex;
+    }
+  }
+  
+  .valid {
+    background-color: #E1EAE2;
+    color: #009E10;
+  }
+  
+  .invalid {
+    color: #EA3333;
+    background-color: #F3E2E2;
+  }
+  
+  .input {
+    pointer-events: visible !important;
+  }
+  
+  
+  .confirm-email-button-container {
+    margin-bottom: 0px !important;
+  
+    .confirm-email-button {
+      width: 100%;
+      text-transform: inherit;
+      --border-radius: 10px;
+      font-size: 10pt;
+      --color: #e3e3e3;
+      --background: #3B3F4C;
+      height: 40px;
+      margin: auto;
+    }
+  }

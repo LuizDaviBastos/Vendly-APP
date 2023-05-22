@@ -5,7 +5,7 @@ import { ToastController } from "@ionic/angular";
 @Injectable({ providedIn: 'root' })
 export class AlertService {
     public async errorAlert(error: HttpErrorResponse ) {
-        const message = `Error: ${error?.error?.message || 'Houve um erro ao processar a requisição.'}`;
+        const message = `${error?.error?.message || 'Houve um erro ao processar a requisição.'}`;
         const toast = await this.toastController.create({
             message: message,
             duration: -1,

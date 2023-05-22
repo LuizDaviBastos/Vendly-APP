@@ -1,4 +1,4 @@
-import { AlertController, IonicModule } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +9,7 @@ import { MentionModule } from 'angular-mentions';
 import { NgxEditorModule } from 'ngx-editor';
 import { AttachmentService } from '../../../services/attachment-service';
 import { AttachmentModal } from 'src/app/modals/attachment-modal/attachment-modal.component';
+import { SkeletonLoadingModule } from 'src/app/components/skeleton-loading/skeleton-loading.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { AttachmentModal } from 'src/app/modals/attachment-modal/attachment-moda
     CommonModule,
     FormsModule,
     MentionModule,
+    SkeletonLoadingModule,
     NgxEditorModule.forRoot({
       locals: {
         // menu
@@ -49,9 +51,9 @@ import { AttachmentModal } from 'src/app/modals/attachment-modal/attachment-moda
         altText: 'Alt Text',
         title: 'Title',
         remove: 'Remove',
-      },
+      }
     }),
-    RouterModule.forChild([{ path: '', component: EditMessagePage }]),
+    RouterModule.forChild([{ path: '', component: EditMessagePage }])
   ],
   declarations: [EditMessagePage, AttachmentModal],
   providers: [MeliService, AttachmentService]

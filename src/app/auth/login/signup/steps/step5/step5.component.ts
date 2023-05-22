@@ -13,6 +13,7 @@ export class Step5Component implements OnInit {
   @Input('form') formGroup: FormGroup;
   @Input('previous') previousStep: () => void;
   @Input('next') nextStep: () => void;
+  @Input('sync') sync: boolean;
 
   constructor(private authService: AuthService) { }
 

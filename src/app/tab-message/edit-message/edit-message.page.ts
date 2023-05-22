@@ -1,5 +1,5 @@
 import { LocalStorage as LocalStorage } from '../../helpers/local-storage.helper';
-import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from "@angular/core";
+import { Component, EventEmitter, HostListener, OnDestroy, OnInit, Output, ViewChild } from "@angular/core";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { NavController } from '@ionic/angular';
 import { MeliService } from '../../../services/meli-service';
@@ -14,6 +14,8 @@ import { SellerInfo } from 'src/models/seller-info.model';
 import { SellerMessage } from 'src/models/seller-message';
 import { ModalController } from '@ionic/angular';
 import { AttachmentModal } from 'src/app/modals/attachment-modal/attachment-modal.component';
+import * as $ from 'jquery';
+
 @Component({
   selector: "edit-message",
   templateUrl: "edit-message.page.html",
@@ -23,6 +25,7 @@ export class EditMessagePage implements OnInit, OnDestroy {
 
   @Output('onChangeMessage') onChangeMessage: EventEmitter<SellerMessage> = new EventEmitter<SellerMessage>();
 
+  public fullscreen: boolean = false;
   public get sellerInfo(): Seller {
     return LocalStorage.getLogin().data || new Seller();
   }
@@ -174,4 +177,9 @@ export class EditMessagePage implements OnInit, OnDestroy {
     this.popover.event = e;
     this.isOpen = true;
   }
+
+  public fullScreenToggle(status: boolean) {
+    this.fullscreen = status;
+  }
+
 }

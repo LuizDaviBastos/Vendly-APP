@@ -40,14 +40,141 @@ ngx-editor-menu {
   height: 50px;
   display: flex;
   overflow-x: auto;
+  align-items: center;
+}
+
+
+.fullscreen {
+
+  //overflow-y: auto;
+  .NgxEditor {
+    max-height: 100% !important;
+    height: 100% !important;
+    min-height: calc(100vh - 100px);
+  }
+
+  .editor {
+    height: 100% !important;
+    max-height: 100% !important;
+  }
+}
+
+.fullscreen-footer {
+  .NgxEditor__MenuBar {
+    background-color: var(--background-white);
+  }
+  ngx-editor-menu {
+    background-color: var(--background-white);
+  }
+}
+
+.NgxEditor__MenuBar {
+  display: flex;
+  flex-wrap: inherit !important;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 4px;
+  background-color: var(--background-white);
+  max-height: 40px;
+}
+
+.NgxEditor__Dropdown .NgxEditor__Dropdown--DropdownMenu {
+  position: fixed!important;
+  box-shadow: #3c404326 0 2px 6px 2px!important;
+  border-radius: 4px!important;
+  background-color: #fff!important;
+  width: 40%!important;
+  top: 50%!important;
+  left: 50%!important;
+  transform: translate(-50%, -50%)!important;
+}
+
+.NgxEditor__Popup {
+  position: fixed!important;
+  box-shadow: #3c404326 0 2px 6px 2px!important;
+  border-radius: 4px!important;
+  background-color: #fff!important;
+  z-index: 10!important;
+  min-width: 192px!important;
+  padding: 8px!important;
+  top: 50%!important;
+  left: 50%!important;
+  transform: translate(-50%, -50%)!important;
+
+  form {
+    button {
+      width: 100%!important;
+      border-radius: 12px!important;
+      height: 30px!important;
+      font-size: 10pt!important;
+      color: white!important;
+      background: #2D2D2D!important;
+    }
+  }
+
+  .NgxEditor__Popup--FormGroup {
+    input {
+      color: black!important;
+      background-color: white!important;
+      border-radius: 7px!important;
+      height: 35px!important;
+      border: 1px gray solid!important;
+      margin-top: 4px!important;
+    }
+
+    .NgxEditor__Popup--Col {
+
+      label {
+        display: flex!important;
+        align-items: center!important;
+        text-align: center!important;
+        margin-top: auto!important;
+
+        input {
+          width: 18px!important;
+          margin-right: 10px!important;
+        }
+      }
+    }
+
+  }
+}
+
+.NgxEditor__Content {
+  padding-left: 0px!important;
+  line-height: 18px!important;
+
+  a {
+    color: #3880ff!important;
+
+    span {
+      color: #3880ff!important;
+    }
+  }
+}
+
+.CodeMirror {
+  border: 1px solid #eee!important;
+  height: auto!important;
+  margin-bottom: 0.7rem!important;
+
+  pre {
+    white-space: pre !important;
+  }
 }
 
 
 
 .editor {
+  color: #2D2D2D;
+  width: 100%;
   border-radius: 5px;
 
+  height: 100%;
+  min-height: calc(100vh - 342px);
+  max-height: calc(100vh - 342px);
+
   .NgxEditor__MenuBar {
+    display: flex;
     flex-wrap: inherit !important;
     border-top-left-radius: 10px !important;
     border-top-right-radius: 4px;
@@ -63,94 +190,14 @@ ngx-editor-menu {
     font-size: 10pt;
     font-weight: 400;
     color: #424242;
-    height: 280px;
+    height: 100%;
+    max-height: calc(100% - 50px);
     overflow-y: auto;
   }
 
-  .NgxEditor__Content {
-    padding-left: 0px;
-    line-height: 18px;
+  
 
-    a {
-      color: #3880ff;
-
-      span {
-        color: #3880ff;
-      }
-    }
-  }
-
-  .CodeMirror {
-    border: 1px solid #eee;
-    height: auto;
-    margin-bottom: 0.7rem;
-
-    pre {
-      white-space: pre !important;
-    }
-  }
-
-  .NgxEditor__Dropdown .NgxEditor__Dropdown--DropdownMenu {
-    position: fixed;
-    box-shadow: #3c404326 0 2px 6px 2px;
-    border-radius: 4px;
-    background-color: #fff;
-    width: 40%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .NgxEditor__Popup {
-    position: fixed;
-    box-shadow: #3c404326 0 2px 6px 2px;
-    border-radius: 4px;
-    background-color: #fff;
-    z-index: 10;
-    min-width: 192px;
-    padding: 8px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    form {
-      button {
-        width: 100%;
-        border-radius: 12px;
-        height: 30px;
-        font-size: 10pt;
-        color: white;
-        background: #2D2D2D;
-      }
-    }
-
-    .NgxEditor__Popup--FormGroup {
-      input {
-        color: black;
-        background-color: white;
-        border-radius: 7px;
-        height: 35px;
-        border: 1px gray solid;
-        margin-top: 4px;
-      }
-
-      .NgxEditor__Popup--Col {
-
-        label {
-          display: flex;
-          align-items: center;
-          text-align: center;
-          margin-top: auto;
-
-          input {
-            width: 18px;
-            margin-right: 10px;
-          }
-        }
-      }
-
-    }
-  }
+ 
 
 
 
@@ -210,6 +257,11 @@ attachment-modal {
 }
 
 .logout-alert {
+  --width: 360px;
+  --max-width: 360px;
+}
+
+.delete-account-alert {
   --width: 360px;
   --max-width: 360px;
 }

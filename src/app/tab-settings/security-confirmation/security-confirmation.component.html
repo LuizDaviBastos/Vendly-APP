@@ -1,12 +1,12 @@
-<!--<ion-header no-border>
+<ion-header no-border>
   <div class="asm-header">
     <ion-grid>
       <ion-row>
         <ion-col>
-          
+          <ion-icon *ngIf="!isSignup" (click)="goBack()" role="button" name="arrow-back-outline"></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="isSignup">
         <ion-icon class="steps" src="assets/icon/steps/step3.svg"></ion-icon>
       </ion-row>
       <ion-row>
@@ -34,6 +34,14 @@
       </ion-item>
     </form>
   </ion-list>
-</ion-content>-->
-
-<security-confirmation [sellerId]="sellerId" (onSuccess)="nextStep()" (onError)="onError($event)" [isSignup]="true" [form]="formGroup"></security-confirmation>
+</ion-content>
+<ion-footer lines="none" class="ion-no-border">
+  <ion-item lines="none" class="continue-buttom-container">
+    <ion-button (click)="confirmEmail()" [disabled]="formInvalid()" class="continue-buttom" expand="block">
+      <ion-spinner *ngIf="loading['confirm']; else label" name="crescent"></ion-spinner>
+      <ng-template #label>
+        Confirmar
+      </ng-template>
+    </ion-button>
+  </ion-item>
+</ion-footer>

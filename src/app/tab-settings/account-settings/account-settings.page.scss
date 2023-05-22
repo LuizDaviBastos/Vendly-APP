@@ -110,9 +110,10 @@ ion-item {
     background-color: var(--background-white);
     border-radius: 10px;
     border: 1px solid red;
-    padding: 17px;
+    padding: 8px;
     color: red;
-    font-size: 9pt;
+    font-size: 10pt;
+    height: 54px;
 }
 
 .delete-account-container {
@@ -124,3 +125,4 @@ ion-item {
         color: #2D2D2D
     }
 }
+

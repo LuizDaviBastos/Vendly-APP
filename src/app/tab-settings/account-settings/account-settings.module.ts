@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AccountSettingsPage } from './account-settings.page';
 import { AccountRoutingModule } from './account-settings-routing.module';
+import { SecurityConfirmationModule } from '../security-confirmation/security-confirmation.module';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { AccountRoutingModule } from './account-settings-routing.module';
     CommonModule,
     FormsModule,
     RouterModule.forChild([{ path: '', component: AccountSettingsPage }]),
-    AccountRoutingModule
+    AccountRoutingModule,
+    SecurityConfirmationModule
   ],
   declarations: [AccountSettingsPage]
 })

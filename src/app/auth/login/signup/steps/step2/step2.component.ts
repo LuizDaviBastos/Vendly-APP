@@ -17,9 +17,7 @@ export class Step2Component implements OnInit {
   constructor() { }
 
   public countries = [
-    { code: 'br', name: 'Brazil' },
-    { code: 'ar', name: 'Argentina' },
-    { code: 'mx', name: 'Mexico' }
+    { code: 'br', name: 'Brazil' }
   ];
 
   ngOnInit() {

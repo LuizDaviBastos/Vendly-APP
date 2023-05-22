@@ -28,7 +28,7 @@
 <ion-content [scrollY]="true">
   <ion-list class="content-item" lines="none">
     <form slot="fixed" [formGroup]="formGroup">
-      <div *ngIf="synState(); else sync">
+      <div *ngIf="synState() || sync">
         <ion-item lines="none" class="link-account-button-container ">
           <ion-button [disabled]="true" (click)="syncAccount()" class="link-account-button sync" expand="block">
             Conta vinculada
@@ -37,14 +37,14 @@
           
         </ion-item>
       </div>
-      <ng-template #sync>
+      <ng-container *ngIf="!synState()">
         <ion-item lines="none" class="link-account-button-container">
           <ion-button (click)="syncAccount()" class="link-account-button" expand="block">Vincular conta</ion-button>
         </ion-item>
         <ion-item lines="none">
           <ion-label class="link-account-label">Não tenho conta no Mercado Livre</ion-label>
         </ion-item>
-      </ng-template>
+      </ng-container>
     </form>
   </ion-list>
 </ion-content>

@@ -26,7 +26,7 @@ export class AttachmentModal implements OnInit {
         private alertController: AlertController,
         private alertService: AlertService) { }
 
-    async ngOnInit() {
+    ngOnInit() {
         this.getAttachments();
     }
 

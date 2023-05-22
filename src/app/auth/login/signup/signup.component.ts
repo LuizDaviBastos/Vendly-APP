@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
@@ -16,15 +16,17 @@ import { MeliService } from 'src/services/meli-service';
 })
 export class SignupComponent implements OnInit {
 
+  public sellerId: string;
   public loading = {};
   public currentStep: 1 | 2 | 3 | 4 | 5 = 1;
+  public sync: boolean = false;
   public stepsFormGroup = {
     1: new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
     }),
     2: new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      country: new FormControl('', [Validators.required]),
+      country: new FormControl('br', [Validators.required]),
     }),
     3: new FormGroup({
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -52,11 +54,13 @@ export class SignupComponent implements OnInit {
     private meliService: MeliService,
     private activatedRoute: ActivatedRoute,
     private loadingController: LoadingController,
-    private router: Router) {
+    private router: Router,
+    private changeDetector: ChangeDetectorRef) {
 
   }
 
   public async ngOnInit() {
+    this.sync = this.stepsFormGroup[5].get('sync').value == 'true';
     this.activatedRoute.queryParamMap.subscribe(async (params) => {
       const step = <1 | 2 | 3 | 4 | 5>+params.get('step');
       if (step && step == 5) {
@@ -70,18 +74,21 @@ export class SignupComponent implements OnInit {
         const hasMeliAccount = await this.meliService.hasMeliAccount(id).toPromise();
         if(hasMeliAccount) {
           this.stepsFormGroup[5].get('sync').setValue('true');
+          this.sync = true;
+          this.changeDetector.detectChanges();
         }
         
         this.currentStep = step;
         loading.dismiss();
       } else if(step == 4) {
-        this.currentStep = step;
         const id = params.get('sellerId');
         if(!id) {
           this.alertService.showToastAlert(`Não foi possível obter os dados do usuario. Experimente apagar o cache do aplicativo e tentar novamente.`)
           this.router.navigateByUrl('/auth');
         }
-        this.sendEmailConfirmationCode(id);
+        this.sellerId = id;
+        this.currentStep = step;
+        //this.sendEmailConfirmationCode(id);
       }
     })
 
@@ -95,7 +102,7 @@ export class SignupComponent implements OnInit {
 
   public nextStep() {
     if (this.currentStep == 3) {
-      this.saveAccountAndSendEmailConfirmationCode();
+      this.saveAccount();
     } else {
       this._nextStep();
     }
@@ -111,22 +118,6 @@ export class SignupComponent implements OnInit {
     return (this.stepsFormGroup[this.currentStep].status == "INVALID")
   }
 
-  public confirmEmail() {
-    this.loading['confirm'] = true;
-    const code = this.stepsFormGroup[4].get('code').value;
-    const sellerId = LocalStorage.getLogin().data.id;
-    this.authService.confirmEmail(sellerId, code).subscribe((confirmEmailResponse) => {
-      this.loading['confirm'] = false;
-      if (confirmEmailResponse.success) {
-        this._nextStep();
-      } else {
-        this.alertService.showToastAlert(confirmEmailResponse.message);
-      }
-    }, (err) => {
-      this.loading['confirm'] = false;
-      this.alertService.errorAlert(err);
-    })
-  }
 
   public finish() {
     this.loading['finish'] = true;
@@ -150,36 +141,18 @@ export class SignupComponent implements OnInit {
 
   }
 
-  private saveAccountAndSendEmailConfirmationCode() {
+  private saveAccount() {
     this.loading['nextStep'] = true;
     this.authService.saveAccount(this.getSellerEntity()).subscribe((loginResponse) => {
       if (loginResponse.success) {
         LocalStorage.setLogin(loginResponse.data);
-        this.sendEmailConfirmationCode(loginResponse.data.data.id, () => {
-          this._nextStep();
-        })
+        this.sellerId = loginResponse.data.data.id;
+        this._nextStep();
       } else {
         this.alertService.showToastAlert(loginResponse.message);
       }
     }, (err: HttpErrorResponse ) => {
       this.loading['nextStep'] = false;
-      this.alertService.errorAlert(err);
-    })
-  }
-
-  private sendEmailConfirmationCode(id: string, onSucess?: () => void) {
-    this.loading['confirm'] = true;
-    this.authService.sendEmailConfirmationCode(id).subscribe((sendConfirmationResponse) => {
-      this.loading['confirm'] = false;
-      if (sendConfirmationResponse.success) {
-        this.alertService.showToastAlert(`Enviamos um código para o seu email.`, 2000, "top");
-        onSucess && onSucess();
-        
-      } else {
-        this.alertService.showToastAlert(sendConfirmationResponse.message);
-      }
-    }, (err) => {
-      this.loading['confirm'] = false;
       this.alertService.errorAlert(err);
     })
   }

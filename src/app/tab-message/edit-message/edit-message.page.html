@@ -1,75 +1,112 @@
-<ion-header no-border>
-  <div class="asm-header">
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-icon (click)="goBack()" role="button" name="arrow-back-outline"></ion-icon>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col><ion-title><b>{{title}}</b></ion-title></ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="description-configuration">
-          <ion-label class="ion-text-wrap">{{instructionDesc}}</ion-label>
-        </ion-col>
-      </ion-row>
-      <ion-row class="ion-toggle-row">
-        <ion-col size="auto" class="description-configuration">
-          <ion-skeleton-text *ngIf="loading[loadingKeys.message]; else SwitchControl" class="loading-toggle"
-            [animated]="true"></ion-skeleton-text>
-          <ng-template #SwitchControl>
-            <ion-toggle [(ngModel)]="message.activated"></ion-toggle>
-          </ng-template>
-        </ion-col>
-        <ion-col>
-          <ion-skeleton-text *ngIf="loading[loadingKeys.message]; else SwitchLabel" class="loading-toggle-text"
-            [animated]="true"></ion-skeleton-text>
-          <ng-template #SwitchLabel>
-            <ion-label>{{getSwitchLabel()}}</ion-label>
-          </ng-template>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
-</ion-header>
-<ion-content scrollY="true">
-  <ion-list class="edit-message" lines="none">
-    <ion-item class="item-background-color header-item">
+<ng-container *ngIf="!fullscreen; else templateFullscreen">
+  <ion-header no-border>
+    <div class="asm-header">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-icon (click)="goBack()" role="button" name="arrow-back-outline"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col><ion-title><b>{{title}}</b></ion-title></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="description-configuration">
+            <ion-label class="ion-text-wrap">{{instructionDesc}}</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-toggle-row">
+          <ion-col size="auto" class="description-configuration">
+            <skeleton-toggle *ngIf="loading[loadingKeys.message]; else SwitchControl"></skeleton-toggle>
+            <ng-template #SwitchControl>
+              <ion-toggle [(ngModel)]="message.activated"></ion-toggle>
+            </ng-template>
+          </ion-col>
+          <ion-col>
+            <skeleton-text *ngIf="loading[loadingKeys.message]; else SwitchLabel"></skeleton-text>
+            <ng-template #SwitchLabel>
+              <ion-label [style]="message.activated ? 'color: green' : ''">{{getSwitchLabel()}}</ion-label>
+            </ng-template>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-header>
+  <ion-content scrollY="false">
+    <ion-list class="edit-message" lines="none">
+      <ion-item class="item-background-color header-item">
+        <ion-title>Escreva a mensagem</ion-title>
+        <div class="edit-msg-icon-container">
+          <ion-ripple-effect></ion-ripple-effect>
+          <ion-icon (click)="presentPopover($event)" name="pricetag"></ion-icon>
+          <ion-icon (click)="openAttachmentModal()" name="attach-outline"></ion-icon>
+          <ion-icon (click)="fullScreenToggle(true)" name="expand-sharp"></ion-icon>
+        </div>
+      </ion-item>
+      <div class="horizontal-line"></div>
+      <ion-item class="item-background-color footer-item">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <div class="editor">
+                <skeleton-horizontal-items *ngIf="loading[loadingKeys.message]; else editorMenuTemplate"></skeleton-horizontal-items>
+                <ng-template #editorMenuTemplate>
+                  <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+                </ng-template>
+                <div class="horizontal-line"></div>
+                <skeleton-textarea *ngIf="loading[loadingKeys.message]; else editorTemplate"></skeleton-textarea>
+                <ng-template #editorTemplate>
+                  <ngx-editor [placeholder]="placeholder" [editor]="editor"></ngx-editor>
+                </ng-template>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <ion-footer style="margin-bottom: 20px;" lines="none" class="ion-no-border">
+    <ion-item class="save-message-button-container" lines="none">
+      <ion-button class="save-message-button " [disabled]="loading['message'] || loading[loadingKeys.button]"
+        expand="block" (click)="save()">
+        <div *ngIf="!loading[loadingKeys.button]">Salvar alterações</div>
+        <ion-spinner *ngIf="loading[loadingKeys.button]"></ion-spinner>
+      </ion-button>
+    </ion-item>
+  </ion-footer>
+</ng-container>
+
+<ng-template #templateFullscreen>
+  <ion-header no-border class="edit-message fullscreen background-white">
+    <ion-item lines="none" class="item-background-color header-item">
       <ion-title>Escreva a mensagem</ion-title>
       <div class="edit-msg-icon-container">
         <ion-ripple-effect></ion-ripple-effect>
         <ion-icon (click)="presentPopover($event)" name="pricetag"></ion-icon>
         <ion-icon (click)="openAttachmentModal()" name="attach-outline"></ion-icon>
+        <ion-icon (click)="fullScreenToggle(false)" name="contract-sharp"></ion-icon>
       </div>
     </ion-item>
-    <div class="horizontal-line"></div>
-    <ion-item class="item-background-color footer-item">
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <div class="editor">
-              <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
-              <div class="horizontal-line"></div>
-              <ngx-editor [placeholder]="placeholder" [editor]="editor"></ngx-editor>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-
-  </ion-list>
-</ion-content>
-
-<ion-footer style="margin-bottom: 20px;" lines="none" class="ion-no-border">
-  <ion-item class="save-message-button-container" lines="none">
-    <ion-button class="save-message-button " [disabled]="loading['message'] || loading[loadingKeys.button]"
-      expand="block" (click)="save()">
-      <div *ngIf="!loading[loadingKeys.button]">Salvar alterações</div>
-      <ion-spinner *ngIf="loading[loadingKeys.button]"></ion-spinner>
-    </ion-button>
-  </ion-item>
-</ion-footer>
+  </ion-header>
+  <ion-content class="fullscreen" [fullscreen]="fullscreen" scrollY="true">
+    <div class="edit-message edit-container">
+      <ion-item lines="none" class="item-background-color">
+        <div class="editor">
+          <div class="horizontal-line"></div>
+          <skeleton-textarea *ngIf="loading[loadingKeys.message]; else editorTemplate"></skeleton-textarea>
+          <ng-template #editorTemplate>
+            <ngx-editor [placeholder]="placeholder" [editor]="editor"></ngx-editor>
+          </ng-template>
+        </div>
+      </ion-item>
+    </div>
+  </ion-content>
+  <ion-footer class="edit-container background-white">
+    <div class="fullscreen-footer">
+      <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+    </div>
+  </ion-footer>
+</ng-template>
 
 <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false">
   <ng-template>
