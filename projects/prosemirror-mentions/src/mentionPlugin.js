@@ -117,7 +117,7 @@ export function getMentionsPlugin(opts) {
   var defaultOpts = {
     mentionTrigger: "@",
     hashtagTrigger: "#",
-    allowSpace: false,
+    allowSpace: true,
     getSuggestions: (type, text, cb) => {
       cb([]);
     },
