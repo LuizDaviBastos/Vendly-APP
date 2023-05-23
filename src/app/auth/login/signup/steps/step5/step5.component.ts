@@ -19,6 +19,8 @@ export class Step5Component implements OnInit {
   @Input('previous') previousStep: () => void;
   @Input('next') nextStep: () => void;
   @Input('sync') sync: boolean;
+  @Input('error') error: boolean = true;
+  @Input('errorMessage') errorMessage: string;
 
   constructor(private authService: AuthService, 
     private settingsService: SettingsService, 

@@ -37,8 +37,11 @@ export class AppComponent {
 
     App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
       const url = new URL(event.url);
-      const params = url.searchParams.get('step');
-      const navigateTo = url.pathname + ((!!params) ? `?step=${params}` : '');
+      let params = '';
+      url.searchParams.forEach((value, key) => {
+        params += `${key}=${value}&`
+      });
+      const navigateTo = url.pathname + `?${params}`;
       this.router.navigateByUrl(navigateTo);
     });
   }

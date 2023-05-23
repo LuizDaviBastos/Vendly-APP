@@ -32,6 +32,17 @@
         <ion-input placeholder="Insira o código" clearInput="true" class="input" type="text" formControlName="code"
           [minlength]="6" [maxlength]="6"></ion-input>
       </ion-item>
+      <ion-item lines="none" class="item-background-color mb-0">
+        <ion-button (click)="sendEmailConfirmationCode()" [disabled]="!canResend()" class="resend-code-buttom" expand="block">
+          <ion-spinner *ngIf="loading['resendcode']; else labelresend" name="crescent"></ion-spinner>
+          <ng-template #labelresend>
+            Reenviar código
+          </ng-template>
+        </ion-button>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label class="count-resend">{{getTimeLeft()}}</ion-label>
+      </ion-item>
     </form>
   </ion-list>
 </ion-content>
@@ -47,4 +58,5 @@
   <ion-item *ngIf="showLogout" lines="none">
     <ion-label (click)="logout()" class="link-account-label">Encerrar a sessão.</ion-label>
   </ion-item>
+
 </ion-footer>

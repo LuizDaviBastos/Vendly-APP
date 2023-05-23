@@ -63,22 +63,23 @@ export class AccountSettingsPage implements OnInit {
   }
 
   private _deleteAccount() {
-    this.loading['delete'] = true;
-    this.accountService.deleteAccount(this.sellerInfo.id).subscribe((response) => {
-      this.loading['delete'] = false;
-      if (response.success) {
-        LocalStorage.logout();
-        //this.navCtrl.back();
-        this.route.navigateByUrl('/auth');
-      }
-      else {
-        this.alertService.showToastAlert(response.message || 'Houve um erro ao deletar sua conta.')
-      }
-    }, (err) => {
-      this.loading['delete'] = false;
-      this.alertService.errorAlert(err);
-    }, () => {
-      this.loading['delete'] = false;
+    this.securityConfirmationService.securityConfirmation().subscribe((modal) => {
+      this.loading['delete'] = true;
+      this.accountService.deleteAccount(this.sellerInfo.id).subscribe((response) => {
+        this.loading['delete'] = false;
+        if (response.success) {
+          LocalStorage.logout();
+          this.route.navigateByUrl('/auth');
+        }
+        else {
+          this.alertService.showToastAlert(response.message || 'Houve um erro ao deletar sua conta.');
+        }
+      }, (err) => {
+        this.loading['delete'] = false;
+        this.alertService.errorAlert(err);
+      }, () => {
+        this.loading['delete'] = false;
+      });
     });
   }
 }

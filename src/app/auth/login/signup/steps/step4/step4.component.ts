@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { LocalStorage } from 'src/app/helpers/local-storage.helper';
 import { AlertService } from 'src/services/alert-service';
 import { AuthService } from 'src/services/auth-service';
 
@@ -10,7 +11,7 @@ import { AuthService } from 'src/services/auth-service';
 })
 export class Step4Component implements OnInit {
 
-  @Input('sellerId') sellerId:string;
+  @Input('sellerId') sellerId: string;
   @Input('form') formGroup: FormGroup;
   @Input('previous') previousStep: () => void;
   @Input('next') nextStep: () => void;
@@ -22,7 +23,16 @@ export class Step4Component implements OnInit {
   ngOnInit() { }
 
   public onError(message: string) {
-      
+
+  }
+
+  public onSuccess() {
+    const login = LocalStorage.getLogin();
+    if (login && login.emailNotConfirmed == false) {
+      login.emailNotConfirmed = true;
+      LocalStorage.setLogin(login);
+    }
+    this.nextStep();
   }
 }
 

@@ -28,7 +28,12 @@
 <ion-content [scrollY]="true">
   <ion-list class="content-item" lines="none">
     <form slot="fixed" [formGroup]="formGroup">
-      <div *ngIf="synState() || sync">
+      <div *ngIf="error">
+        <ion-item lines="none" class="link-account-button-container">
+          <ion-label class="error-message">{{errorMessage || 'Houve um erro ao tentar vincular a conta do mercado livre.'}}</ion-label>
+        </ion-item>
+      </div>
+      <div *ngIf="sync">
         <ion-item lines="none" class="link-account-button-container ">
           <ion-button [disabled]="true" (click)="syncAccount()" class="link-account-button sync" expand="block">
             Conta vinculada
@@ -37,7 +42,7 @@
           
         </ion-item>
       </div>
-      <ng-container *ngIf="!synState()">
+      <ng-container *ngIf="!sync">
         <ion-item lines="none" class="link-account-button-container">
           <ion-button (click)="syncAccount()" class="link-account-button" expand="block">Vincular conta</ion-button>
         </ion-item>

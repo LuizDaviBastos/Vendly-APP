@@ -58,3 +58,13 @@ form {
   opacity: 0.86 !important;
   --background: #3b7a2b !important;
 }
+
+.error-message {
+  color: #444!important;
+  font-size: 12pt!important;
+  font-weight: 200!important;
+  background-color: #fce9e9;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #f04e54;
+}

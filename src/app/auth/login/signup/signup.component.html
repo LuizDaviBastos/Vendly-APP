@@ -7,7 +7,7 @@
 <app-step4 *ngIf="currentStep == 4" [form]="stepsFormGroup[4]" [previous]="previousStep.bind(this)"
   [next]="nextStep.bind(this)" [sellerId]="sellerId"></app-step4>
 <app-step5 *ngIf="currentStep == 5" [form]="stepsFormGroup[5]" [previous]="previousStep.bind(this)"
-  [next]="nextStep.bind(this)" [sync]="sync"></app-step5>
+  [next]="nextStep.bind(this)" [sync]="sync" [error]="syncError" [errorMessage]="errorMessage"></app-step5>
 
 <ion-footer *ngIf="currentStep != 4" lines="none" class="ion-no-border">
   <ion-item lines="none" class="continue-buttom-container">

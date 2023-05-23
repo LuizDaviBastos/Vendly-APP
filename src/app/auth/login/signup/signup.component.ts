@@ -20,6 +20,8 @@ export class SignupComponent implements OnInit {
   public loading = {};
   public currentStep: 1 | 2 | 3 | 4 | 5 = 1;
   public sync: boolean = false;
+  public syncError: boolean = false;
+  public errorMessage: string;
   public stepsFormGroup = {
     1: new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -62,7 +64,7 @@ export class SignupComponent implements OnInit {
   }
 
   public async ngOnInit() {
-    this.sync = this.stepsFormGroup[5].get('sync').value == 'true';
+    this.sync = false;
     this.activatedRoute.queryParamMap.subscribe(async (params) => {
       const step = <1 | 2 | 3 | 4 | 5>+params.get('step');
       if (step && step == 5) {
@@ -74,23 +76,29 @@ export class SignupComponent implements OnInit {
         loading.present();
         const id = LocalStorage.getLogin().data.id;
         const hasMeliAccount = await this.meliService.hasMeliAccount(id).toPromise();
-        if(hasMeliAccount) {
+        if (hasMeliAccount) {
           this.stepsFormGroup[5].get('sync').setValue('true');
           this.sync = true;
+          this.syncError = false;
+          this.errorMessage = '';
           this.changeDetector.detectChanges();
+        } else {
+          const sync = params.get('sync');
+          const syncError = params.get('error');
+          this.syncError = syncError == 'true';
+          this.errorMessage = params.get('message');
         }
-        
+
         this.currentStep = step;
         loading.dismiss();
-      } else if(step == 4) {
+      } else if (step == 4) {
         const id = LocalStorage.getLogin()?.data?.id;
-        if(!id) {
+        if (!id) {
           this.alertService.showToastAlert(`Não foi possível obter os dados do usuario. Experimente apagar o cache do aplicativo e tentar novamente.`)
           this.router.navigateByUrl('/auth');
         }
         this.sellerId = id;
         this.currentStep = step;
-        //this.sendEmailConfirmationCode(id);
       }
     })
 
@@ -123,6 +131,7 @@ export class SignupComponent implements OnInit {
 
   public finish() {
     this.loading['finish'] = true;
+    this.stepsFormGroup[5].get('sync').setValue('');
     const login = LocalStorage.getLogin();
     login.hasMeliAccount = true;
 
@@ -153,7 +162,7 @@ export class SignupComponent implements OnInit {
       } else {
         this.alertService.showToastAlert(loginResponse.message);
       }
-    }, (err: HttpErrorResponse ) => {
+    }, (err: HttpErrorResponse) => {
       this.loading['nextStep'] = false;
       this.alertService.errorAlert(err);
     })
