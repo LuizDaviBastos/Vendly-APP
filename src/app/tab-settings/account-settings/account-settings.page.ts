@@ -15,7 +15,7 @@ import { AlertService } from 'src/services/alert-service';
 export class AccountSettingsPage implements OnInit {
 
   public get sellerInfo(): Seller {
-    return LocalStorage.getLogin().data || new Seller();
+    return LocalStorage.getLogin()?.data || new Seller();
   }
 
   public loading = {};
@@ -68,8 +68,8 @@ export class AccountSettingsPage implements OnInit {
       this.loading['delete'] = false;
       if (response.success) {
         LocalStorage.logout();
-        this.navCtrl.back();
-        //this.route.navigateByUrl('/auth');
+        //this.navCtrl.back();
+        this.route.navigateByUrl('/auth');
       }
       else {
         this.alertService.showToastAlert(response.message || 'Houve um erro ao deletar sua conta.')

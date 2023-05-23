@@ -36,4 +36,4 @@
   </ion-list>
 </ion-content>-->
 
-<security-confirmation [sellerId]="sellerId" (onSuccess)="nextStep()" (onError)="onError($event)" [isSignup]="true" [form]="formGroup"></security-confirmation>
+<security-confirmation [showLogout]="true" [sellerId]="sellerId" (onSuccess)="nextStep()" (onError)="onError($event)" [isSignup]="true" [form]="formGroup"></security-confirmation>

@@ -17,7 +17,8 @@ export class FireBaseService {
                 if (documents && documents.length > 0) {
                     const data = documents[0];
                     subscriber.next(<Settings>{
-                        urlBaseApi: data.urlBaseApi
+                        urlBaseApi: data.urlBaseApi,
+                        createAccountMeliUrl: data.createAccountMeliUrl
                     })
                 } else {
                     subscriber.error("Não foi possivel obter as configurações.");

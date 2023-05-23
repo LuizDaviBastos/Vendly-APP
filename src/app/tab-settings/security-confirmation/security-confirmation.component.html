@@ -44,4 +44,7 @@
       </ng-template>
     </ion-button>
   </ion-item>
+  <ion-item *ngIf="showLogout" lines="none">
+    <ion-label (click)="logout()" class="link-account-label">Encerrar a sessão.</ion-label>
+  </ion-item>
 </ion-footer>

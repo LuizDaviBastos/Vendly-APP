@@ -25,7 +25,8 @@ export class SignupComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
     }),
     2: new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      firstName: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      lastName: new FormControl('', [Validators.required, Validators.minLength(4)]),
       country: new FormControl('br', [Validators.required]),
     }),
     3: new FormGroup({
@@ -43,7 +44,8 @@ export class SignupComponent implements OnInit {
   public getSellerEntity() {
     return <Seller>{
       email: this.stepsFormGroup[1].get('email').value,
-      fullName: this.stepsFormGroup[2].get('name').value,
+      firstName: this.stepsFormGroup[2].get('firstName').value,
+      lastName: this.stepsFormGroup[2].get('lastName').value,
       country: this.stepsFormGroup[2].get('country').value,
       password: this.stepsFormGroup[3].get('password').value,
     }
@@ -81,7 +83,7 @@ export class SignupComponent implements OnInit {
         this.currentStep = step;
         loading.dismiss();
       } else if(step == 4) {
-        const id = params.get('sellerId');
+        const id = LocalStorage.getLogin()?.data?.id;
         if(!id) {
           this.alertService.showToastAlert(`Não foi possível obter os dados do usuario. Experimente apagar o cache do aplicativo e tentar novamente.`)
           this.router.navigateByUrl('/auth');
@@ -155,5 +157,10 @@ export class SignupComponent implements OnInit {
       this.loading['nextStep'] = false;
       this.alertService.errorAlert(err);
     })
+  }
+
+  public logout() {
+    LocalStorage.logout();
+    this.router.navigateByUrl('/auth');
   }
 }

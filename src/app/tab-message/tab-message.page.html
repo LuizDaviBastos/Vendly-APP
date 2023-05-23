@@ -19,7 +19,7 @@
             <ion-skeleton-text *ngIf="!meliSellerInfo()?.nickname" style="width: 174px; border-radius: 6px;"
               [animated]="true"></ion-skeleton-text>
           </ion-row>
-          <ion-row>
+          <ion-row *ngIf="meliSellerInfo()?.produtosCount != 0">
             <ion-skeleton-text *ngIf="!meliSellerInfo()?.produtosCount" style="width: 70px; border-radius: 6px;"
               [animated]="true"></ion-skeleton-text>
             <ion-label *ngIf="meliSellerInfo()?.produtosCount"

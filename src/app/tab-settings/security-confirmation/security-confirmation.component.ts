@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoadingController, ModalController, NavController } from '@ionic/angular';
+import { LocalStorage } from 'src/app/helpers/local-storage.helper';
 import { AlertService } from 'src/services/alert-service';
 import { AuthService } from 'src/services/auth-service';
 
@@ -12,6 +14,7 @@ import { AuthService } from 'src/services/auth-service';
 export class SecurityConfirmationComponent implements OnInit {
 
   @Input('form') public formGroup: FormGroup;
+  @Input('showLogout') public showLogout: boolean;
   @Input('isSignup') public isSignup: boolean;
   @Input('sellerId') public sellerId: string;
   @Output('onSuccess') onSuccessEvent: EventEmitter<any> = new EventEmitter();
@@ -27,7 +30,8 @@ export class SecurityConfirmationComponent implements OnInit {
   constructor(private navCtrl: NavController, public modalController: ModalController,
     private authService: AuthService,
     private alertService: AlertService,
-    private loadingController: LoadingController) { }
+    private loadingController: LoadingController,
+    private route: Router) { }
 
   async ngOnInit() {
     if (this.sellerId) {
@@ -108,6 +112,11 @@ export class SecurityConfirmationComponent implements OnInit {
 
   public clearCode() {
     this.formGroup.get('code').setValue('');
+  }
+
+  public logout() {
+    LocalStorage.logout();
+    this.route.navigateByUrl('/auth');
   }
 
 }

@@ -35,10 +35,11 @@ export class AuthPage implements OnInit {
       this.loading = true;
       this.meliService.login(this.email, this.password).subscribe((response) => {
         if (response.success) {
+          LocalStorage.setLogin(response.data);
           if (response.data.emailNotConfirmed) {
             this.route.navigateByUrl(`auth/signup?step=4&sellerId=${response.data.data.id}`);
           } else {
-            LocalStorage.setLogin(response.data);
+            //LocalStorage.setLogin(response.data);
             this.route.navigate(['/message']);
           }
 
