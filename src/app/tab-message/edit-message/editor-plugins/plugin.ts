@@ -30,7 +30,7 @@ const mentions = [
     email: ''
   },
   {
-    name: 'PRODUTO',
+    name: 'RASTREIO',
     id: '102',
     email: ''
   },

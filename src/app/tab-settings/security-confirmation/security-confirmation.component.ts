@@ -69,10 +69,12 @@ export class SecurityConfirmationComponent implements OnInit, OnDestroy {
         this.startCountDown();
       } else {
         this.alertService.showToastAlert(sendConfirmationResponse.message);
+        this.timeLeft = 0;
       }
     }, (err) => {
       this.hideLoading();
       this.alertService.errorAlert(err);
+      this.timeLeft = 0;
     }, () => {
       this.hideLoading();
     })

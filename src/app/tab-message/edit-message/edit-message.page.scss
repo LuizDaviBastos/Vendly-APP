@@ -117,9 +117,8 @@ ion-list,
     margin: auto;
   }
 
-  ion-icon[name="pricetag"] {
-    font-size: 16pt;
-    transform: rotate(-89deg);
+  ion-icon[name="at"], ion-icon[name="at-circle"] {
+    font-size: 18pt;
     font-weight: 700;
     margin: auto;
   }
