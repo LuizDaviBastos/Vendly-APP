@@ -28,21 +28,11 @@ export class SecurityConfirmationComponent implements OnInit, OnDestroy {
   public loadingModal: HTMLIonLoadingElement[] = [];
 
   public set timeLeft(value: number) {
-    localStorage.setItem('timeLeft', `${value}`);
+    LocalStorage.timeLeft = value;
   }
 
   public get timeLeft(): number {
-    const item = localStorage.getItem('timeLeft');
-    return (!!item ? +item : -1);
-  }
-
-  public get intervals(): number[] {
-    let _intervals: number[] = [];
-    const item = localStorage.getItem('sendintervals');
-    if (!!item) {
-      _intervals = JSON.parse(item);
-    }
-    return _intervals;
+    return LocalStorage.timeLeft;
   }
 
   private intervalId: any;
@@ -75,6 +65,7 @@ export class SecurityConfirmationComponent implements OnInit, OnDestroy {
     this.authService.sendEmailConfirmationCode(id).subscribe((sendConfirmationResponse) => {
       if (sendConfirmationResponse.success) {
         this.alertService.showToastAlert(`Enviamos um código para o seu email.`, 2000, "top");
+        LocalStorage.lastTimeSendCode = new Date().getTime();
         this.startCountDown();
       } else {
         this.alertService.showToastAlert(sendConfirmationResponse.message);
@@ -175,7 +166,7 @@ export class SecurityConfirmationComponent implements OnInit, OnDestroy {
   }
 
   public getTimeLeft(): string {
-    let time: number = (this.timeLeft < 0 ? 0 : this.timeLeft);
+    let time: number = (this.timeLeft < 0 || !this.timeLeft ? 0 : this.timeLeft);
     const horas = Math.floor(time / 3600);
     const minutos = Math.floor((time % 3600) / 60);
     const segundos = time % 60;

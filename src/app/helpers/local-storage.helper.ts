@@ -99,6 +99,8 @@ export class LocalStorage {
         this.seletectMeliSellerInfo = null;
         localStorage.setItem(this.keys.seller, null);
         localStorage.setItem(this.keys.meliSeller, null);
+        localStorage.setItem(this.keys.timeLeft, null);
+        localStorage.setItem(this.keys.lastTimeSendCode, null);
         this.setToken(null);
     }
 
@@ -113,11 +115,42 @@ export class LocalStorage {
         seller: 'seller-login',
         token: 'asm-token',
         meliSeller: 'meli-seller-id',
-        country: 'asm-country'
+        country: 'asm-country',
+        timeLeft: 'timeLeft',
+        lastTimeSendCode: 'lastTimeSendCode'
     }
 
     public static get settings(): ConfigurationStorage {
         return new ConfigurationStorage();
+    }
+
+    public static set timeLeft(value: number) {
+        localStorage.setItem(this.keys.timeLeft, `${value}`);
+    }
+
+    public static set lastTimeSendCode(value: number) {
+        localStorage.setItem(this.keys.lastTimeSendCode, `${value}`);
+    }
+    public static get lastTimeSendCode(): number {
+        return +localStorage.getItem(this.keys.lastTimeSendCode);
+    }
+
+    public static get timeLeft(): number {
+        const now = new Date().getTime();
+        const lastSetLeftTime = this.lastTimeSendCode;
+        if(!lastSetLeftTime) {
+            this.timeLeft = -1;
+            this.lastTimeSendCode = null;
+            return -1;
+        }
+        const diff = now - lastSetLeftTime;
+        const times = Math.floor(diff / 1000);
+        if(times > 40) {
+            this.timeLeft = -1;
+            return -1;
+        }
+        const item = localStorage.getItem(this.keys.timeLeft);
+        return (!!item ? +item : -1);
     }
 
     //FAKE
