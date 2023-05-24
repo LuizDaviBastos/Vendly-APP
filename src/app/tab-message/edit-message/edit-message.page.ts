@@ -14,7 +14,6 @@ import { SellerInfo } from 'src/models/seller-info.model';
 import { SellerMessage } from 'src/models/seller-message';
 import { ModalController } from '@ionic/angular';
 import { AttachmentModal } from 'src/app/modals/attachment-modal/attachment-modal.component';
-import * as $ from 'jquery';
 
 @Component({
   selector: "edit-message",
