@@ -14,27 +14,77 @@ ion-grid {
     }
 }
 
-.md body.yellow {
-    --ion-background-color: #dfd814 !important;
+ion-card {
+    background-color: #dfd81400;
+    box-shadow: none;
+    border-radius: 25px;
+
 }
 
-.dark {
-    --ion-background-color: #dfd814 !important;
+.ion-card-content {
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
-body.dark {
-    --ion-background-color: #dfd814;
-}
-
-body {
-    --ion-background-color: #dfd814;
-}
-
-:root {
-    --ion-background-color: #dfd814 !important;
-}
-
-.signup {
+.link-container {
+    font-size: 12pt;
     margin: auto;
-    
+    margin-bottom: 26px;
+    color: #2D2D2D;
+
+    .link {
+        margin-left: 10px;
+        color: rgb(62, 126, 245);
+    }
+}
+
+.item-input {
+    margin: auto;
+}
+
+.login-button-container {
+    margin-bottom: 10px;
+}
+
+.login-button {
+    width: 100%;
+    text-transform: inherit;
+    --border-radius: 10px;
+    height: 50px;
+    font-size: 12pt;
+    --color: #e3e3e3;
+    --background: #3B3F4C;
+}
+
+.content-item {
+    .edit-msg-icon-container {
+        display: flex;
+        width: 25%;
+        color: #2D2D2D;
+    }
+
+    ion-label {
+        font-size: 16pt;
+        color: #2D2D2D;
+        margin-bottom: 14px;
+        font-weight: 500;
+    }
+}
+
+.input-container {
+    margin-bottom: 10px;
+    .input {
+        border: 1px solid #7a7a7a;
+        border-radius: 8px;
+        padding: 4px !important;
+        padding-left: 12px !important;
+        margin-bottom: 6px;
+        pointer-events: visible !important;
+    }
+
+    .input[type="email"] {
+        pointer-events: none!important;
+    }
 }

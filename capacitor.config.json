@@ -1,6 +1,6 @@
 {
-	"appId": "asm.app",
-	"appName": "Meli: Assistente de vendas",
+	"appId": "vendly.app",
+	"appName": "Vendly",
 	"webDir": "www",
 	"bundledWebRuntime": false
 }

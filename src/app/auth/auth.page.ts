@@ -68,4 +68,12 @@ export class AuthPage implements OnInit {
       this.route.navigateByUrl('/message');
     }, 3000);
   }
+
+  public signup() {
+    this.route.navigateByUrl('auth/signup');
+  }
+
+  public recoveryPassword() {
+    this.route.navigateByUrl('auth/recovery-password')
+  }
 }

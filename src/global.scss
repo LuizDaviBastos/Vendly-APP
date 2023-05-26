@@ -63,6 +63,7 @@ ngx-editor-menu {
   .NgxEditor__MenuBar {
     background-color: var(--background-white);
   }
+
   ngx-editor-menu {
     background-color: var(--background-white);
   }
@@ -78,60 +79,60 @@ ngx-editor-menu {
 }
 
 .NgxEditor__Dropdown .NgxEditor__Dropdown--DropdownMenu {
-  position: fixed!important;
-  box-shadow: #3c404326 0 2px 6px 2px!important;
-  border-radius: 4px!important;
-  background-color: #fff!important;
-  width: 40%!important;
-  top: 50%!important;
-  left: 50%!important;
-  transform: translate(-50%, -50%)!important;
+  position: fixed !important;
+  box-shadow: #3c404326 0 2px 6px 2px !important;
+  border-radius: 4px !important;
+  background-color: #fff !important;
+  width: 40% !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
 }
 
 .NgxEditor__Popup {
-  position: fixed!important;
-  box-shadow: #3c404326 0 2px 6px 2px!important;
-  border-radius: 4px!important;
-  background-color: #fff!important;
-  z-index: 10!important;
-  min-width: 192px!important;
-  padding: 8px!important;
-  top: 50%!important;
-  left: 50%!important;
-  transform: translate(-50%, -50%)!important;
+  position: fixed !important;
+  box-shadow: #3c404326 0 2px 6px 2px !important;
+  border-radius: 4px !important;
+  background-color: #fff !important;
+  z-index: 10 !important;
+  min-width: 192px !important;
+  padding: 8px !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
 
   form {
     button {
-      width: 100%!important;
-      border-radius: 12px!important;
-      height: 30px!important;
-      font-size: 10pt!important;
-      color: white!important;
-      background: #2D2D2D!important;
+      width: 100% !important;
+      border-radius: 12px !important;
+      height: 30px !important;
+      font-size: 10pt !important;
+      color: white !important;
+      background: #2D2D2D !important;
     }
   }
 
   .NgxEditor__Popup--FormGroup {
     input {
-      color: black!important;
-      background-color: white!important;
-      border-radius: 7px!important;
-      height: 35px!important;
-      border: 1px gray solid!important;
-      margin-top: 4px!important;
+      color: black !important;
+      background-color: white !important;
+      border-radius: 7px !important;
+      height: 35px !important;
+      border: 1px gray solid !important;
+      margin-top: 4px !important;
     }
 
     .NgxEditor__Popup--Col {
 
       label {
-        display: flex!important;
-        align-items: center!important;
-        text-align: center!important;
-        margin-top: auto!important;
+        display: flex !important;
+        align-items: center !important;
+        text-align: center !important;
+        margin-top: auto !important;
 
         input {
-          width: 18px!important;
-          margin-right: 10px!important;
+          width: 18px !important;
+          margin-right: 10px !important;
         }
       }
     }
@@ -140,22 +141,22 @@ ngx-editor-menu {
 }
 
 .NgxEditor__Content {
-  padding-left: 0px!important;
-  line-height: 22px!important;
+  padding-left: 0px !important;
+  line-height: 22px !important;
 
   a {
-    color: #3880ff!important;
+    color: #3880ff !important;
 
     span {
-      color: #3880ff!important;
+      color: #3880ff !important;
     }
   }
 }
 
 .CodeMirror {
-  border: 1px solid #eee!important;
-  height: auto!important;
-  margin-bottom: 0.7rem!important;
+  border: 1px solid #eee !important;
+  height: auto !important;
+  margin-bottom: 0.7rem !important;
 
   pre {
     white-space: pre !important;
@@ -195,9 +196,9 @@ ngx-editor-menu {
     overflow-y: auto;
   }
 
-  
 
- 
+
+
 
 
 
@@ -264,4 +265,21 @@ attachment-modal {
 .delete-account-alert {
   --width: 360px;
   --max-width: 360px;
+}
+
+
+app-auth {
+  //--ion-background-color: #ffde33!important;
+
+  .item-interactive.ion-valid {
+    --highlight-background: rgb(5, 5, 5) !important;
+  }
+
+
+
+}
+
+
+a[class*="type-toggle"] {
+  margin-right: 6px;
 }
