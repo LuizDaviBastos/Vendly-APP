@@ -78,6 +78,7 @@ export class SignupComponent implements OnInit {
         const hasMeliAccount = await this.meliService.hasMeliAccount(id).toPromise();
         if (hasMeliAccount) {
           this.stepsFormGroup[5].get('sync').setValue('true');
+          LocalStorage.updateHasMeliAccount(true);
           this.sync = true;
           this.syncError = false;
           this.errorMessage = '';

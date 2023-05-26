@@ -7,6 +7,14 @@ export class LocalStorage {
     private static login: LoginResponse = null;
     private static country: Country = null;
     private static seletectMeliSellerInfo: SellerInfo = null;
+    private static keys = {
+        seller: 'seller-login',
+        token: 'asm-token',
+        meliSeller: 'meli-seller-id',
+        country: 'asm-country',
+        timeLeft: 'timeLeft',
+        lastTimeSendCode: 'lastTimeSendCode'
+    }
 
     public static get sellerId(): string {
         return this.getLogin().data.id;
@@ -97,27 +105,20 @@ export class LocalStorage {
     public static logout() {
         this.login = null;
         this.seletectMeliSellerInfo = null;
-        localStorage.setItem(this.keys.seller, null);
-        localStorage.setItem(this.keys.meliSeller, null);
-        localStorage.setItem(this.keys.timeLeft, null);
-        localStorage.setItem(this.keys.lastTimeSendCode, null);
+        localStorage.removeItem(this.keys.seller);
         this.setToken(null);
+        localStorage.removeItem(this.keys.token);
+        localStorage.removeItem(this.keys.meliSeller);
+        localStorage.removeItem(this.keys.country);
+        localStorage.removeItem(this.keys.timeLeft);
+        localStorage.removeItem(this.keys.lastTimeSendCode);
+        
     }
 
     public static updateHasMeliAccount(state: boolean) {
         let login = this.getLogin();
         login.hasMeliAccount = state;
         this.setLogin(login);
-    }
-
-
-    private static keys = {
-        seller: 'seller-login',
-        token: 'asm-token',
-        meliSeller: 'meli-seller-id',
-        country: 'asm-country',
-        timeLeft: 'timeLeft',
-        lastTimeSendCode: 'lastTimeSendCode'
     }
 
     public static get settings(): ConfigurationStorage {
@@ -153,14 +154,6 @@ export class LocalStorage {
         return (!!item ? +item : -1);
     }
 
-    //FAKE
-    public static fake() {
-        return {
-            setLogin() {
-                localStorage.setItem(this.keys.seller, '{"success":true, "token": true}');
-            }
-        }
-    }
 }
 export class ConfigurationStorage {
     public setTheme(theme: 'dark' | 'light') {

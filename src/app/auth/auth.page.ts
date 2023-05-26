@@ -1,3 +1,4 @@
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LocalStorage } from '../helpers/local-storage.helper';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -15,10 +16,12 @@ export class AuthPage implements OnInit {
     private alertService: AlertService) { }
 
   public loading: boolean = false;
-  public loadingFake: boolean = false;
   public target: string;
-  public email: string = '';
-  public password: string = '';
+
+  public formGroup: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required]),
+  })
 
   public navigateUrl: string;
 
@@ -33,7 +36,9 @@ export class AuthPage implements OnInit {
   public async login() {
     try {
       this.loading = true;
-      this.meliService.login(this.email, this.password).subscribe((response) => {
+      const email = this.formGroup.get('email').value;
+      const password = this.formGroup.get('password').value;
+      this.meliService.login(email, password).subscribe((response) => {
         if (response.success) {
           LocalStorage.setLogin(response.data);
           if (response.data.emailNotConfirmed) {
@@ -64,5 +69,19 @@ export class AuthPage implements OnInit {
 
   public recoveryPassword() {
     this.route.navigateByUrl('auth/recovery-password')
+  }
+
+  public emailInvalid() {
+    const control = this.formGroup.get('email');
+    return (control.touched && control.status == "INVALID");
+  }
+
+  public passwordInvalid() {
+    const control = this.formGroup.get('password');
+    return (control.touched && control.status == "INVALID");
+  }
+
+  public formInvalid() {
+    return (this.formGroup.status == "INVALID");
   }
 }

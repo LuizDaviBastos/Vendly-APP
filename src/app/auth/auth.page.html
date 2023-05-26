@@ -8,20 +8,20 @@
           </ion-card-header>
           <ion-card-content>
             <ion-list class="content-item" lines="none">
-              <form>
+              <form [formGroup]="formGroup">
                 <ion-item lines="none" class="input-container">
-                  <ion-input name="email" [(ngModel)]="email" class="input" type="email" [clearInput]="true"
+                  <ion-input size="12" formControlName="email" class="input" type="email" [clearInput]="true"
                     placeholder="Digite seu e-mail"></ion-input>
+                  <!-- <label class="feedback-validation" *ngIf="emailInvalid()">Endereço de e-mail inválido.</label> -->
                 </ion-item>
                 <ion-item lines="none" class="input-container">
                   <app-show-hide-password class="input">
-                    <ion-input name="password" [(ngModel)]="password" type="password"
-                      placeholder="Digite sua senha"></ion-input>
+                    <ion-input formControlName="password" type="password" placeholder="Digite sua senha"></ion-input>
                   </app-show-hide-password>
-
+                  <!-- <label class="feedback-validation" *ngIf="passwordInvalid()">Este campo é obrigatório</label> -->
                 </ion-item>
                 <ion-item class="login-button-container">
-                  <ion-button [disabled]="loading" (click)="login()" class="login-button" expand="block">
+                  <ion-button [disabled]="loading || formInvalid()" (click)="login()" class="login-button" expand="block">
                     <div *ngIf="!loading">Acessar</div>
                     <ion-spinner *ngIf="loading"></ion-spinner>
                   </ion-button>
@@ -30,7 +30,6 @@
                   <ion-row class="link-container">
                     <label class="link" (click)="recoveryPassword()">Esqueci minha senha</label>
                   </ion-row>
-
                 </ion-item>
               </form>
             </ion-list>

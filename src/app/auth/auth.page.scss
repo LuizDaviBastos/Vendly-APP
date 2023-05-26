@@ -92,3 +92,11 @@ ion-card {
         pointer-events: none !important;
     }
 }
+
+.feedback-validation {
+    color: red;
+    position: fixed;
+    top: 64px;
+    font-size: 14px;
+    margin-left: 3px;
+}
