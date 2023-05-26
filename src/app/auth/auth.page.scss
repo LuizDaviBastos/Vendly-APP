@@ -45,7 +45,9 @@ ion-card {
 }
 
 .login-button-container {
-    margin-bottom: 10px;
+    margin-bottom: 10px!important;
+    max-width: 430px;
+    margin: auto;
 }
 
 .login-button {
@@ -75,6 +77,8 @@ ion-card {
 
 .input-container {
     margin-bottom: 10px;
+    max-width: 430px;
+
     .input {
         border: 1px solid #7a7a7a;
         border-radius: 8px;
@@ -85,6 +89,6 @@ ion-card {
     }
 
     .input[type="email"] {
-        pointer-events: none!important;
+        pointer-events: none !important;
     }
 }

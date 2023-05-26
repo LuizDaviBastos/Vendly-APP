@@ -17,8 +17,8 @@ export class AuthPage implements OnInit {
   public loading: boolean = false;
   public loadingFake: boolean = false;
   public target: string;
-  public email: string = "davi-sdb@hotmail.com";
-  public password: string = "80849903Dd@";
+  public email: string = '';
+  public password: string = '';
 
   public navigateUrl: string;
 
@@ -39,7 +39,6 @@ export class AuthPage implements OnInit {
           if (response.data.emailNotConfirmed) {
             this.route.navigateByUrl(`auth/signup?step=4&sellerId=${response.data.data.id}`);
           } else {
-            //LocalStorage.setLogin(response.data);
             this.route.navigate(['/message']);
           }
 
@@ -57,16 +56,6 @@ export class AuthPage implements OnInit {
     catch {
       this.loading = false;
     }
-  }
-
-  public loginFake() {
-    this.loadingFake = true;
-    setTimeout(() => {
-      LocalStorage.fake().setLogin();
-      this.loadingFake = false;
-      //document.body.classList.remove('yellow');
-      this.route.navigateByUrl('/message');
-    }, 3000);
   }
 
   public signup() {
