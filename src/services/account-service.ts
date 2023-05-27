@@ -1,7 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { Attachment } from '../models/attachment.model';
 import { RequestResponse } from '../models/request-response.model';
 import { HttpClientBase } from './http-base.service';
 
@@ -20,12 +19,26 @@ export class AccountService {
             password: password,
             newPassword: newPassword
         }
-        return this.http.post<RequestResponse<Attachment>>(`api/settings/changePassword`, body);
+        return this.http.post<RequestResponse<any>>(`api/settings/changePassword`, body);
     }
 
     public deleteAccount(sellerId: string) {
         const params = new HttpParams().append('sellerId', sellerId);
-        return this.http.get<RequestResponse<Attachment[]>>(`api/settings/deleteAccount`, { params: params });
+        return this.http.get<RequestResponse<any>>(`api/settings/deleteAccount`, { params: params });
+    }
+
+    public recoveryPassword(email: string) {
+        const params = new HttpParams().append('email', email);
+        return this.http.get<RequestResponse<any>>(`api/auth/RecoveryPassword`, { params: params });
+    }
+
+    public confirmRecoveryPassword(sellerId: string, code: string, newPassword: string) {
+        const body = {
+            sellerId: sellerId,
+            code: code,
+            newPassword: newPassword
+        }
+        return this.http.post<RequestResponse<any>>(`api/auth/confirmRecoveryPassword`, body);
     }
 
 }

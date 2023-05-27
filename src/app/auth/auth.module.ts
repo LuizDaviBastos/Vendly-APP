@@ -11,6 +11,7 @@ import { Step1Component, Step2Component, Step3Component, Step4Component, Step5Co
 import { ShowHidePasswordModule } from '../components/show-hide-password/show-hide-password.module';
 import { SecurityConfirmationModule } from '../tab-settings/security-confirmation/security-confirmation.module';
 import { RecoveryPasswordComponent } from './login/recovery-password/recovery-password.component';
+import { ConfirmRecoveryPasswordComponent } from './login/confirm-recovery-password/confirm-recovery-password.component';
 
 
 @NgModule({
@@ -18,12 +19,23 @@ import { RecoveryPasswordComponent } from './login/recovery-password/recovery-pa
     IonicModule,
     CommonModule,
     FormsModule,
-    AuthPageRoutingModule,
     ReactiveFormsModule,
+    AuthPageRoutingModule,
     ShowHidePasswordModule,
     SecurityConfirmationModule
   ],
-  declarations:[AuthPage, MeliLogoComponent, SignupComponent, Step1Component, Step2Component, Step3Component, Step4Component, Step5Component, RecoveryPasswordComponent],
-  providers:[MeliService]
+  declarations: [
+    AuthPage,
+    MeliLogoComponent, 
+    SignupComponent, 
+    Step1Component, 
+    Step2Component, 
+    Step3Component, 
+    Step4Component, 
+    Step5Component, 
+    RecoveryPasswordComponent,
+    ConfirmRecoveryPasswordComponent
+  ],
+  providers: [MeliService]
 })
-export class AuthPageModule {}
+export class AuthPageModule { }

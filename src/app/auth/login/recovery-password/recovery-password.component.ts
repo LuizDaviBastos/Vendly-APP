@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { AccountService } from 'src/services/account-service';
+import { AlertService } from 'src/services/alert-service';
 
 @Component({
   selector: 'recovery-password',
@@ -18,7 +21,11 @@ export class RecoveryPasswordComponent implements OnInit {
   @Input('previous') previusStep: () => void;
   @Input('next') nextStep: () => void;
 
-  constructor(private navCtrl: NavController) { }
+  constructor(private navCtrl: NavController,
+    private accountService: AccountService,
+    private alertService: AlertService,
+    private route: Router
+  ) { }
 
   ngOnInit() {
 
@@ -34,7 +41,21 @@ export class RecoveryPasswordComponent implements OnInit {
   }
 
   public recoveryEmail() {
-
+    this.loading = true;
+    const email = this.formGroup.get('email').value;
+    this.accountService.recoveryPassword(email).subscribe((response) => {
+      this.loading = false;
+      if (response.success) {
+        this.alertService.showToastAlert('Enviamos um email para que possa recuperar sua senha.');
+        this.route.navigateByUrl('/auth');
+      } else {
+        this.alertService.showToastAlert(response.message);
+      }
+    }, (error) => {
+      this.alertService.errorAlert(error);
+    }, () => {
+      this.loading = false;
+    })
   }
 
 }

@@ -34,6 +34,11 @@ const mentions = [
     id: '102',
     email: ''
   },
+  {
+    name: 'URLRASTREIO',
+    id: '103',
+    email: ''
+  },
 ];
 
 var mentionPlugin = getMentionsPlugin({

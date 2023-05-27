@@ -22,7 +22,7 @@ export class AppComponent {
           return;
         }
         this.cdr.detectChanges();
-        if (event.url.includes("/edit") || event.url.includes("settings")) {
+        if (event.url.includes("/edit") || event.url.includes("settings") || event.url.includes('/auth')) {
 
           StatusBar.setBackgroundColor({
             color: "#ebebeb"
