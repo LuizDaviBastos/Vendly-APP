@@ -17,20 +17,23 @@ export class ConfirmRecoveryPasswordComponent implements OnInit {
   public sellerId: string;
   public code: string;
 
-  public formGroup: FormGroup = new FormGroup({
-    newPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    confirmPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
-  });
+  // public formGroup: FormGroup = new FormGroup({
+  //   newPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+  //   confirmPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+  // });
 
-  public get touched(): boolean {
-    return this.formGroup.touched;
-  }
+  public newPassword: string = '';
+  public confirmPassword: string = '';
+
+   public get touched(): boolean {
+     return this.newPassword != ''; //this.formGroup.touched;
+   }
 
   public get errors(): any {
     return {
-      'minLength': this.lengthGreaterOrEqual8(this.formGroup.get('newPassword').value),
-      'number': this.containsNumber(this.formGroup.get('newPassword').value),
-      'special': this.containsSpecialCharacter(this.formGroup.get('newPassword').value),
+      'minLength': this.lengthGreaterOrEqual8(this.newPassword),
+      'number': this.containsNumber(this.newPassword),
+      'special': this.containsSpecialCharacter(this.newPassword),
       'matching': this.matchPassword()
     }
   }
@@ -49,7 +52,7 @@ export class ConfirmRecoveryPasswordComponent implements OnInit {
       this.code = params.get('code');
       if(!this.sellerId || !this.code) {
         this.alertService.showToastAlert("Não foi possível obter as informações do usuario.");
-        //this.route.navigateByUrl('/auth');
+        this.route.navigateByUrl('/auth');
         return;
       }
 
@@ -57,18 +60,13 @@ export class ConfirmRecoveryPasswordComponent implements OnInit {
   }
 
   public formInvalid() {
-    return (this.formGroup.status == "INVALID")
+    return !this.newPassword || !this.confirmPassword || this.confirmPassword?.length < 8 || this.newPassword?.length < 8 || !this.matchPassword();
   }
 
-  public hasErrorMatching() {
-    const state = this.formGroup.hasError('matching');
-    return state;
-  }
-
-  changeDetected() {
-    this.changeState('matching');
-    this.changeState('special');
-    this.changeState('number');
+  public changeDetected() {
+    //this.changeState('matching');
+    //this.changeState('special');
+    //this.changeState('number');
   }
 
   public containsNumber(str: string) {
@@ -84,26 +82,26 @@ export class ConfirmRecoveryPasswordComponent implements OnInit {
   }
 
   public matchPassword() {
-    let password = this.formGroup.get('newPassword').value;
-    let confirmPassword = this.formGroup.get('confirmPassword').value;
+    let password = this.newPassword;
+    let confirmPassword = this.confirmPassword;
     return (password == confirmPassword);
   }
 
-  public changeState(name: string) {
-    if (!this.formGroup.errors) {
-      this.formGroup.setErrors({});
-    }
+  // public changeState(name: string) {
+  //   if (!this.formGroup.errors) {
+  //     this.formGroup.setErrors({});
+  //   }
 
-    if (!this.errors[name]) {
-      this.formGroup.errors[name] = true;
-    } else {
-      delete this.formGroup.errors[name];
-    }
+  //   if (!this.errors[name]) {
+  //     this.formGroup.errors[name] = true;
+  //   } else {
+  //     delete this.formGroup.errors[name];
+  //   }
 
-    if (Object.keys(this.formGroup.errors).length == 0) {
-      this.formGroup.setErrors(null);
-    }
-  }
+  //   if (Object.keys(this.formGroup.errors).length == 0) {
+  //     this.formGroup.setErrors(null);
+  //   }
+  // }
 
 
   public goBack() {
@@ -113,7 +111,7 @@ export class ConfirmRecoveryPasswordComponent implements OnInit {
 
   public confirmRecoveryPassword() {
     this.loading['password'] = true;
-    const newPassword = this.formGroup.get('newPassword').value;
+    const newPassword = this.newPassword;//this.formGroup.get('newPassword').value;
 
     this.accountService.confirmRecoveryPassword(this.sellerId, this.code, newPassword).subscribe((response) => {
       this.loading['password'] = false;
