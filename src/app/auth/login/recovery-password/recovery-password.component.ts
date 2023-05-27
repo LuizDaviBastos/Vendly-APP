@@ -40,6 +40,10 @@ export class RecoveryPasswordComponent implements OnInit {
     return (control.touched && control.status == "INVALID");
   }
 
+  public formInvalid() {
+    return !this.formGroup.touched || this.formGroup.status == "INVALID";
+  }
+
   public recoveryEmail() {
     this.loading = true;
     const email = this.formGroup.get('email').value;
