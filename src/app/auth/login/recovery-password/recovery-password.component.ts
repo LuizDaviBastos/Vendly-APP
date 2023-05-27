@@ -41,7 +41,7 @@ export class RecoveryPasswordComponent implements OnInit {
   }
 
   public formInvalid() {
-    return !this.formGroup.touched || this.formGroup.status == "INVALID";
+    return this.formGroup.status == "INVALID";
   }
 
   public recoveryEmail() {

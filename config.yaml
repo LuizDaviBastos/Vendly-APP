@@ -1,14 +1,20 @@
 vars:
   BUNDLE_ID:
-    default: asm.app
+    default: vendly.app
   PACKAGE_NAME:
-    default: asm.app
+    default: vendly.app
 
 platforms:
 
   android:
     packageName: $PACKAGE_NAME
     manifest:
+    - file: AndroidManifest.xml
+      target: manifest/application
+      attrs:
+        android:allowBackup: 'false'
+        android:fullBackupContent: 'false'
+
     - file: AndroidManifest.xml
       target: manifest/application/activity
       inject: |
