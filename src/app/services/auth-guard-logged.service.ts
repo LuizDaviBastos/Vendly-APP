@@ -5,12 +5,15 @@ import { LocalStorage } from '../helpers/local-storage.helper';
 import { MeliService } from 'src/services/meli-service';
 import { map } from 'rxjs/operators';
 import { AlertService } from 'src/services/alert-service';
+import { AccountService } from 'src/services/account-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuardLoggedService implements CanActivate {
-  constructor(private router: Router, private meliService: MeliService, private alertService: AlertService) { }
+  constructor(private router: Router, private meliService: MeliService,
+    private alertService: AlertService,
+    private accountService: AccountService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     if (!LocalStorage.IsLogged) {
@@ -45,7 +48,21 @@ export class AuthGuardLoggedService implements CanActivate {
       );
     }
 
-    //return LocalStorage.IsLogged;
+    return LocalStorage.IsLogged;
+    return this.accountService.expiredStatus(LocalStorage.sellerId).pipe(
+      map((response) => {
+        if (response.data) {
+          return true;
+        } else {
+          //this.alertService.showToastAlert("Seu plano expirou!");
+          this.router.navigateByUrl('/auth');
+          return false;
+        }
+
+      })
+    )
+
+    return;
     return this.meliService.isAuthenticated(LocalStorage.token).pipe(
       map((isAuthenticated) => {
         if (isAuthenticated) {

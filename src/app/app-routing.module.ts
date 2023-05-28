@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuardLoggedService, AuthGuardLoggoutService } from './services';
-import { ShowHidePasswordComponent } from './components/show-hide-password/show-hide-password.component';
+import { AuthGuardExpiredInvalidService, AuthGuardExpiredValidService } from './services/auth-guard-expired.service';
 
 const routes: Routes = [
  
   {
-    canActivate: [AuthGuardLoggedService],
+    canActivate: [AuthGuardLoggedService, AuthGuardExpiredInvalidService],
     path: 'message',
     loadChildren: () => import('./tab-message/tab-message.module').then(m => m.Tab1PageModule)
   },
@@ -19,6 +19,11 @@ const routes: Routes = [
     canActivate: [AuthGuardLoggoutService],
       path: 'auth',
       loadChildren: () => import('./auth/auth.module').then(m => m.AuthPageModule)
+  },
+  {
+    canActivate: [AuthGuardLoggedService, AuthGuardExpiredValidService],
+      path: 'subscribe',
+      loadChildren: () => import('./subscribe/subscribe.module').then(m => m.SubscribeModule)
   },
   {
     path: '',

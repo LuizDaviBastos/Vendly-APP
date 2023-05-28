@@ -1,0 +1,13 @@
+<ion-header>
+
+</ion-header>
+<ion-content lines="none">
+  <ion-list>
+    <ion-item lines="none" class="paybutton-container">
+      <a target="_blank" class="paybutton" [href]="paymentLink">{{(!paymentLink ? 'Carregando...' : 'Pay')}}</a>
+    </ion-item>
+    <ion-item lines="none" class="logout-container">
+      <ion-label (click)="logout()" class="logout">Encerrar sessão</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

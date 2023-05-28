@@ -45,18 +45,4 @@ export class TabMessagePage implements OnInit, AfterViewInit {
   public navigateTo(route: string) {
     this.route.navigateByUrl(route);
   }
-
-  public getPaymentLink() {
-    const sellerId = LocalStorage.sellerId;
-    this.accountService.getPaymentLink(sellerId).subscribe((response) => {
-      if (response.success) {
-        this.paymentLink = response.data.init_point;
-        this.alertService.showToastAlert("Sucesso");
-      } else {
-        this.alertService.showToastAlert("Houve um erro ao obter o link de pagamento.");
-      }
-    }, (err) => {
-      this.alertService.errorAlert(err);
-    })
-  }
 }

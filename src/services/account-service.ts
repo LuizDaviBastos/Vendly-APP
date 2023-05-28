@@ -47,4 +47,9 @@ export class AccountService {
         return this.http.get<RequestResponse<PaymentLinkResponse>>(`api/account/getPaymentLink`, { params: params });
     }
 
+    public expiredStatus(sellerId: string) {
+        const params = new HttpParams().append('sellerId', sellerId);
+        return this.http.get<RequestResponse<boolean>>(`api/account/expiredStatus`, { params: params });
+    }
+
 }
