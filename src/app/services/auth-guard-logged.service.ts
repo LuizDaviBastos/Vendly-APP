@@ -45,7 +45,7 @@ export class AuthGuardLoggedService implements CanActivate {
       );
     }
 
-    return LocalStorage.IsLogged;
+    //return LocalStorage.IsLogged;
     return this.meliService.isAuthenticated(LocalStorage.token).pipe(
       map((isAuthenticated) => {
         if (isAuthenticated) {
