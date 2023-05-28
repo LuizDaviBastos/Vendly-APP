@@ -122,6 +122,10 @@
             </ion-row>
           </ion-grid>
         </ion-item>
+        <ion-item>
+          <ion-button (click)="getPaymentLink()">Obter link de pagamento</ion-button>
+          <a target="_blank" [href]="paymentLink">Pay</a>
+        </ion-item>
       </div>
     </div>
   </ion-list>

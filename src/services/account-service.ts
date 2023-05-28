@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { RequestResponse } from '../models/request-response.model';
 import { HttpClientBase } from './http-base.service';
+import { PaymentLinkResponse } from 'src/models/payment-link-response';
 
 @Injectable({
     providedIn: 'root'
@@ -39,6 +40,11 @@ export class AccountService {
             newPassword: newPassword
         }
         return this.http.post<RequestResponse<any>>(`api/auth/confirmRecoveryPassword`, body);
+    }
+
+    public getPaymentLink(sellerId: string) {
+        const params = new HttpParams().append('sellerId', sellerId);
+        return this.http.get<RequestResponse<PaymentLinkResponse>>(`api/account/getPaymentLink`, { params: params });
     }
 
 }
