@@ -112,7 +112,16 @@ export class LocalStorage {
         localStorage.removeItem(this.keys.country);
         localStorage.removeItem(this.keys.timeLeft);
         localStorage.removeItem(this.keys.lastTimeSendCode);
-        
+
+    }
+
+    public static async logoutAsync() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                this.logout();
+                resolve(true);
+            }, 2000);
+        });
     }
 
     public static updateHasMeliAccount(state: boolean) {
@@ -139,14 +148,14 @@ export class LocalStorage {
     public static get timeLeft(): number {
         const now = new Date().getTime();
         const lastSetLeftTime = this.lastTimeSendCode;
-        if(!lastSetLeftTime) {
+        if (!lastSetLeftTime) {
             this.timeLeft = -1;
             this.lastTimeSendCode = null;
             return -1;
         }
         const diff = now - lastSetLeftTime;
         const times = Math.floor(diff / 1000);
-        if(times > 40) {
+        if (times > 40) {
             this.timeLeft = -1;
             return -1;
         }

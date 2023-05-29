@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of  } from 'rxjs';
 import { LocalStorage } from '../helpers/local-storage.helper';
 import { MeliService } from 'src/services/meli-service';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { AlertService } from 'src/services/alert-service';
 import { AccountService } from 'src/services/account-service';
 
@@ -25,6 +25,10 @@ export class AuthGuardExpiredInvalidService implements CanActivate {
           this.router.navigateByUrl('/subscribe');
           return false;
         }
+      }),
+      catchError((err: any) => {
+        this.alertService.showToastAlert("Houve um erro ao processar a requisição");
+        return of(false)
       })
     )
   }
@@ -47,6 +51,10 @@ export class AuthGuardExpiredValidService implements CanActivate {
         } else {
           return true;
         }
+      }),
+      catchError((err: any) => {
+        this.alertService.showToastAlert("Houve um erro ao processar a requisição");
+        return of(true)
       })
     )
   }

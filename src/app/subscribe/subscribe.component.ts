@@ -29,9 +29,12 @@ export class SubscribeComponent implements OnInit {
       this.alertService.errorAlert(err);
     })
   }
-  public logout() {
-    LocalStorage.logout();
-    this.route.navigateByUrl('/auth');
+  public async logout() {
+    LocalStorage.logoutAsync().then(() => {
+      console.log('logout');
+      this.route.navigateByUrl('/auth');
+    });
+    
   }
 
 }
