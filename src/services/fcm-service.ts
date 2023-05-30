@@ -11,6 +11,7 @@ import {
     Token,
 } from '@capacitor/push-notifications';
 import { Router } from '@angular/router';
+import { Uteis } from 'src/app/helpers/Uteis';
 
 @Injectable({
     providedIn: 'root'
@@ -49,7 +50,8 @@ export class FcmService {
 
         PushNotifications.addListener('pushNotificationReceived',
             (notification: PushNotificationSchema) => {
-                this.alertService.showNotification(notification.title, notification.body, 504);
+                const id = Uteis.getRandomNumber(0, 500);
+                this.alertService.showNotification(notification.title, notification.body, id);
                 this.route.navigateByUrl('/message');
             }
         );

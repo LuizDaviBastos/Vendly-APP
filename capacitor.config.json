@@ -4,6 +4,10 @@
 	"webDir": "www",
 	"bundledWebRuntime": false,
 	"plugins": {
-		
+		"LocalNotifications": {
+			"smallIcon": "push_icon",
+			"largeIcon": "push_icon",
+			"iconColor": "#ffe769"
+		}
 	}
 }

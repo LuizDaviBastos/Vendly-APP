@@ -48,13 +48,5 @@ export class AlertService {
                 body: message
             }]
         })
-
-        await LocalNotifications.schedule({
-            notifications: [{
-                id: id + 1,
-                title: title,
-                body: message
-            }]
-        })
     }
 }

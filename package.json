@@ -9,6 +9,8 @@
     "deploy-android": "npm run build-android & npx cap copy & npx cap sync & npx cap open android",
     "android": "npm run build-android & npm run build & ionic capacitor run android --target Pixel_4_API_30",
     "android-skip-build": "ionic capacitor run android --target Pixel_4_API_30",
+    "android-pixel6": "npm run build-android & npm run build & ionic capacitor run android --target Pixel_6_API_30_Sem_PlayStore",
+    "android-pixel6-skip-build": "ionic capacitor run android --target Pixel_6_API_30_Sem_PlayStore",
     "build-android": "./build.bat",
     "start": "npm run build:lib && ionic serve",
     "build": "ng build",
