@@ -4,6 +4,7 @@ import { App, URLOpenListenerEvent } from '@capacitor/app';
 import { StatusBar } from '@capacitor/status-bar';
 import { Platform } from '@ionic/angular';
 import { AlertService } from 'src/services/alert-service';
+import { FcmService } from 'src/services/fcm-service';
 import { MeliService } from 'src/services/meli-service';
 
 @Component({
@@ -44,5 +45,7 @@ export class AppComponent {
       const navigateTo = url.pathname + `?${params}`;
       this.router.navigateByUrl(navigateTo);
     });
+
+  
   }
 }

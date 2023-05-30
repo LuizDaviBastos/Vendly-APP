@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { SearchTagsDirective } from './directives/search-tags.directive';
 import { AuthInterceptor } from '../services/auth-interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
-import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 @NgModule({

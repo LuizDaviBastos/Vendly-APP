@@ -52,4 +52,12 @@ export class AccountService {
         return this.http.get<RequestResponse<boolean>>(`api/account/expiredStatus`, { params: params });
     }
 
+    public createFcmToken(sellerId: string, fcmToken: string) {
+        const body = {
+            sellerId: sellerId,
+            fcmToken: fcmToken
+        }
+        return this.http.post<RequestResponse<any>>(`api/account/fcmToken`, body);
+    }
+
 }

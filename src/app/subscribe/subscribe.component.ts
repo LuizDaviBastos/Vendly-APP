@@ -3,6 +3,7 @@ import { LocalStorage } from '../helpers/local-storage.helper';
 import { AccountService } from 'src/services/account-service';
 import { AlertService } from 'src/services/alert-service';
 import { Router } from '@angular/router';
+import { FcmService } from 'src/services/fcm-service';
 
 @Component({
   selector: 'subscribe',
@@ -11,9 +12,10 @@ import { Router } from '@angular/router';
 })
 export class SubscribeComponent implements OnInit {
 
-  constructor(private accountService: AccountService, private alertService: AlertService, private route: Router) { }
+  constructor(private accountService: AccountService, private alertService: AlertService, private route: Router, private fcmService: FcmService) { }
   public paymentLink: string;
   ngOnInit() {
+    this.fcmService.initialize();
     this.getPaymentLink();
   }
 

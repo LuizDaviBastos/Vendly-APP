@@ -2,5 +2,8 @@
 	"appId": "vendly.app",
 	"appName": "Vendly",
 	"webDir": "www",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+	"plugins": {
+		
+	}
 }

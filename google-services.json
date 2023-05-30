@@ -1,0 +1,40 @@
+{
+    "project_info": {
+      "project_number": "1077536421024",
+      "firebase_url": "https://asm-app-413c2-default-rtdb.firebaseio.com",
+      "project_id": "asm-app-413c2",
+      "storage_bucket": "asm-app-413c2.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:1077536421024:android:17178624ce8334fd7585c5",
+          "android_client_info": {
+            "package_name": "vendly.app"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "1077536421024-064eep8jh51jgu9gedcatnjr7832qifb.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyCjO4c3pedM0FWr0cFxwGTCV6mb-gBBctA"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "1077536421024-064eep8jh51jgu9gedcatnjr7832qifb.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }

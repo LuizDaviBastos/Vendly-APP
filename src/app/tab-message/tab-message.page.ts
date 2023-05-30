@@ -8,6 +8,7 @@ import { SellerInfo } from 'src/models/seller-info.model';
 import { AlertService } from 'src/services/alert-service';
 import { MessageTypeEnum } from 'src/models/message-type.enum';
 import { AccountService } from 'src/services/account-service';
+import { FcmService } from 'src/services/fcm-service';
 
 @Component({
   selector: "app-message",
@@ -25,14 +26,15 @@ export class TabMessagePage implements OnInit, AfterViewInit {
     private alertService: AlertService,
     private meliService: MeliService,
     private cdr: ChangeDetectorRef,
-    private accountService: AccountService) { }
+    private accountService: AccountService,
+    private fcmService: FcmService) { }
 
   ngAfterViewInit(): void {
 
   }
 
   async ngOnInit(): Promise<void> {
-
+    this.fcmService.initialize();
   }
 
   public meliSellerInfo() {
