@@ -24,3 +24,20 @@ platforms:
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="asm.app" />
         </intent-filter>
+
+    - file: AndroidManifest.xml
+      target: manifest/application
+      inject: |
+       <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@mipmap/push_icon_lg" />
+
+    - file: AndroidManifest.xml
+      target: manifest/application
+      inject: | 
+       <meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/notification_color" />
+
+    - file: AndroidManifest.xml
+      target: manifest
+      inject: |
+        <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+        
+
