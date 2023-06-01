@@ -20,13 +20,12 @@ export class SubscribeComponent implements OnInit {
     return LocalStorage.getSelectedMeliAccount().nickname;
   }
   ngOnInit() {
-
-    return;
-    this.fcmService.initialize();
+    //this.fcmService.initialize();
     this.getPaymentLink();
   }
 
-  public getPaymentLink() {
+  public async getPaymentLink() {
+    const loading = await this.alertService.showLoading();
     const sellerId = LocalStorage.sellerId;
     this.accountService.getPaymentLink(sellerId).subscribe((response) => {
       if (response.success) {
@@ -36,6 +35,8 @@ export class SubscribeComponent implements OnInit {
       }
     }, (err) => {
       this.alertService.errorAlert(err);
+    }, () => {
+      loading.dismiss()
     })
   }
   public async logout() {
