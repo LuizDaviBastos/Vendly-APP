@@ -12,7 +12,7 @@ export class AlertService {
         const message = `${error?.error?.message || 'Houve um erro ao processar a requisição.'}`;
         const toast = await this.toastController.create({
             message: message,
-            duration: -1,
+            duration: 3000,
             position: 'bottom',
             keyboardClose: true,
             buttons: [

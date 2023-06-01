@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IconModule } from 'src/components/icon-components/icon.module';
+import { SkeletonLoadingModule } from '../components/skeleton-loading/skeleton-loading.module';
 
 @NgModule({
   declarations: [SubscribeComponent],
@@ -13,6 +14,7 @@ import { IconModule } from 'src/components/icon-components/icon.module';
     CommonModule,
     FormsModule,
     IconModule,
+    SkeletonLoadingModule,
     RouterModule.forChild([
       {
         path: '',

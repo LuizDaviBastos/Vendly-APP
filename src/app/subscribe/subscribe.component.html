@@ -23,7 +23,12 @@
 
     <ion-card-content>
       <ion-row>
-        <ion-label class="cash">R$ 39,90</ion-label>
+        <ion-label class="cash">
+          <skeleton-text *ngIf="loading; else priceLabel"  [innerStyle]="'width: 100px; height: 22px;'"></skeleton-text>
+          <ng-template #priceLabel>
+            R$ {{paymentLinkResponse.price}}
+          </ng-template>
+        </ion-label>
       </ion-row>
       <ion-row>
         <ion-label>Pague com o dinheiro em conta do Mercado Pago ou cartão.</ion-label>
@@ -31,7 +36,7 @@
 
     </ion-card-content>
     <div class="card-footer">
-      <a target="_blank" class="paybutton" [href]="paymentLink">
+      <a target="_blank" class="paybutton" [href]="paymentLinkResponse.init_point">
         <div class="text-pay-containter">
           <img class="mpago-icon" src="assets/icon/mpago.png">
           <label>Pagar com mercado pago</label>

@@ -6,3 +6,19 @@ ion-title,
 ion-label {
   color: #2D2D2D
 }
+
+.main-spinner-container {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  .main-spinner {
+    margin: auto;
+    color: #424242;
+    width: 34px;
+    scale: 1.4;
+    height: 40px;
+  }
+}

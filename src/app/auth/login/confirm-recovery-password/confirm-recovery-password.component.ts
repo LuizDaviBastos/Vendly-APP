@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController, Platform } from '@ionic/angular';
@@ -22,6 +22,14 @@ export class ConfirmRecoveryPasswordComponent implements OnInit {
   //   confirmPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
   // });
 
+  public _reload = true;
+
+  public reload() {
+      setTimeout(() => this._reload = false);
+      setTimeout(() => this._reload = true);
+  }
+
+
   public newPassword: string = '';
   public confirmPassword: string = '';
 
@@ -43,13 +51,15 @@ export class ConfirmRecoveryPasswordComponent implements OnInit {
     private navCtrl: NavController,
     private accountService: AccountService,
     private alertService: AlertService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private change: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.activatedRoute.queryParamMap.subscribe(async (params) => {
       this.sellerId = params.get('sellerId');
       this.code = params.get('code');
+      return;
       if(!this.sellerId || !this.code) {
         this.alertService.showToastAlert("Não foi possível obter as informações do usuario.");
         this.route.navigateByUrl('/auth');
@@ -64,6 +74,8 @@ export class ConfirmRecoveryPasswordComponent implements OnInit {
   }
 
   public changeDetected() {
+    this.reload();
+    this.change.detectChanges();
     //this.changeState('matching');
     //this.changeState('special');
     //this.changeState('number');
@@ -110,6 +122,9 @@ export class ConfirmRecoveryPasswordComponent implements OnInit {
   }
 
   public confirmRecoveryPassword() {
+    if(this.formInvalid()) {
+      this.alertService.showLoading('Revise sua senha')
+    }
     this.loading['password'] = true;
     const newPassword = this.newPassword;//this.formGroup.get('newPassword').value;
 
