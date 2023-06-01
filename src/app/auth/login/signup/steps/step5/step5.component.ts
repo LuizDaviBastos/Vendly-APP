@@ -6,7 +6,6 @@ import { AlertService } from 'src/services/alert-service';
 import { AuthService } from 'src/services/auth-service';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import { SettingsService } from 'src/services/settings-service';
-import { Settings } from 'src/models/settings.model';
 
 @Component({
   selector: 'app-step5',
@@ -22,8 +21,8 @@ export class Step5Component implements OnInit {
   @Input('error') error: boolean = true;
   @Input('errorMessage') errorMessage: string;
 
-  constructor(private authService: AuthService, 
-    private settingsService: SettingsService, 
+  constructor(private authService: AuthService,
+    private settingsService: SettingsService,
     private alertService: AlertService,
     private route: Router) { }
 

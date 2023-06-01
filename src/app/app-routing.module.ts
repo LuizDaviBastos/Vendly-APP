@@ -16,12 +16,12 @@ const routes: Routes = [
     loadChildren: () => import('./tab-settings/tab-settings.module').then(m => m.Tab3PageModule)
   },
   {
-    //canActivate: [AuthGuardLoggoutService],
+    canActivate: [AuthGuardLoggoutService],
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthPageModule)
   },
   {
-    //canActivate: [AuthGuardLoggedService, AuthGuardExpiredValidService],
+    canActivate: [AuthGuardLoggedService, AuthGuardExpiredValidService],
     path: 'subscribe',
     loadChildren: () => import('./subscribe/subscribe.module').then(m => m.SubscribeModule)
   },
