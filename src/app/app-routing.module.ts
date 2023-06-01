@@ -4,7 +4,7 @@ import { AuthGuardLoggedService, AuthGuardLoggoutService } from './services';
 import { AuthGuardExpiredInvalidService, AuthGuardExpiredValidService } from './services/auth-guard-expired.service';
 
 const routes: Routes = [
- 
+
   {
     canActivate: [AuthGuardLoggedService, AuthGuardExpiredInvalidService],
     path: 'message',
@@ -17,19 +17,19 @@ const routes: Routes = [
   },
   {
     canActivate: [AuthGuardLoggoutService],
-      path: 'auth',
-      loadChildren: () => import('./auth/auth.module').then(m => m.AuthPageModule)
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthPageModule)
   },
   {
-    // canActivate: [AuthGuardLoggedService, AuthGuardExpiredValidService],
-      path: 'subscribe',
-      loadChildren: () => import('./subscribe/subscribe.module').then(m => m.SubscribeModule)
+    canActivate: [AuthGuardLoggedService, AuthGuardExpiredValidService],
+    path: 'subscribe',
+    loadChildren: () => import('./subscribe/subscribe.module').then(m => m.SubscribeModule)
   },
   {
     path: '',
-    redirectTo:'/message',
+    redirectTo: '/message',
     pathMatch: 'full'
-}
+  }
 
 ];
 @NgModule({
@@ -38,4 +38,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
