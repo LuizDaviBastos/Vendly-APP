@@ -3,7 +3,6 @@ import { AccountService } from './account-service';
 import { LocalStorage } from 'src/app/helpers/local-storage.helper';
 import { AlertService } from './alert-service';
 
-
 import {
     ActionPerformed,
     PushNotificationSchema,
@@ -21,6 +20,9 @@ export class FcmService {
     constructor(private accountService: AccountService, private alertService: AlertService, private route: Router) { }
 
     public initialize() {
+        if (window.navigator.platform == "Win32") {
+            return;
+        }
         PushNotifications.requestPermissions().then(result => {
             if (result.receive === 'granted') {
                 // Register with Apple / Google to receive push via APNS/FCM

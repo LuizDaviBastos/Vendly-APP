@@ -19,6 +19,7 @@ export class TabMessagePage implements OnInit, AfterViewInit {
 
   public get isLogged(): boolean { return LocalStorage.IsLogged; }
   public get sellerInfo(): Seller { return LocalStorage.getLogin().data || new Seller(); }
+  public get expired(): boolean { return LocalStorage.expired; }
   public loading: KeyValue<string, boolean>[] = [];
   public paymentLink: string;
 
@@ -46,5 +47,9 @@ export class TabMessagePage implements OnInit, AfterViewInit {
 
   public navigateTo(route: string) {
     this.route.navigateByUrl(route);
+  }
+
+  public messageActivated(messageType: MessageTypeEnum) {
+    return this.getMessage(messageType).activated && !this.expired;
   }
 }

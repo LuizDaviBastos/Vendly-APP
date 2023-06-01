@@ -5,6 +5,7 @@ import { LocalStorage } from 'src/app/helpers/local-storage.helper';
 import { SubscriptionInformation } from 'src/models/subscription-Information';
 import { AccountService } from 'src/services/account-service';
 import { AlertService } from 'src/services/alert-service';
+import { ModalService } from 'src/services/modal-service';
 
 @Component({
   selector: 'subscribe-info',
@@ -14,17 +15,20 @@ import { AlertService } from 'src/services/alert-service';
 export class SubscribeInfoComponent implements OnInit {
 
   public subscription: SubscriptionInformation = <SubscriptionInformation>{};
-  public loading = true;
+  public loading = {};
+  public get expired(): boolean { return LocalStorage.expired; }
 
   constructor(private route: Router,
     private navCtrl: NavController,
     private accountService: AccountService,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private modalService: ModalService) { }
 
   ngOnInit() {
     const sellerId = LocalStorage.sellerId;
+    this.loading['info'] = true;
     this.accountService.getPaymentInformations(sellerId).subscribe((response) => {
-      this.loading = false;
+      this.loading['info'] = false;
       if (response.success) {
         this.subscription = response.data;
       } else {
@@ -32,12 +36,22 @@ export class SubscribeInfoComponent implements OnInit {
       }
     }, (err) => { },
       () => {
-        this.loading = false;
+        this.loading['info'] = false;
       })
   }
 
   public goBack() {
     this.navCtrl.back();
+  }
+
+  public async openPaymentModal() {
+    this.loading['pay'] = true;
+    await this.modalService.showSubscribeModal();
+    this.loading['pay'] = false;
+  }
+
+  public getFormattedPrice() {
+    return `R$ ${this.subscription.price}/mês`;
   }
 
 }

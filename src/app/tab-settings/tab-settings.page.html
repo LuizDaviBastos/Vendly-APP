@@ -35,12 +35,19 @@
     <ion-item class="item-background-color" [routerLink]="'subscribe-info'">
       <ion-label>
         <ion-label class="item-name">Assinatura</ion-label>
-        <p>Informações de assinatura</p>
+        <p>Informações da assinatura</p>
       </ion-label>
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
     <div class="horizontal-line"></div>
-    <ion-item class="item-background-color" disabled="disabled" [routerLink]="'account'">
+    <ion-item class="item-background-color" [routerLink]="'help'">
+      <ion-label>
+        <ion-label class="item-name">Ajuda</ion-label>
+        <p>Entre em contato</p>
+      </ion-label>
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+      <ion-item *ngIf="false" class="item-background-color" disabled="disabled" [routerLink]="'account'">
       <ion-label>
         <ion-label class="item-name">Contas vinculadas</ion-label>
         <p>Vincular contas do Mercado Livre</p>
@@ -48,7 +55,15 @@
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
     <div class="horizontal-line"></div>
-    <ion-item class="item-background-color last-item" disabled="disabled" [routerLink]="'account'">
+    <ion-item class="last-item item-background-color" disabled="disabled" [routerLink]="'account'">
+      <ion-label>
+        <ion-label class="item-name">Contas vinculadas</ion-label>
+        <p>Vincular contas do Mercado Livre (Em breve)</p> 
+      </ion-label>
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+    <div class="horizontal-line"></div>
+    <ion-item *ngIf="false" class="item-background-color last-item" disabled="disabled" [routerLink]="'account'">
       <ion-label>
         <ion-label class="item-name">Idioma</ion-label>
         <p>Escolha o idioma do aplicativo</p>
@@ -68,17 +83,5 @@
         </div>
       </ion-label>
     </ion-item>
-    
   </ion-list>
-
-  <!--<ion-item>
-    <ion-label>Dark Mode</ion-label>
-    <ion-badge color="black" slot="end">
-      <ion-toggle id="themeToggle" checked="true"></ion-toggle>
-    </ion-badge>
-  </ion-item>
-  <ion-item>
-    <ion-label>Logout</ion-label>
-    <ion-badge color="black" slot="end"><ion-button (click)="logout()">Logout</ion-button></ion-badge>
-  </ion-item>-->
 </ion-content>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabMessagePage } from './tab-message.page';
+import { AuthGuardExpiredInvalidOfflineService } from '../services/auth-guard-expired.service';
 
 const routes: Routes = [
   {
@@ -8,6 +9,7 @@ const routes: Routes = [
     component: TabMessagePage,
   },
   {
+    canActivate: [AuthGuardExpiredInvalidOfflineService],
     path: 'edit/:id',
     loadChildren: () => import('./edit-message/edit-message.module').then(x => x.EditMessagePageModule)
   }

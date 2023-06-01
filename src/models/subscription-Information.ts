@@ -5,6 +5,7 @@ export class SubscriptionInformation {
     public sellerId: string;
     public expireInFormatted: string;
     public lastPaymentFormatted: string;
+    public price: number;
     public status: number;
     
 }

@@ -40,7 +40,7 @@
       <div>
         <ion-item [routerLink]="['edit', '0']" class="item-background-color">
           <ion-grid>
-            <ion-row class="row-border" [style]="(getMessage(0).activated ? '' : 'border-color: rgb(158, 2, 2);')">
+            <ion-row class="row-border" [style]="(messageActivated(0) ? '' : 'border-color: rgb(158, 2, 2);')">
               <ion-col size="2" size-sm="1" size-md="auto" size-lg="auto">
                 <div class="icon-container">
                   <ion-icon name="bag-handle"></ion-icon>
@@ -48,9 +48,8 @@
               </ion-col>
               <ion-col class="message-title">
                 <ion-label>Compra realizada</ion-label>
-                <p [style]="(getMessage(0).activated ? '' : 'color: rgb(158, 2, 2);')">{{getMessage(0).activated ?
-                  'Ativo'
-                  : 'Inativo'}}</p>
+                <p [style]="(messageActivated(0) ? '' : 'color: rgb(158, 2, 2);')">
+                  {{messageActivated(0) ? 'Ativo' : 'Inativo'}}</p>
               </ion-col>
               <ion-col size="1" class="edit-container">
                 <ion-icon src="assets/icon/pencil.svg"></ion-icon>
@@ -69,7 +68,7 @@
         </div>
         <ion-item [routerLink]="['edit', '1']" class="item-background-color">
           <ion-grid>
-            <ion-row class="row-border" [style]="(getMessage(1).activated ? '' : 'border-color: rgb(158, 2, 2);')">
+            <ion-row class="row-border" [style]="(messageActivated(1) ? '' : 'border-color: rgb(158, 2, 2);')">
               <ion-col size="2" size-sm="1" size-md="auto" size-lg="auto">
                 <div class="icon-container">
                   <ion-icon src="assets/icon/truck.svg"></ion-icon>
@@ -77,7 +76,7 @@
               </ion-col>
               <ion-col class="message-title">
                 <ion-label>Pedido a caminho</ion-label>
-                <p [style]="(getMessage(1).activated ? '' : 'color: rgb(158, 2, 2);')">{{getMessage(1).activated ?
+                <p [style]="(messageActivated(1) ? '' : 'color: rgb(158, 2, 2);')">{{messageActivated(1) ?
                   'Ativo'
                   : 'Inativo'}}</p>
               </ion-col>
@@ -98,7 +97,7 @@
         </div>
         <ion-item [routerLink]="['edit', '2']" class="item-background-color">
           <ion-grid>
-            <ion-row class="row-border" [style]="(getMessage(2).activated ? '' : 'border-color: rgb(158, 2, 2);')">
+            <ion-row class="row-border" [style]="(messageActivated(2) ? '' : 'border-color: rgb(158, 2, 2);')">
               <ion-col size="2" size-sm="1" size-md="auto" size-lg="auto">
                 <div class="icon-container">
                   <ion-icon src="assets/icon/box.svg"></ion-icon>
@@ -106,7 +105,7 @@
               </ion-col>
               <ion-col class="message-title">
                 <ion-label>Pedido entregue</ion-label>
-                <p [style]="(getMessage(2).activated ? '' : 'color: rgb(158, 2, 2);')">{{getMessage(2).activated ?
+                <p [style]="(messageActivated(2) ? '' : 'color: rgb(158, 2, 2);')">{{messageActivated(2) ?
                   'Ativo'
                   : 'Inativo'}}</p>
               </ion-col>

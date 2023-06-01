@@ -11,7 +11,8 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-label>{{nickname}}, pague para continuar usando nossa ferramenta.</ion-label>
+      <ion-label>Ops, parece que seu plano expirou.
+        Continue com o plano mensal e não deixe seus clientes esperando.</ion-label>
     </ion-row>
   </ion-grid>
 </ion-header>
@@ -37,7 +38,7 @@
     </ion-card-content>
     <div class="card-footer">
       <a target="_blank" class="paybutton" [href]="paymentLinkResponse.init_point">
-        <div class="text-pay-containter">
+        <div class="text-pay-container">
           <img class="mpago-icon" src="assets/icon/mpago.png">
           <label>Pagar com mercado pago</label>
         </div>
@@ -46,7 +47,7 @@
   </ion-card>
 
 </ion-content>
-<ion-footer lines="none" class="ion-no-border">
+<ion-footer *ngIf="false" lines="none" class="ion-no-border">
   <label>Deseja utilizar outra conta? </label>
   <label (click)="logout()" class="link">Encerrar sessão.</label>
 </ion-footer>

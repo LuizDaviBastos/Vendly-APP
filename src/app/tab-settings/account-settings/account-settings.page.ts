@@ -17,7 +17,8 @@ export class AccountSettingsPage implements OnInit {
   public get sellerInfo(): Seller {
     return LocalStorage.getLogin()?.data || new Seller();
   }
-
+  
+  public get expired(): boolean { return LocalStorage.expired; }
   public loading = {};
 
   constructor(private route: Router, private platform: Platform,

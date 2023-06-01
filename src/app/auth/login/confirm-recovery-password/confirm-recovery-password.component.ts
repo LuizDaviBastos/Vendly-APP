@@ -25,17 +25,17 @@ export class ConfirmRecoveryPasswordComponent implements OnInit {
   public _reload = true;
 
   public reload() {
-      setTimeout(() => this._reload = false);
-      setTimeout(() => this._reload = true);
+    setTimeout(() => this._reload = false);
+    setTimeout(() => this._reload = true);
   }
 
 
   public newPassword: string = '';
   public confirmPassword: string = '';
 
-   public get touched(): boolean {
-     return this.newPassword != ''; //this.formGroup.touched;
-   }
+  public get touched(): boolean {
+    return this.newPassword != ''; //this.formGroup.touched;
+  }
 
   public get errors(): any {
     return {
@@ -60,7 +60,7 @@ export class ConfirmRecoveryPasswordComponent implements OnInit {
       this.sellerId = params.get('sellerId');
       this.code = params.get('code');
       return;
-      if(!this.sellerId || !this.code) {
+      if (!this.sellerId || !this.code) {
         this.alertService.showToastAlert("Não foi possível obter as informações do usuario.");
         this.route.navigateByUrl('/auth');
         return;
@@ -122,25 +122,27 @@ export class ConfirmRecoveryPasswordComponent implements OnInit {
   }
 
   public confirmRecoveryPassword() {
-    if(this.formInvalid()) {
+    if (this.formInvalid()) {
       this.alertService.showLoading('Revise sua senha')
     }
     this.loading['password'] = true;
+    this.reload();
     const newPassword = this.newPassword;//this.formGroup.get('newPassword').value;
 
     this.accountService.confirmRecoveryPassword(this.sellerId, this.code, newPassword).subscribe((response) => {
       this.loading['password'] = false;
-      if(response.success) {
+      if (response.success) {
         this.alertService.showToastAlert("Senha alterada com sucesso.");
         this.route.navigateByUrl('/auth');
       } else {
-          this.alertService .showToastAlert("Houve um erro tentar alterar sua senha.")
+        this.alertService.showToastAlert("Houve um erro tentar alterar sua senha.")
       }
     }, (err) => {
       this.loading['password'] = false;
       this.alertService.errorAlert(err);
     }, () => {
       this.loading['password'] = false;
+      this.reload();
     })
 
   }

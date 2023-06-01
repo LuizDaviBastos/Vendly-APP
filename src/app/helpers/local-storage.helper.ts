@@ -3,8 +3,7 @@ import { LoginResponse } from '../../models/login-response';
 import { SellerInfo } from 'src/models/seller-info.model';
 import { MessageTypeEnum } from 'src/models/message-type.enum';
 import { SellerMessage } from 'src/models/seller-message';
-import { AlertService } from 'src/services/alert-service';
-import { Router } from '@angular/router';
+import { Uteis } from './Uteis';
 
 export class LocalStorage {
     
@@ -18,6 +17,15 @@ export class LocalStorage {
         country: 'asm-country',
         timeLeft: 'timeLeft',
         lastTimeSendCode: 'lastTimeSendCode'
+    }
+
+
+    public static set expired(value: boolean) {
+        localStorage.setItem('expired', `${value}`);
+    }
+
+    public static get expired(): boolean {
+        return Uteis.parseToBoolean(localStorage.getItem('expired'));
     }
 
     public static get sellerId(): string {

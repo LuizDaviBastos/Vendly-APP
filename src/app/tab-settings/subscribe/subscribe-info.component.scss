@@ -98,20 +98,20 @@ ion-item {
 
 
 
-.delete-account-button-container {
+.pay-button-container {
     margin: auto;
     margin-top: 20px;
     width: 100%;
     max-width: 500px;
 }
 
-.delete-account-button {
+.pay-account-button {
     width: 100%;
     background-color: var(--background-white);
     border-radius: 10px;
-    border: 1px solid red;
+    border: 1px solid #009EE3;
     padding: 8px;
-    color: red;
+    color: #009EE3;
     font-size: 10pt;
     height: 54px;
 }
@@ -157,4 +157,22 @@ ion-icon[name="mpago"] {
 ion-skeleton-text {
     float: right !important;
     display: flex;
+}
+
+.text-pay-container {
+    margin: auto;
+    display: flex;
+    width: 64%;
+    max-width: 200px;
+
+    label {
+        margin: auto;
+    }
+
+    .mpago-icon {
+        width: 32px;
+        height: 22px;
+        margin: auto;
+        margin-right: 10px;
+    }
 }
