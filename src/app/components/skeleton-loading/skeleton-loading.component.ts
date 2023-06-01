@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'skeleton-textarea',
@@ -21,6 +21,7 @@ export class SkeletonTextAreaComponent implements OnInit {
 })
 export class SkeletonTextComponent implements OnInit {
 
+  @Input('innerStyle') innerStyle: string;
   constructor() { }
 
   ngOnInit() {}

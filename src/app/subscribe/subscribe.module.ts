@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { IconModule } from 'src/components/icon-components/icon.module';
 
 @NgModule({
   declarations: [SubscribeComponent],
@@ -11,6 +12,7 @@ import { RouterModule } from '@angular/router';
     IonicModule,
     CommonModule,
     FormsModule,
+    IconModule,
     RouterModule.forChild([
       {
         path: '',

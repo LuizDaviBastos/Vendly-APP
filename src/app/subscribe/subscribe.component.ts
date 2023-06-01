@@ -4,6 +4,7 @@ import { AccountService } from 'src/services/account-service';
 import { AlertService } from 'src/services/alert-service';
 import { Router } from '@angular/router';
 import { FcmService } from 'src/services/fcm-service';
+import { LocalStorageService } from 'src/services/local-storage-service';
 
 @Component({
   selector: 'subscribe',
@@ -12,9 +13,15 @@ import { FcmService } from 'src/services/fcm-service';
 })
 export class SubscribeComponent implements OnInit {
 
-  constructor(private accountService: AccountService, private alertService: AlertService, private route: Router, private fcmService: FcmService) { }
+  constructor(private accountService: AccountService, private alertService: AlertService, private route: Router, private fcmService: FcmService,
+    private localStorageService: LocalStorageService) { }
   public paymentLink: string;
+  public get nickname() {
+    return LocalStorage.getSelectedMeliAccount().nickname;
+  }
   ngOnInit() {
+
+    return;
     this.fcmService.initialize();
     this.getPaymentLink();
   }
@@ -32,11 +39,7 @@ export class SubscribeComponent implements OnInit {
     })
   }
   public async logout() {
-    LocalStorage.logoutAsync().then(() => {
-      console.log('logout');
-      this.route.navigateByUrl('/auth');
-    });
-    
+    await this.localStorageService.logout();
   }
 
 }

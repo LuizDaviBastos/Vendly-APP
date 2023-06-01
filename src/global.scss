@@ -26,8 +26,9 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=OpenSans:wght@400;500;700&display=swap');
 
-html {
+html, html.md {
   font-family: 'Roboto', sans-serif;
 }
 
@@ -267,18 +268,17 @@ attachment-modal {
   --max-width: 360px;
 }
 
-
 app-auth {
   //--ion-background-color: #ffde33!important;
 
   .item-interactive.ion-valid {
     --highlight-background: rgb(5, 5, 5) !important;
   }
-
-
-
 }
 
+app-step1 {
+  height: 100%;
+}
 
 a[class*="type-toggle"] {
   margin-right: 6px;

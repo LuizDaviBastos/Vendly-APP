@@ -21,7 +21,7 @@ const routes: Routes = [
       loadChildren: () => import('./auth/auth.module').then(m => m.AuthPageModule)
   },
   {
-    canActivate: [AuthGuardLoggedService, AuthGuardExpiredValidService],
+    // canActivate: [AuthGuardLoggedService, AuthGuardExpiredValidService],
       path: 'subscribe',
       loadChildren: () => import('./subscribe/subscribe.module').then(m => m.SubscribeModule)
   },

@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { RequestResponse } from '../models/request-response.model';
 import { HttpClientBase } from './http-base.service';
 import { PaymentLinkResponse } from 'src/models/payment-link-response';
+import { SubscriptionInformation } from 'src/models/subscription-Information';
 
 @Injectable({
     providedIn: 'root'
@@ -59,5 +60,10 @@ export class AccountService {
         }
         return this.http.post<RequestResponse<any>>(`api/account/fcmToken`, body);
     }
-
+    
+    public getPaymentInformations(sellerId: string) {
+        const params = new HttpParams().append('sellerId', sellerId);
+        return this.http.get<RequestResponse<SubscriptionInformation>>(`api/account/getPaymentInformations`, { params: params });
+    }
+    
 }

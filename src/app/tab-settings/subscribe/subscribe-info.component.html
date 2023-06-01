@@ -1,0 +1,112 @@
+<ion-header no-border>
+  <div class="asm-header">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-icon (click)="goBack()" role="button" name="arrow-back-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><ion-title><b>Assinatura</b></ion-title></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="description-configuration">
+          <ion-label class="ion-text-wrap">Veja suas informações de assinatura e cobrança</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="none">
+    <ion-item class="item-background-color">
+      <ion-col size="3">
+        <ion-label class="item-settings-label">Plano atual</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label class="item-setting-value ion-text-wrap">
+          <ng-container *ngIf="loading; else labelPlan">
+            <skeleton-text [innerStyle]="'float: right'"></skeleton-text>
+          </ng-container>
+          <ng-template #labelPlan>
+            1 Mês
+          </ng-template>
+        </ion-label>
+      </ion-col>
+    </ion-item>
+    <div class="horizontal-line"></div>
+    <ion-item class="item-background-color">
+      <ion-col size="2">
+        <ion-label class="item-settings-label">Preço</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label class="item-setting-value ion-text-wrap">
+          <ng-container *ngIf="loading; else labelPrice">
+            <skeleton-text [innerStyle]="'float: right'"></skeleton-text>
+          </ng-container>
+          <ng-template #labelPrice>
+            R$ 39,90/mês
+          </ng-template>
+        </ion-label>
+      </ion-col>
+    </ion-item>
+    <div class="horizontal-line"></div>
+    <ion-item class="item-background-color">
+      <ion-col size="6">
+        <ion-label class="item-settings-label">Forma de pagamento</ion-label>
+      </ion-col>
+      <ion-col>
+
+        <ion-label class="item-setting-value">
+          <ng-container *ngIf="loading; else labelMethod">
+            <skeleton-text [innerStyle]="'float: right'"></skeleton-text>
+          </ng-container>
+          <ng-template #labelMethod>
+            <div class="mpago-container">
+              <!-- <ion-icon name="mpago" src="assets/icon/mpago.svg"></ion-icon> -->
+              <img src="assets/icon/mpago.png" />
+              <label>Mercado Pago</label>
+            </div>
+          </ng-template>
+
+        </ion-label>
+      </ion-col>
+    </ion-item>
+    
+    <div class="horizontal-line"></div>
+    <ion-item class="item-background-color">
+      <ion-col size="6">
+        <ion-label class="item-settings-label">Sua próxima cobrança</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label class="item-setting-value">
+          <ng-container *ngIf="loading; else labelExpire">
+            <skeleton-text [innerStyle]="'float: right'"></skeleton-text>
+          </ng-container>
+          <ng-template #labelExpire>
+            {{subscription.expireInFormatted}}
+          </ng-template>
+        </ion-label>
+      </ion-col>
+    </ion-item>
+    <div class="horizontal-line"></div>
+    <ion-item class="item-background-color">
+      <ion-col size="6">
+        <ion-label class="item-settings-label">Último pagamento</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label class="item-setting-value">
+          <ng-container *ngIf="loading; else labelLast">
+            <skeleton-text [innerStyle]="'float: right'"></skeleton-text>
+          </ng-container>
+          <ng-template #labelLast>
+            {{subscription.lastPaymentFormatted}}
+          </ng-template>
+        </ion-label>
+      </ion-col>
+    </ion-item>
+
+
+  </ion-list>
+</ion-content>

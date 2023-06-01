@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
-import { LocalStorage } from '../helpers/local-storage.helper';
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController, Platform } from '@ionic/angular';
+import { LocalStorageService } from 'src/services/local-storage-service';
 
 @Component({
   selector: 'app-tab-settings',
@@ -11,7 +11,7 @@ import { AlertController, NavController, Platform } from '@ionic/angular';
 export class TabSettingsPage implements OnInit {
 
   constructor(private route: Router, private platform: Platform, private navCtrl: NavController,
-    private alertController: AlertController) { }
+    private alertController: AlertController, private localStorageService: LocalStorageService) { }
   ngOnInit(): void {
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.goBack();
@@ -30,9 +30,8 @@ export class TabSettingsPage implements OnInit {
     dialog.present();
   }
 
-  private _logout() {
-    LocalStorage.logout();
-    this.route.navigateByUrl('/auth');
+  private async _logout() {
+    await this.localStorageService.logout();
   }
 
   public goBack() {

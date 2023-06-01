@@ -3,7 +3,11 @@ import { LoginResponse } from '../../models/login-response';
 import { SellerInfo } from 'src/models/seller-info.model';
 import { MessageTypeEnum } from 'src/models/message-type.enum';
 import { SellerMessage } from 'src/models/seller-message';
+import { AlertService } from 'src/services/alert-service';
+import { Router } from '@angular/router';
+
 export class LocalStorage {
+    
     private static login: LoginResponse = null;
     private static country: Country = null;
     private static seletectMeliSellerInfo: SellerInfo = null;
@@ -123,6 +127,8 @@ export class LocalStorage {
             }, 2000);
         });
     }
+
+  
 
     public static updateHasMeliAccount(state: boolean) {
         let login = this.getLogin();

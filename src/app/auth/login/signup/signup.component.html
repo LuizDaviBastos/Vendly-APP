@@ -13,7 +13,7 @@
   <ion-item lines="none" class="continue-buttom-container">
     <ng-container [ngSwitch]="currentStep">
 
-      <ion-button *ngSwitchDefault [disabled]="formInvalid() || loading['nextStep']" (click)="nextStep()"
+      <ion-button (key.enter)="nextStep()" *ngSwitchDefault [disabled]="formInvalid() || loading['nextStep']" (click)="nextStep()"
         class="continue-buttom" expand="block">
         <ion-spinner *ngIf="loading['nextStep']; else label" name="crescent"></ion-spinner>
         <ng-template #label>

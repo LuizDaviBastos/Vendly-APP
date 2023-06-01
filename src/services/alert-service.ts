@@ -1,10 +1,13 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ToastController } from "@ionic/angular";
+import { LoadingController, ToastController } from "@ionic/angular";
 import { LocalNotifications, Schedule } from '@capacitor/local-notifications';
 
 @Injectable({ providedIn: 'root' })
 export class AlertService {
+
+    constructor(private toastController: ToastController, private loadingController: LoadingController) { }
+
     public async errorAlert(error: HttpErrorResponse) {
         const message = `${error?.error?.message || 'Houve um erro ao processar a requisição.'}`;
         const toast = await this.toastController.create({
@@ -21,8 +24,6 @@ export class AlertService {
         });
         return toast.present();
     }
-
-    constructor(private toastController: ToastController) { }
 
     public async showToastAlert(message: string, duration: number = 5000, position: 'top' | 'bottom' | 'middle' = 'bottom') {
         const toast = await this.toastController.create({
@@ -48,5 +49,16 @@ export class AlertService {
                 body: message
             }]
         })
+    }
+
+    public async showLoading(message?: string) {
+        const loading = await this.loadingController.create({
+            duration: -1,
+            message: message || "Carregando..",
+            animated: true
+        });
+        loading.present();
+
+        return loading;
     }
 }

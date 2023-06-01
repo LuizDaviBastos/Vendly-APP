@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
     }),
     2: new FormGroup({
       firstName: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      lastName: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      lastName: new FormControl('', [Validators.required]),
       country: new FormControl('br', [Validators.required]),
     }),
     3: new FormGroup({

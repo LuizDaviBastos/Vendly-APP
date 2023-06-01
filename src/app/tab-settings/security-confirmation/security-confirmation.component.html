@@ -33,7 +33,7 @@
           [minlength]="6" [maxlength]="6"></ion-input>
       </ion-item>
       <ion-item lines="none" class="item-background-color mb-0">
-        <ion-button (click)="sendEmailConfirmationCode()" [disabled]="!canResend()" class="resend-code-buttom" expand="block">
+        <ion-button (click)="sendEmailConfirmationCode()" [disabled]="!resendEnabled" class="resend-code-buttom" expand="block">
           <ion-spinner *ngIf="loading['resendcode']; else labelresend" name="crescent"></ion-spinner>
           <ng-template #labelresend>
             Reenviar código

@@ -34,7 +34,7 @@ export class SecurityConfirmationComponent implements OnInit, OnDestroy {
   public get timeLeft(): number {
     return LocalStorage.timeLeft;
   }
-
+  public resendEnabled: boolean = false;
   private intervalId: any;
 
   constructor(private navCtrl: NavController, public modalController: ModalController,
@@ -146,6 +146,7 @@ export class SecurityConfirmationComponent implements OnInit, OnDestroy {
   }
 
   public startCountDown() {
+    this.resendEnabled = false;
     const agora = new Date();
     const startInSeconds = 40; //start time
     const time = (this.timeLeft > 0 ? this.timeLeft : startInSeconds)
@@ -160,9 +161,10 @@ export class SecurityConfirmationComponent implements OnInit, OnDestroy {
       const times = Math.floor(diferenca / 1000)
       this.timeLeft = times ;
       console.log(this.timeLeft);
-      if (diferenca < 0) {
-        clearInterval(this.intervalId);
+      if (diferenca <= 0) {
+        this.resendEnabled = true;
         this.timeLeft = 0;
+        clearInterval(this.intervalId);
       }
     }, 100);
   }
@@ -183,9 +185,4 @@ export class SecurityConfirmationComponent implements OnInit, OnDestroy {
       return `${formatoMinutos}:${formatoSegundos}`;
     }
   }
-
-  public canResend() {
-    return this.timeLeft == 0;
-  }
-
 }

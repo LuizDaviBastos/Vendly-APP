@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+
+
+ion-header::after {
+    background-image: none;
+}
+
 ion-list {
     margin-top: 50%;
     margin-bottom: 50%;
@@ -5,19 +13,39 @@ ion-list {
 
 .paybutton-container {
     margin: auto;
+
 }
 
 .paybutton {
-    padding: 16px;
-    width: 200px;
-    background-color: #424242;
+    display: flex;
+    padding: 12px;
+    width: 260px;
+    background-color: #4b7add;
     color: white;
-    height: 50px;
+    height: 45px;
     text-align: center;
-    font-size: 10pt;
+    font-size: 12px;
     margin: auto;
     text-decoration: none;
     border-radius: 10px;
+
+    .text-pay-containter {
+        margin: auto;
+        display: flex;
+
+        label {
+            margin: auto;
+        }
+
+        .mpago-icon {
+            width: 32px;
+            height: 22px;
+            margin: auto;
+            margin-right: 10px;
+        }
+    }
+
+
 }
 
 .logout {
@@ -26,5 +54,104 @@ ion-list {
     font-size: 10pt;
     margin: auto;
     text-decoration-line: underline;
-    color: black;
+    color: rgb(134, 72, 72);
+}
+
+ion-header {
+    height: 230px;
+    display: flex;
+
+    .title {
+        margin-bottom: 10px;
+    }
+
+    .image {
+        text-align: center;
+    }
+
+    ion-title {
+        color: var(--color-text);
+        text-align: center;
+    }
+
+
+}
+
+ion-label {
+    color: var(--color-text-description) !important;
+    text-align: center !important;
+    margin: auto !important;
+    font-size: 14px !important;
+}
+
+.cash {
+    font-size: 20pt !important;
+    font-weight: 100;
+    font-family: Montserrat;
+    color: #4b7add!important;
+    font-weight: bold;
+}
+
+ion-content {
+    height: 100%;
+}
+
+ion-card {
+    height: 68%;
+    display: flex;
+    flex-direction: column;
+    max-width: 320px;
+    margin: auto;
+    margin-top: 26px;
+    border: solid 1px rgb(207 207 207 / 32%);
+    //box-shadow: 0px 2px 8px rgba(163, 163, 163, 0.431372549);
+    box-shadow: 0px 8px 8px rgb(157 157 157 / 43%);
+    padding: 26px;
+    border-radius: 14px;
+    background: #efefef;
+    ion-card-header {
+        padding: 0px!important;
+    }
+    ion-card-title {
+        text-align: center;
+        color: var(--color-text)
+    }
+
+    ion-card-subtitle {
+        text-align: center;
+        color: var(--color-text-description);
+        font-weight: 400;
+    }
+
+    ion-card-content {
+        margin: auto;
+        ion-row {
+            margin-top: 22px;
+            margin-bottom: 22px;
+        }
+    }
+
+    .card-footer {
+        margin-top: 20px;
+    }
+}
+
+ion-footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #e1e1e1a8;
+
+    .link {
+        color: rgb(62, 126, 245);
+
+    }
+
+    label {
+        color: var(--color-text-description);
+        font-size: 14px;
+    }
+}
+
+html:root {
+    --ion-background-color: white!important;
 }
