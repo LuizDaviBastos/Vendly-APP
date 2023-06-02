@@ -22,3 +22,24 @@ ion-label {
     height: 40px;
   }
 }
+
+.main-logo-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  //background: var(--ml-yellow);
+  background: var(--background-gray);
+  
+
+  .logo {
+    margin: auto;
+    margin-bottom: 0px;
+  }
+
+  .main-spinner {
+    margin: auto;
+    margin-top: 10px;
+    color: #424242;
+    margin-top: 30px;
+  }
+}

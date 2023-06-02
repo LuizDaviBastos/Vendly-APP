@@ -12,10 +12,11 @@ import { AuthInterceptor } from '../services/auth-interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { IconModule } from 'src/components/icon-components/icon.module';
 
 @NgModule({
   declarations: [AppComponent, SearchTagsDirective],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule,
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule, IconModule,
     provideFirebaseApp(() => initializeApp({
       apiKey: "AIzaSyDy9fSBYh58zt8TT4tzed3b9-HYeau-12w",
       authDomain: "asm-app-413c2.firebaseapp.com",

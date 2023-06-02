@@ -12,7 +12,7 @@ export class AlertService {
         const message = `${error?.error?.message || 'Houve um erro ao processar a requisição.'}`;
         const toast = await this.toastController.create({
             message: message,
-            duration: 3000,
+            duration: 2000,
             position: 'bottom',
             keyboardClose: true,
             buttons: [
@@ -25,7 +25,7 @@ export class AlertService {
         return toast.present();
     }
 
-    public async showToastAlert(message: string, duration: number = 5000, position: 'top' | 'bottom' | 'middle' = 'bottom') {
+    public async showToastAlert(message: string, duration: number = 2000, position: 'top' | 'bottom' | 'middle' = 'bottom') {
         const toast = await this.toastController.create({
             message: message,
             duration: duration,
@@ -37,6 +37,15 @@ export class AlertService {
                     role: 'cancel'
                 },
             ],
+        });
+        return toast.present();
+    }
+
+    public async showQuickToast(message: string, duration: number = 2000, position: 'top' | 'bottom' | 'middle' = 'bottom') {
+        const toast = await this.toastController.create({
+            message: message,
+            duration: duration,
+            position: position
         });
         return toast.present();
     }

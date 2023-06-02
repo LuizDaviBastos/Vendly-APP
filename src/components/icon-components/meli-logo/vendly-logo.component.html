@@ -1,1 +1,2 @@
-<img [style]="innerStyle" src="assets/logo.png" />
+<img *ngIf="type == 1 || !type" [style]="innerStyle" src="assets/logo.png" />
+<img *ngIf="type == 2" [style]="innerStyle" src="assets/logo-only-transparent.png" />

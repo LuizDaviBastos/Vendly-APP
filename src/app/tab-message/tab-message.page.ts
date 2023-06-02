@@ -1,14 +1,12 @@
 import { LocalStorage as LocalStorage } from '../helpers/local-storage.helper';
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { MeliService } from 'src/services/meli-service';
 import { KeyValue } from '@angular/common';
 import { Seller } from 'src/models/seller';
-import { SellerInfo } from 'src/models/seller-info.model';
-import { AlertService } from 'src/services/alert-service';
 import { MessageTypeEnum } from 'src/models/message-type.enum';
-import { AccountService } from 'src/services/account-service';
 import { FcmService } from 'src/services/fcm-service';
+import { Platform } from '@ionic/angular';
+import { App } from '@capacitor/app';
 
 @Component({
   selector: "app-message",
@@ -22,19 +20,28 @@ export class TabMessagePage implements OnInit, AfterViewInit {
   public get expired(): boolean { return LocalStorage.expired; }
   public loading: KeyValue<string, boolean>[] = [];
   public paymentLink: string;
+  public exit: boolean = false;
 
   constructor(private route: Router,
-    private alertService: AlertService,
-    private meliService: MeliService,
-    private cdr: ChangeDetectorRef,
-    private accountService: AccountService,
-    private fcmService: FcmService) { }
+    private fcmService: FcmService,
+    private platform: Platform) {
+    this.platform.ready().then(() => {
+      this.platform.backButton.subscribeWithPriority(10, () => {
+        App.minimizeApp();
+      });
+    })
+  }
 
   ngAfterViewInit(): void {
-
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      App.minimizeApp();
+    });
   }
 
   async ngOnInit(): Promise<void> {
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      App.minimizeApp();
+    });
     this.fcmService.initialize();
   }
 

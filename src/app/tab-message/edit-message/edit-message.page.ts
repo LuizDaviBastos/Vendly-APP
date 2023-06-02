@@ -1,7 +1,7 @@
 import { LocalStorage as LocalStorage } from '../../helpers/local-storage.helper';
 import { Component, EventEmitter, HostListener, OnDestroy, OnInit, Output, ViewChild } from "@angular/core";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
-import { NavController } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { MeliService } from '../../../services/meli-service';
 import { KeyValue } from '@angular/common';
 import { MessageTypeEnum } from '../../../models/message-type.enum';
@@ -55,10 +55,19 @@ export class EditMessagePage implements OnInit, OnDestroy {
     private navCtrl: NavController,
     private activateRoute: ActivatedRoute,
     private alertService: AlertService,
-    private modalController: ModalController) {
+    private modalController: ModalController,
+    private platform: Platform) {
     this.activateRoute.paramMap.subscribe((params: ParamMap) => {
       this.messageType = +params.get('id');
     })
+
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      if(this.fullscreen) {
+        this.fullscreen = false;
+      } else {
+        this.goBack();
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -87,7 +96,7 @@ export class EditMessagePage implements OnInit, OnDestroy {
       this.meliService.saveMessage(this.message).subscribe((response) => {
         if (response.success) {
           this.message = response.data;
-          this.alertService.showToastAlert('Mensagem salva com sucesso.', 2000, 'bottom');
+          this.alertService.showToastAlert('Mensagem salva com sucesso.', 1000, 'bottom');
           LocalStorage.updateMessage(response.data);
           this.onChangeMessage.emit(response.data);
           onSave && onSave(this.message.id);
@@ -141,7 +150,7 @@ export class EditMessagePage implements OnInit, OnDestroy {
       case MessageTypeEnum.Sent:
         this.instructionDesc = "Configure uma mensagem para o seu comprador receber assim que o pedido sair para entrega.";
         this.title = "Pedido a caminho";
-        this.placeholder = "Seu @PRODUTO acabou de sair para entrega."
+        this.placeholder = "Seu produto acabou de sair para entrega."
         break;
       case MessageTypeEnum.Completed:
         this.instructionDesc = "Configure uma mensagem para o seu comprador receber assim que o pedido for entregue.";

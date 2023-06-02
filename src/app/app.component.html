@@ -1,7 +1,12 @@
 <ion-app>
 
   <ion-router-outlet id="main-content">
-    <div class="main-spinner-container">
+    <!-- <div class="main-spinner-container">
+      <ion-spinner name="crescent" class="main-spinner"></ion-spinner>
+    </div> -->
+
+    <div class="main-logo-container">
+      <vendly-logo [type]="2" class="logo" innerStyle="width: 60px;"></vendly-logo>
       <ion-spinner name="crescent" class="main-spinner"></ion-spinner>
     </div>
   </ion-router-outlet>

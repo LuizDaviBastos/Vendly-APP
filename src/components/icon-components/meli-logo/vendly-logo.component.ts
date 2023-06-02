@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./vendly-logo.component.scss']
 })
 export class VendlyLogoComponent implements OnInit {
-  
+  @Input('type') type: number = 1;
   @Input('innerStyle') innerStyle: string;
 
   constructor() { }
