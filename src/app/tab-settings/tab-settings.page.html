@@ -12,7 +12,8 @@
       </ion-row>
       <ion-row>
         <ion-col class="description-configuration">
-          <ion-label class="ion-text-wrap">Configurações de conta, preferências e contas vinculadas com Mercado Livre</ion-label>
+          <ion-label class="ion-text-wrap">Configurações de conta, preferências e contas vinculadas com Mercado
+            Livre</ion-label>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -40,25 +41,18 @@
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
     <div class="horizontal-line"></div>
-    <ion-item class="item-background-color" [routerLink]="'help'">
+    <ion-item class="item-background-color" (click)="openContactModal()">
       <ion-label>
-        <ion-label class="item-name">Ajuda</ion-label>
-        <p>Entre em contato</p>
-      </ion-label>
-      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-    </ion-item>
-      <ion-item *ngIf="false" class="item-background-color" disabled="disabled" [routerLink]="'account'">
-      <ion-label>
-        <ion-label class="item-name">Contas vinculadas</ion-label>
-        <p>Vincular contas do Mercado Livre</p>
+        <ion-label class="item-name">Contato</ion-label>
+        <p>Obtenha informações de contato</p>
       </ion-label>
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
     <div class="horizontal-line"></div>
-    <ion-item class="last-item item-background-color" disabled="disabled" [routerLink]="'account'">
+    <ion-item *ngIf="false" class="last-item item-background-color" disabled="disabled" [routerLink]="'account'">
       <ion-label>
         <ion-label class="item-name">Contas vinculadas</ion-label>
-        <p>Vincular contas do Mercado Livre (Em breve)</p> 
+        <p>Vincular contas do Mercado Livre</p>
       </ion-label>
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>

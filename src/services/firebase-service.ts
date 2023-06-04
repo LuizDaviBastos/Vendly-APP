@@ -18,7 +18,9 @@ export class FireBaseService {
                     const data = documents[0];
                     subscriber.next(<Settings>{
                         urlBaseApi: data.urlBaseApi,
-                        createAccountMeliUrl: data.createAccountMeliUrl
+                        createAccountMeliUrl: data.createAccountMeliUrl,
+                        supportEmail: data.supportEmail,
+                        whatsappSupportLink: data.whatsappSupportLink,
                     })
                 } else {
                     subscriber.error("Não foi possivel obter as configurações.");

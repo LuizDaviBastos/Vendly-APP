@@ -7,6 +7,7 @@ import { TabSettingsPage } from './tab-settings.page';
 import { Tab3PageRoutingModule } from './tab-settings-routing.module';
 import { SubscribeInfoComponent } from './subscribe/subscribe-info.component';
 import { SkeletonLoadingModule } from '../components/skeleton-loading/skeleton-loading.module';
+import { ContactModalComponent } from '../modals/contact-modal/contact-modal.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { SkeletonLoadingModule } from '../components/skeleton-loading/skeleton-l
     RouterModule.forChild([{ path: '', component: TabSettingsPage }]),
     Tab3PageRoutingModule,
   ],
-  declarations: [TabSettingsPage, SubscribeInfoComponent],
+  declarations: [TabSettingsPage, SubscribeInfoComponent, ContactModalComponent],
   providers: [CurrencyPipe]
 })
 export class Tab3PageModule { }

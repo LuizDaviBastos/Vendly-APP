@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { SubscribeComponent } from '../app/subscribe/subscribe.component';
-import { FreePeriodComponent } from 'src/app/components/free-period/free-period.component';
+import { FreePeriodComponent } from 'src/app/modals/free-period/free-period.component';
+import { ContactModalComponent } from 'src/app/modals/contact-modal/contact-modal.component';
 
 @Injectable({
     providedIn: 'root'
@@ -17,8 +18,8 @@ export class ModalService {
             breakpoints: [0.1, 0.5, 0.75, 0.95, 1],
             canDismiss: true,
             backdropDismiss: true
-          });
-          modal.present();
+        });
+        modal.present();
     }
 
     public async showFreePeriodModal() {
@@ -28,7 +29,18 @@ export class ModalService {
             breakpoints: [0, 0.5, 0.75, 0.95, 1],
             canDismiss: true,
             backdropDismiss: true
-          });
-          modal.present();
+        });
+        modal.present();
+    }
+
+    public async showContactModal() {
+        const modal = await this.modalController.create({
+            component: ContactModalComponent,
+            initialBreakpoint: 0.5,
+            breakpoints: [0, 0.5, 0.75],
+            canDismiss: true,
+            backdropDismiss: true
+        });
+        modal.present();
     }
 }

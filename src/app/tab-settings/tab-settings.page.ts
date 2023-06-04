@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController, Platform } from '@ionic/angular';
 import { LocalStorageService } from 'src/services/local-storage-service';
+import { ModalService } from 'src/services/modal-service';
 
 @Component({
   selector: 'app-tab-settings',
@@ -11,7 +12,7 @@ import { LocalStorageService } from 'src/services/local-storage-service';
 export class TabSettingsPage implements OnInit {
 
   constructor(private route: Router, private platform: Platform, private navCtrl: NavController,
-    private alertController: AlertController, private localStorageService: LocalStorageService) { }
+    private alertController: AlertController, private localStorageService: LocalStorageService, private modalService: ModalService) { }
   ngOnInit(): void {
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.goBack();
@@ -36,6 +37,10 @@ export class TabSettingsPage implements OnInit {
 
   public goBack() {
     this.navCtrl.back();
+  }
+
+  public openContactModal() {
+    this.modalService.showContactModal();
   }
 
 }
