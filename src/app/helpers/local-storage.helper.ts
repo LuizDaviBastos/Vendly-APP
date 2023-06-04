@@ -6,7 +6,7 @@ import { SellerMessage } from 'src/models/seller-message';
 import { Uteis } from './Uteis';
 
 export class LocalStorage {
-    
+
     private static login: LoginResponse = null;
     private static country: Country = null;
     private static seletectMeliSellerInfo: SellerInfo = null;
@@ -26,6 +26,24 @@ export class LocalStorage {
 
     public static get expired(): boolean {
         return Uteis.parseToBoolean(localStorage.getItem('expired'));
+    }
+
+    public static set isFreePeriod(value: boolean) {
+        localStorage.setItem('isFreePeriod', `${value}`);
+    }
+
+    public static get isFreePeriod(): boolean {
+        return Uteis.parseToBoolean(localStorage.getItem('isFreePeriod'));
+    }
+
+    public static get isFirstTime(): boolean {
+        const isFirstItem = localStorage.getItem('isFirstTime');
+        if (isFirstItem) {
+            return false;
+        }
+
+        localStorage.setItem('isFirstTime', 'true');
+        return true;
     }
 
     public static get sellerId(): string {
@@ -70,7 +88,13 @@ export class LocalStorage {
     public static getSelectedMeliAccount(): SellerInfo {
         if (!this.seletectMeliSellerInfo) {
             this.seletectMeliSellerInfo = <SellerInfo>JSON.parse(localStorage.getItem(this.keys.meliSeller));
-            if (!this.seletectMeliSellerInfo) return <SellerInfo>{ id: this.getLogin().data.meliAccounts[0].meliSellerId };
+            if (!this.seletectMeliSellerInfo) {
+                let meliAccounts = this.getLogin()?.data?.meliAccounts;
+                if(meliAccounts?.length > 0) {
+                    return <SellerInfo>{ id: meliAccounts[0].meliSellerId };    
+                } 
+                return null;
+            }
         }
         return this.seletectMeliSellerInfo;
     }
@@ -136,7 +160,7 @@ export class LocalStorage {
         });
     }
 
-  
+
 
     public static updateHasMeliAccount(state: boolean) {
         let login = this.getLogin();

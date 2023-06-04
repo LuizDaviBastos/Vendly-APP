@@ -12,7 +12,6 @@ export class LocalStorageService {
     public async logout() {
         const loading = await this.alertService.showLoading('Encerrando sessão');
         LocalStorage.logoutAsync().then(() => {
-            console.log('logout');
             this.route.navigateByUrl('/auth');
         }).finally(() => {
             loading.dismiss();

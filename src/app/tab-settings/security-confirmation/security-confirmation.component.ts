@@ -160,7 +160,6 @@ export class SecurityConfirmationComponent implements OnInit, OnDestroy {
 
       const times = Math.floor(diferenca / 1000)
       this.timeLeft = times ;
-      console.log(this.timeLeft);
       if (diferenca <= 0) {
         this.resendEnabled = true;
         this.timeLeft = 0;

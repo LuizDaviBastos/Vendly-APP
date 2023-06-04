@@ -6,4 +6,5 @@ export class Uteis {
     public static parseToBoolean(value: any) {
         return (/true/i).test(value);
     }
+    
 }

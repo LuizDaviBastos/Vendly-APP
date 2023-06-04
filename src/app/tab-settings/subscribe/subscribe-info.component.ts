@@ -6,6 +6,8 @@ import { SubscriptionInformation } from 'src/models/subscription-Information';
 import { AccountService } from 'src/services/account-service';
 import { AlertService } from 'src/services/alert-service';
 import { ModalService } from 'src/services/modal-service';
+import * as moment from 'moment';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'subscribe-info',
@@ -22,7 +24,8 @@ export class SubscribeInfoComponent implements OnInit {
     private navCtrl: NavController,
     private accountService: AccountService,
     private alertService: AlertService,
-    private modalService: ModalService) { }
+    private modalService: ModalService,
+    private currencyPipe: CurrencyPipe) { }
 
   ngOnInit() {
     const sellerId = LocalStorage.sellerId;
@@ -38,6 +41,7 @@ export class SubscribeInfoComponent implements OnInit {
       () => {
         this.loading['info'] = false;
       })
+
   }
 
   public goBack() {
@@ -51,7 +55,22 @@ export class SubscribeInfoComponent implements OnInit {
   }
 
   public getFormattedPrice() {
-    return `R$ ${this.subscription.price}/mês`;
+    if (LocalStorage.isFreePeriod) return "Grátis";
+    return this.currencyPipe.transform(this.subscription.price, 'BRL', 'symbol');
   }
 
+  public getDate(date: Date) {
+    try {
+      if(!date) {
+        return '';
+      }
+      moment.locale('pt-br');
+      const dataUTCObj = moment.utc(date);
+      const l = dataUTCObj.local();
+      const dataLocalF = l.format('DD [de] MMMM [de] YYYY');
+      return dataLocalF;
+    } catch {
+      return '';
+    }
+  }
 }

@@ -64,10 +64,10 @@ export class AlertService {
         const loading = await this.loadingController.create({
             duration: -1,
             message: message || "Carregando..",
-            animated: true
+            animated: true,
+            spinner: 'lines'
         });
         loading.present();
-
         return loading;
     }
 }

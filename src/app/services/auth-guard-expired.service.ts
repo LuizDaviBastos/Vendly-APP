@@ -20,41 +20,15 @@ export class AuthGuardExpiredInvalidService implements CanActivate {
     private modalService: ModalService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    return true;
     return this.accountService.expiredStatus(LocalStorage.sellerId).pipe(
       map((response) => {
-        LocalStorage.expired = !response.data;
-        if (response.data) {
+        LocalStorage.expired = !(response?.data?.notExpired);
+        LocalStorage.isFreePeriod = response.data.isFreePeriod;
+        if (response?.data?.notExpired) {
           return true;
         } else {
           this.modalService.showSubscribeModal();
-          return true;
-        }
-      }),
-      catchError((err: any) => {
-        this.alertService.showToastAlert("Houve um erro ao processar a requisição");
-        return of(false)
-      })
-    )
-  }
-
-}
-
-
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthGuardExpiredValidService implements CanActivate {
-  constructor(private router: Router, private meliService: MeliService,
-    private alertService: AlertService,
-    private accountService: AccountService) { }
-
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    return this.accountService.expiredStatus(LocalStorage.sellerId).pipe(
-      map((response) => {
-        if (response.data) {
-          this.router.navigateByUrl('/message');
-          return false;
-        } else {
           return true;
         }
       }),
@@ -64,7 +38,9 @@ export class AuthGuardExpiredValidService implements CanActivate {
       })
     )
   }
+
 }
+
 
 @Injectable({
   providedIn: 'root'
@@ -78,10 +54,24 @@ export class AuthGuardExpiredInvalidOfflineService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
 
     if (LocalStorage.expired) {
-      this.modalService.showSubscribeModal()
-      return false;
+      return this.accountService.expiredStatus(LocalStorage.sellerId).pipe(
+        map((response) => {
+          LocalStorage.expired = !(response?.data?.notExpired);
+          LocalStorage.isFreePeriod = response.data.isFreePeriod;
+          if (response?.data?.notExpired) {
+            return true;
+          } else {
+            this.modalService.showSubscribeModal();
+            return false;
+          }
+        }),
+        catchError((err: any) => {
+          this.alertService.showToastAlert("Houve um erro ao processar a requisição");
+          return of(false)
+        })
+      )
+    } else {
+      return true;
     }
-
-    return true;
   }
 }

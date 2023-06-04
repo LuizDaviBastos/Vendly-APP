@@ -253,6 +253,8 @@ ion-list {
     align-self: end;
     width: 100%;
     text-align: center;
+    overflow: auto;
+    height: 100%;
   }
 }
 

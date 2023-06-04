@@ -5,6 +5,7 @@ import { RequestResponse } from '../models/request-response.model';
 import { HttpClientBase } from './http-base.service';
 import { PaymentLinkResponse } from 'src/models/payment-link-response';
 import { SubscriptionInformation } from 'src/models/subscription-Information';
+import { ExpiredResponse } from 'src/models/expired-response';
 
 @Injectable({
     providedIn: 'root'
@@ -50,7 +51,7 @@ export class AccountService {
 
     public expiredStatus(sellerId: string) {
         const params = new HttpParams().append('sellerId', sellerId);
-        return this.http.get<RequestResponse<boolean>>(`api/account/expiredStatus`, { params: params });
+        return this.http.get<RequestResponse<ExpiredResponse>>(`api/account/expiredStatus`, { params: params });
     }
 
     public createFcmToken(sellerId: string, fcmToken: string) {

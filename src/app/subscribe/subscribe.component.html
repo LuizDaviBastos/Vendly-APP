@@ -25,9 +25,9 @@
     <ion-card-content>
       <ion-row>
         <ion-label class="cash">
-          <skeleton-text *ngIf="loading; else priceLabel"  [innerStyle]="'width: 100px; height: 22px;'"></skeleton-text>
+          <skeleton-text *ngIf="loading; else priceLabel" [innerStyle]="'width: 100px; height: 22px;'"></skeleton-text>
           <ng-template #priceLabel>
-            R$ {{paymentLinkResponse.price}}
+            {{paymentLinkResponse.price | currency}}
           </ng-template>
         </ion-label>
       </ion-row>

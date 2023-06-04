@@ -18,7 +18,7 @@ export class AccountSettingsPage implements OnInit {
     return LocalStorage.getLogin()?.data || new Seller();
   }
   
-  public get expired(): boolean { return LocalStorage.expired; }
+  public get canShowDelete(): boolean { return !LocalStorage.expired && !LocalStorage.isFreePeriod; }
   public loading = {};
 
   constructor(private route: Router, private platform: Platform,
@@ -39,7 +39,6 @@ export class AccountSettingsPage implements OnInit {
 
   public changePassword() {
     this.securityConfirmationService.securityConfirmation().subscribe((modal) => {
-      console.log(modal);
       this.route.navigate(['password'], {
         relativeTo: this.activatedRoute,
       })

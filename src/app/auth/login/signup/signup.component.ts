@@ -108,7 +108,6 @@ export class SignupComponent implements OnInit {
   private _nextStep() {
     if (this.currentStep >= 5) return;
     this.currentStep++;
-    console.log(this.getSellerEntity());
   }
 
   public nextStep() {
@@ -122,7 +121,6 @@ export class SignupComponent implements OnInit {
   public previousStep() {
     if (this.currentStep <= 1) return;
     this.currentStep--;
-    console.log(this.getSellerEntity());
   }
 
   public formInvalid() {

@@ -29,7 +29,7 @@ export class FcmService {
                 PushNotifications.register();
             } else {
                 // Show some error
-                //res://ic_launcher_round
+                //res://ic_launcher_roundGetSellerInfo
             }
         });
 
@@ -38,7 +38,6 @@ export class FcmService {
                 //alert('Push registration success, token: ' + token.value);
                 const sellerId = LocalStorage.sellerId;
                 this.accountService.createFcmToken(sellerId, token.value).subscribe(() => {
-                    //console.log('token saved!');
                 });
             }
         );
@@ -65,26 +64,5 @@ export class FcmService {
             }
         );
     }
-
-    // public initialize() {
-    //     this.fcm.subscribeToTopic('payment');
-
-    //     this.fcm.getToken().then(token => {
-    //         const sellerId = LocalStorage.sellerId;
-    //         this.accountService.createFcmToken(sellerId, token).subscribe(() => {
-    //             console.log('token saved!');
-    //         });
-    //     });
-
-    //     this.fcm.onNotification().subscribe(data => {
-    //         if (data.wasTapped) {
-    //             console.log("Received in background");
-    //             this.alertService.showToastAlert('Received in background');
-    //         } else {
-    //             console.log("Received in foreground");
-    //             this.alertService.showToastAlert('Received in foreground');
-    //         };
-    //     });
-    // }
 
 }

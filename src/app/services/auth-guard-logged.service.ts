@@ -22,7 +22,7 @@ export class AuthGuardLoggedService implements CanActivate {
     }
     else {
       if (!LocalStorage.meliInfoStored() && !!LocalStorage.getLogin()?.hasMeliAccount) {
-        this.meliService.getMeliAccountInfo(LocalStorage.getSelectedMeliAccount().id).subscribe((response) => {
+        this.meliService.getMeliAccountInfo(LocalStorage.getSelectedMeliAccount()?.id).subscribe((response) => {
           if (response.success) {
             LocalStorage.selectMeliAccount(response.data);
           }
@@ -30,7 +30,7 @@ export class AuthGuardLoggedService implements CanActivate {
             this.alertService.showToastAlert(response.message);
           }
         }, (error) => {
-          this.alertService.showToastAlert(error?.error?.message || 'Um erro ocorreu ao obter suas informações.');
+          this.alertService.showToastAlert(error?.error?.message || 'Houve um erro tentar obter suas informações.');
         })
       }
     }

@@ -1,12 +1,13 @@
 export class SubscriptionInformation {
     public id: string;
     public lastPayment: Date;
-    public ExpireIn: Date;
+    public expireIn: Date;
     public sellerId: string;
     public expireInFormatted: string;
     public lastPaymentFormatted: string;
     public price: number;
     public status: number;
+    public currentPlan: string;
     
 }
 /**
