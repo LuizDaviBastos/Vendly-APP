@@ -16,33 +16,35 @@ export class LocalStorage {
         meliSeller: 'meli-seller-id',
         country: 'asm-country',
         timeLeft: 'timeLeft',
-        lastTimeSendCode: 'lastTimeSendCode'
+        lastTimeSendCode: 'lastTimeSendCode',
+        isFirstTime: 'isFirstTime',
+        expired: 'expired',
+        isFreePeriod: 'isFreePeriod'
     }
 
 
     public static set expired(value: boolean) {
-        localStorage.setItem('expired', `${value}`);
+        localStorage.setItem(this.keys.expired, `${value}`);
     }
 
     public static get expired(): boolean {
-        return Uteis.parseToBoolean(localStorage.getItem('expired'));
+        return Uteis.parseToBoolean(localStorage.getItem(this.keys.expired));
     }
 
     public static set isFreePeriod(value: boolean) {
-        localStorage.setItem('isFreePeriod', `${value}`);
+        localStorage.setItem(this.keys.isFreePeriod, `${value}`);
     }
 
     public static get isFreePeriod(): boolean {
-        return Uteis.parseToBoolean(localStorage.getItem('isFreePeriod'));
+        return Uteis.parseToBoolean(localStorage.getItem(this.keys.isFreePeriod));
     }
 
     public static get isFirstTime(): boolean {
-        const isFirstItem = localStorage.getItem('isFirstTime');
+        const isFirstItem = localStorage.getItem(this.keys.isFirstTime);
         if (isFirstItem) {
             return false;
         }
-
-        localStorage.setItem('isFirstTime', 'true');
+        localStorage.setItem(this.keys.isFirstTime, 'true');
         return true;
     }
 
@@ -148,6 +150,9 @@ export class LocalStorage {
         localStorage.removeItem(this.keys.country);
         localStorage.removeItem(this.keys.timeLeft);
         localStorage.removeItem(this.keys.lastTimeSendCode);
+        localStorage.removeItem(this.keys.isFirstTime);
+        localStorage.removeItem(this.keys.isFreePeriod);
+        localStorage.removeItem(this.keys.expired);
 
     }
 

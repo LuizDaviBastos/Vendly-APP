@@ -8,7 +8,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchTagsDirective } from './directives/search-tags.directive';
-import { AuthInterceptor } from '../services/auth-interceptor';
+import { AuthInterceptor, ErrorCatchingInterceptor } from '../services/auth-interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
@@ -38,6 +38,11 @@ registerLocaleData(localePt, 'pt-BR');
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorCatchingInterceptor,
       multi: true
     },
     { provide: LOCALE_ID, useValue: 'pt-BR' },
