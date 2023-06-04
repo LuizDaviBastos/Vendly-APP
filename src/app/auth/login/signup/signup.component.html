@@ -13,12 +13,17 @@
   <ion-item lines="none" class="continue-buttom-container">
     <ng-container [ngSwitch]="currentStep">
 
-      <ion-button (key.enter)="nextStep()" *ngSwitchDefault [disabled]="formInvalid() || loading['nextStep']" (click)="nextStep()"
-        class="continue-buttom" expand="block">
+      <ion-button (key.enter)="nextStep()" *ngSwitchDefault [disabled]="formInvalid() || loading['nextStep']"
+        (click)="nextStep()" class="continue-buttom" expand="block">
         <ion-spinner *ngIf="loading['nextStep']; else label" name="crescent"></ion-spinner>
         <ng-template #label>
-          Continuar cadastro
-          <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+          <ng-container *ngIf="currentStep == 3; else continueLabel">
+            Criar conta
+          </ng-container>
+          <ng-template #continueLabel>
+            Continuar cadastro
+            <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+          </ng-template>
         </ng-template>
       </ion-button>
 

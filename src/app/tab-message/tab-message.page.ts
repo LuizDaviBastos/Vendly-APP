@@ -38,10 +38,10 @@ export class TabMessagePage implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit() {
     this.getUserInfo();
-    this.fcmService.initialize();
     this.checkExpiredStatus();
+    this.fcmService.initialize();
   }
 
   public meliSellerInfo() {

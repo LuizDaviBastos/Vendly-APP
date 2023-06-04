@@ -21,6 +21,8 @@ export class FireBaseService {
                         createAccountMeliUrl: data.createAccountMeliUrl,
                         supportEmail: data.supportEmail,
                         whatsappSupportLink: data.whatsappSupportLink,
+                        privacyPoliciesLink: data.privacyPoliciesLink,
+                        termsAndConditionsLink: data.termsAndConditionsLink
                     })
                 } else {
                     subscriber.error("Não foi possivel obter as configurações.");

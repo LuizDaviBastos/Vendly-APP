@@ -1,10 +1,10 @@
-
 ion-content {
   height: 300px;
 }
 
 .description {
-  margin-left: 14px!important;
+  margin-left: 14px !important;
+
   ion-icon {
     margin: auto;
     width: 20px;
@@ -29,9 +29,28 @@ ion-content {
 }
 
 .input {
-  pointer-events: visible!important;
+  pointer-events: visible !important;
 }
 
+.termos-container {
+  display: flex;
+  padding: 20px;
+  align-items: center;
 
+  ion-checkbox {
+    //margin-right: 20px;
+    width: 20px;
+  }
 
+  ion-label {
+    font-size: 12pt;
+    color: #565656;
+    margin: auto;
+    margin-left: 14px;
 
+  }
+}
+
+.link {
+  color: rgb(62, 126, 245);
+}

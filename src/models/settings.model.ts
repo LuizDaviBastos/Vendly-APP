@@ -3,4 +3,6 @@ export class Settings {
     createAccountMeliUrl: string;
     supportEmail: string;
     whatsappSupportLink: string;
+    privacyPoliciesLink: string;
+    termsAndConditionsLink: string;
 };

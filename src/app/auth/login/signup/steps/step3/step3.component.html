@@ -71,6 +71,10 @@
         </app-show-hide-password>
         <label class="feedback-validation" *ngIf="hasErrorMatching()">As senhas não coincidem</label>
       </ion-item>
+      
+      <div class="termos-container">
+        <ion-checkbox formControlName="acceptedTerms"></ion-checkbox> <ion-label>Aceite os <a class="link" target="_blank" [href]="settings.termsAndConditionsLink">Termos e Condições</a></ion-label>
+      </div>
     </form>
   </ion-list>
 </ion-content>

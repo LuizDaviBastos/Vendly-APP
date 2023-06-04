@@ -8,7 +8,7 @@ export class SubscriptionInformation {
     public price: number;
     public status: number;
     public currentPlan: string;
-    
+    public isFreePeriod: boolean;
 }
 /**
  *   public Guid Id { get; set; }

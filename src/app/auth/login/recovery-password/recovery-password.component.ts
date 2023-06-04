@@ -56,6 +56,7 @@ export class RecoveryPasswordComponent implements OnInit {
         this.alertService.showToastAlert(response.message);
       }
     }, (error) => {
+      this.loading = false;
       this.alertService.errorAlert(error);
     }, () => {
       this.loading = false;

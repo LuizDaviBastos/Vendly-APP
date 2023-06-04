@@ -8,6 +8,7 @@ import { AlertService } from 'src/services/alert-service';
 import { ModalService } from 'src/services/modal-service';
 import * as moment from 'moment';
 import { CurrencyPipe } from '@angular/common';
+import { BrowserService } from 'src/services/browser-service';
 
 @Component({
   selector: 'subscribe-info',
@@ -25,7 +26,8 @@ export class SubscribeInfoComponent implements OnInit {
     private accountService: AccountService,
     private alertService: AlertService,
     private modalService: ModalService,
-    private currencyPipe: CurrencyPipe) { }
+    private currencyPipe: CurrencyPipe,
+    private browserService: BrowserService) { }
 
   ngOnInit() {
     const sellerId = LocalStorage.sellerId;
@@ -34,6 +36,7 @@ export class SubscribeInfoComponent implements OnInit {
       this.loading['info'] = false;
       if (response.success) {
         this.subscription = response.data;
+        LocalStorage.isFreePeriod = response.data.isFreePeriod;
       } else {
         this.alertService.showToastAlert(response.message);
       }
@@ -48,20 +51,32 @@ export class SubscribeInfoComponent implements OnInit {
     this.navCtrl.back();
   }
 
-  public async openPaymentModal() {
+  public async pay(isPrePayment: boolean = false) {
     this.loading['pay'] = true;
-    await this.modalService.showSubscribeModal();
-    this.loading['pay'] = false;
+    if (isPrePayment) {
+      const sellerId = LocalStorage.sellerId;
+      this.accountService.getPaymentLink(sellerId, true).subscribe((response) => {
+        this.loading['pay'] = false;
+        if (response.success) {
+          this.browserService.openBrowser(response.data.init_point);
+        }
+
+      }, (err) => { this.alertService.errorAlert(err); this.loading['pay'] = false; })
+    } else {
+      await this.modalService.showSubscribeModal();
+      this.loading['pay'] = false;
+    }
+
   }
 
   public getFormattedPrice() {
-    if (LocalStorage.isFreePeriod) return "Grátis";
+    if (this.subscription.isFreePeriod) return "Grátis";
     return this.currencyPipe.transform(this.subscription.price, 'BRL', 'symbol');
   }
 
   public getDate(date: Date) {
     try {
-      if(!date) {
+      if (!date) {
         return '';
       }
       moment.locale('pt-br');

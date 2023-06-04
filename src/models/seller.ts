@@ -11,4 +11,5 @@ export class Seller {
     public confirmedEmail: boolean;
     public code: string;
     public meliAccounts: MeliAccount[];
+    public acceptedTerms: boolean;
 }

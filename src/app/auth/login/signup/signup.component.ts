@@ -34,6 +34,7 @@ export class SignupComponent implements OnInit {
     3: new FormGroup({
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       confirmPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      acceptedTerms: new FormControl(false, [Validators.required, Validators.pattern("^(true)$")]),
     }),
     4: new FormGroup({
       code: new FormControl('', [Validators.required, Validators.maxLength(6), Validators.minLength(6), Validators.pattern("^[0-9]*$")])
@@ -50,6 +51,7 @@ export class SignupComponent implements OnInit {
       lastName: this.stepsFormGroup[2].get('lastName').value,
       country: this.stepsFormGroup[2].get('country').value,
       password: this.stepsFormGroup[3].get('password').value,
+      acceptedTerms: <boolean>(this.stepsFormGroup[3].get('acceptedTerms').value || false)
     }
   }
 

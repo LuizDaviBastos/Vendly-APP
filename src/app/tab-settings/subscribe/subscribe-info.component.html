@@ -105,12 +105,16 @@
       </ion-col>
     </ion-item>
 
-    <ion-item *ngIf="expired" class="item-background-color delete-account-container">
+    <ion-item class="item-background-color delete-account-container">
       <ion-label>
-        <ion-label><b>Parece que seu plano expirou</b></ion-label>
-        <p>Continue com o pagamento mensal.</p>
+        <ion-label>
+          <b *ngIf="!expired">Pagamento antecipado</b>
+          <b *ngIf="expired">Parece que seu plano expirou</b>
+        </ion-label>
+        <p *ngIf="!expired">Faça um pagamento antecipado para garantir o serviço sem interrupções.</p>
+        <p *ngIf="expired">Continue com o pagamento mensal.</p>
         <div class="pay-button-container">
-          <button [disabled]="loading['pay']" (click)="openPaymentModal()" class="pay-account-button">
+          <button [disabled]="loading['pay']" (click)="pay(!expired)" class="pay-account-button">
             <div *ngIf="!loading['pay']" class="text-pay-container">
               <img class="mpago-icon" src="assets/icon/mpago.png">
               <label>Pagar com mercado pago</label>

@@ -44,8 +44,8 @@ export class AccountService {
         return this.http.post<RequestResponse<any>>(`api/auth/confirmRecoveryPassword`, body);
     }
 
-    public getPaymentLink(sellerId: string) {
-        const params = new HttpParams().append('sellerId', sellerId);
+    public getPaymentLink(sellerId: string, isBinary: boolean = false) {
+        const params = new HttpParams().append('sellerId', sellerId,).append('isBinary', isBinary);
         return this.http.get<RequestResponse<PaymentLinkResponse>>(`api/account/getPaymentLink`, { params: params });
     }
 

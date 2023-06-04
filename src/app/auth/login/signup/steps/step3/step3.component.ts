@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, ContentChild, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Settings } from 'src/models/settings.model';
 import { AuthService } from 'src/services/auth-service';
+import { SettingsService } from 'src/services/settings-service';
 @Component({
   selector: 'app-step3',
   templateUrl: './step3.component.html',
@@ -11,8 +13,8 @@ export class Step3Component implements OnInit {
   @Input('form') formGroup: FormGroup;
   @Input('previous') previousStep: () => void;
   @Input('next') nextStep: () => void;
-
-  constructor(private cdr: ChangeDetectorRef) { }
+  public settings: Settings = new Settings();
+  constructor(private cdr: ChangeDetectorRef, private settingsService: SettingsService) { }
 
   public get touched(): boolean {
     return this.formGroup.touched;
@@ -27,7 +29,11 @@ export class Step3Component implements OnInit {
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.settingsService.loadSettings().subscribe((settings) => {
+      this.settings = settings;
+    })
+  }
 
   public hasErrorMatching() {
     const state = this.formGroup.hasError('matching');
