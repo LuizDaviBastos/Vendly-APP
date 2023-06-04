@@ -6,8 +6,6 @@ import { MeliService } from 'src/services/meli-service';
 import { map, catchError } from 'rxjs/operators';
 import { AlertService } from 'src/services/alert-service';
 import { AccountService } from 'src/services/account-service';
-import { ModalController } from '@ionic/angular';
-import { SubscribeComponent } from '../subscribe/subscribe.component';
 import { ModalService } from 'src/services/modal-service';
 
 @Injectable({
