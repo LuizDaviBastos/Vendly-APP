@@ -1,14 +1,13 @@
+import { SubscriptionPlan } from "./subscription-plan";
+
 export class SubscriptionInformation {
     public id: string;
-    public lastPayment: Date;
     public expireIn: Date;
+    public lastPayment: Date;
     public sellerId: string;
-    public expireInFormatted: string;
-    public lastPaymentFormatted: string;
-    public price: number;
-    public status: number;
-    public currentPlan: string;
     public isFreePeriod: boolean;
+    public price: number;
+    public subscriptionPlan: SubscriptionPlan;
 }
 /**
  *   public Guid Id { get; set; }

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   urlBaseApi:'https://www.meli.app.vbweb.com.br'
-  //urlBaseApi:'https://pb9n3n0w-7024.brs.devtunnels.ms'
+  //urlBaseApi:'https://p2cfb6g9-7024.brs.devtunnels.ms'
   //urlBaseApi:'https://localhost:7024'
 };
 

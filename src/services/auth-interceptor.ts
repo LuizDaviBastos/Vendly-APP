@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, throwError } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
+import { catchError, map, tap } from "rxjs/operators";
 import { LocalStorage } from "src/app/helpers/local-storage.helper";
 
 @Injectable()

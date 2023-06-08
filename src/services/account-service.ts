@@ -6,6 +6,8 @@ import { HttpClientBase } from './http-base.service';
 import { PaymentLinkResponse } from 'src/models/payment-link-response';
 import { SubscriptionInformation } from 'src/models/subscription-Information';
 import { ExpiredResponse } from 'src/models/expired-response';
+import { SubscriptionPlan } from 'src/models/subscription-plan';
+import { PaymentHistory } from 'src/models/payment-history';
 
 @Injectable({
     providedIn: 'root'
@@ -44,8 +46,8 @@ export class AccountService {
         return this.http.post<RequestResponse<any>>(`api/auth/confirmRecoveryPassword`, body);
     }
 
-    public getPaymentLink(sellerId: string, isBinary: boolean = false) {
-        const params = new HttpParams().append('sellerId', sellerId,).append('isBinary', isBinary);
+    public getPaymentLink(sellerId: string, subscriptionPlanId: string, isBinary: boolean = false) {
+        const params = new HttpParams().append('sellerId', sellerId,).append('subscriptionPlanId', subscriptionPlanId).append('isBinary', isBinary);
         return this.http.get<RequestResponse<PaymentLinkResponse>>(`api/account/getPaymentLink`, { params: params });
     }
 
@@ -61,10 +63,19 @@ export class AccountService {
         }
         return this.http.post<RequestResponse<any>>(`api/account/fcmToken`, body);
     }
-    
+
     public getPaymentInformations(sellerId: string) {
         const params = new HttpParams().append('sellerId', sellerId);
         return this.http.get<RequestResponse<SubscriptionInformation>>(`api/account/getPaymentInformations`, { params: params });
     }
-    
+
+    public getSubscriptionPlans() {
+        return this.http.get<RequestResponse<SubscriptionPlan[]>>(`api/payment/subscriptionList`);
+    }
+
+    public getPaymentHistory(sellerId: string) {
+        const params = new HttpParams().append('sellerId', sellerId);
+        return this.http.get<RequestResponse<PaymentHistory[]>>(`api/payment/paymentHistory`, { params: params });
+    }
+
 }

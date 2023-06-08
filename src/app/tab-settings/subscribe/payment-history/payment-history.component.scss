@@ -7,7 +7,7 @@ ion-content {
 }
 
 .asm-header {
-    height: 123px;
+    height: 130px;
     background-color: var(--background-gray);
 
     ion-grid,
@@ -48,11 +48,14 @@ ion-label {
     color: #2D2D2D
 }
 
+
 .item-background-color {
     --ion-item-background: var(--background-white);
 }
 
 ion-item {
+    border-radius: 20px;
+    margin-bottom: 10px;
 
     ion-icon {
         color: #2D2D2D;
@@ -60,8 +63,8 @@ ion-item {
     }
 
     ion-label {
-        padding-top: 14px;
-        padding-bottom: 14px;
+        padding-top: 8px;
+        padding-bottom: 8px;
 
         .item-name {
             margin-bottom: 6px;
@@ -90,6 +93,10 @@ ion-item {
     text-align: right;
     font-size: 11pt;
     margin: auto;
+}
+
+.status {
+    color: var(--ion-color-base) !important;
 }
 
 .last-item {
@@ -175,9 +182,4 @@ ion-skeleton-text {
         margin: auto;
         margin-right: 10px;
     }
-}
-
-.item-settings-label-bold {
-    font-weight: 600;
-    color: #2D2D2D
 }

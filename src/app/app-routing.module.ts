@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuardLoggedService, AuthGuardLoggoutService } from './services';
-import { AuthGuardExpiredInvalidService } from './services/auth-guard-expired.service';
+import { AuthGuardLoggedService, AuthGuardLoggoutService } from './auth-guard-services';
+import { AuthGuardExpiredInvalidService } from './auth-guard-services/auth-guard-expired.service';
 
 const routes: Routes = [
 
@@ -23,7 +23,7 @@ const routes: Routes = [
   {
     canActivate: [AuthGuardLoggedService],
     path: 'subscribe',
-    loadChildren: () => import('./subscribe/subscribe.module').then(m => m.SubscribeModule)
+    loadChildren: () => import('./modals/subscribe/subscribe.module').then(m => m.SubscribeModule)
   },
   {
     path: '',

@@ -15,7 +15,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { IconModule } from 'src/components/icon-components/icon.module';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
-import { SubscribeModule } from './subscribe/subscribe.module';
+import { SubscribeModule } from './modals/subscribe/subscribe.module';
 
 registerLocaleData(localePt, 'pt-BR');
 

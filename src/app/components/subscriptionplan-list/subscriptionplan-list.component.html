@@ -1,0 +1,35 @@
+<ng-container *ngIf="!loading['plans']; loadingPlans">
+  
+    <ion-card *ngFor="let subscriptionPlan of subscriptionPlans">
+      <ion-card-header>
+        <ion-card-title>{{subscriptionPlan.name}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-row>
+          <ion-label class="cash">
+            {{subscriptionPlan.price | currency}}
+          </ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-label>Pague com o dinheiro em conta do Mercado Pago ou cartão.</ion-label>
+        </ion-row>
+
+      </ion-card-content>
+      <div class="card-footer">
+        <a class="paybutton" (click)="pay(subscriptionPlan)">
+          <skeleton-text *ngIf="loading['link']; else label" [innerStyle]="'width: 100px; height: 22px;'"></skeleton-text>
+          <ng-template #label>
+            <div class="text-pay-container">
+              <img class="mpago-icon" src="assets/icon/mpago.png">
+              <label>Pagar com mercado pago</label>
+            </div>
+          </ng-template>
+        </a>
+      </div>
+    </ion-card>
+  
+</ng-container>
+<ng-template #loadingPlans>
+  <ion-spinner></ion-spinner>
+</ng-template>

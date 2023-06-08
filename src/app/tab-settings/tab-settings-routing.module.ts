@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabSettingsPage } from './tab-settings.page';
-import { SubscribeInfoComponent } from './subscribe/subscribe-info.component';
 
 const routes: Routes = [
   {
@@ -14,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'subscribe-info',
-    component: SubscribeInfoComponent
+    loadChildren: () => import('./subscribe/subscribe-info.module').then(x => x.SubscribeInfoModule)
   }
 ];
 

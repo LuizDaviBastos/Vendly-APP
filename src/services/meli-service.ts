@@ -12,6 +12,7 @@ import { isAuthenticatedResponse } from 'src/models/is-authenticated-response';
 import { MessageTypeEnum } from 'src/models/message-type.enum';
 import { Seller } from 'src/models/seller';
 import { HttpClientBase } from './http-base.service';
+import { SubscriptionPlan } from 'src/models/subscription-plan';
 
 @Injectable({
   providedIn: 'root'

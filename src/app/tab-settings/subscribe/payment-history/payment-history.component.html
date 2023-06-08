@@ -1,0 +1,75 @@
+<ion-header no-border>
+    <div class="asm-header">
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <ion-icon (click)="goBack()" role="button" name="arrow-back-outline"></ion-icon>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col><ion-title><b>Histórico de pagamentos</b></ion-title></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col class="description-configuration">
+                    <ion-label class="ion-text-wrap">Veja seu histórico de pagamentos e pague faturas em
+                        aberto.</ion-label>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+</ion-header>
+
+<ion-content>
+    <ion-list lines="none">
+        <ion-item *ngFor="let item of history" class="item-background-color">
+            <ion-grid>
+                <ion-row>
+                    <ion-col size="4">
+                        <ion-label class="item-settings-label">Plano</ion-label>
+                    </ion-col>
+                    <ion-col>
+                        <ion-label class="item-setting-value ion-text-wrap">{{item.plan}}</ion-label>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="2">
+                        <ion-label class="item-settings-label">Preço</ion-label>
+                    </ion-col>
+                    <ion-col>
+                        <ion-label class="item-setting-value ion-text-wrap">{{getFormattedPrice(item)}}</ion-label>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="2">
+                        <ion-label class="item-settings-label">Data</ion-label>
+                    </ion-col>
+                    <ion-col>
+                        <ion-label class="item-setting-value ion-text-wrap">{{getDate(item.createdDate)}}</ion-label>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="3">
+                        <ion-label class="item-settings-label">Status</ion-label>
+                    </ion-col>
+                    <ion-col>
+                        <ion-label class="item-setting-value ion-text-wrap status"
+                            [color]="getColorStatus(item)">{{getStatus(item)}}</ion-label>
+                    </ion-col>
+                </ion-row>
+                <ion-row *ngIf="canShowPayButton(item)">
+
+                    <ion-col>
+                        <div class="pay-button-container">
+                            <button class="pay-account-button">
+                                <div class="text-pay-container">
+                                    <img class="mpago-icon" src="assets/icon/mpago.png">
+                                    <label>Pagar com mercado pago</label>
+                                </div>
+                            </button>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+    </ion-list>
+</ion-content>

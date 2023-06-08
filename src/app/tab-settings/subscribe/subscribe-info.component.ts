@@ -55,13 +55,8 @@ export class SubscribeInfoComponent implements OnInit {
     this.loading['pay'] = true;
     if (isPrePayment) {
       const sellerId = LocalStorage.sellerId;
-      this.accountService.getPaymentLink(sellerId, true).subscribe((response) => {
-        this.loading['pay'] = false;
-        if (response.success) {
-          this.browserService.openBrowser(response.data.init_point);
-        }
-
-      }, (err) => { this.alertService.errorAlert(err); this.loading['pay'] = false; })
+      await this.modalService.showSubscribeModal('Pagamento antecipado', 'Faça um pagamento antecipado para garantir o serviço sem interrupções.');
+      this.loading['pay'] = false;
     } else {
       await this.modalService.showSubscribeModal();
       this.loading['pay'] = false;
