@@ -45,3 +45,5 @@ platforms
 #ignore icons
 icons
 manifest.webmanifest
+
+projects/ngx-editor/node_modules
