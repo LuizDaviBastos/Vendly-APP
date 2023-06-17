@@ -48,7 +48,8 @@
               </ion-col>
               <ion-col class="message-title">
                 <ion-label>Compra realizada</ion-label>
-                <p [style]="(messageActivated(0) ? '' : 'color: rgb(158, 2, 2);')">
+                <ion-skeleton-text *ngIf="loading['sellerInfo']"></ion-skeleton-text>
+                <p *ngIf="!loading['sellerInfo']" [style]="(messageActivated(0) ? '' : 'color: rgb(158, 2, 2);')">
                   {{messageActivated(0) ? 'Ativo' : 'Inativo'}}</p>
               </ion-col>
               <ion-col size="1" class="edit-container">
@@ -76,7 +77,8 @@
               </ion-col>
               <ion-col class="message-title">
                 <ion-label>Pedido a caminho</ion-label>
-                <p [style]="(messageActivated(1) ? '' : 'color: rgb(158, 2, 2);')">{{messageActivated(1) ?
+                <ion-skeleton-text *ngIf="loading['sellerInfo']"></ion-skeleton-text>
+                <p *ngIf="!loading['sellerInfo']" [style]="(messageActivated(1) ? '' : 'color: rgb(158, 2, 2);')">{{messageActivated(1) ?
                   'Ativo'
                   : 'Inativo'}}</p>
               </ion-col>
@@ -105,7 +107,8 @@
               </ion-col>
               <ion-col class="message-title">
                 <ion-label>Pedido entregue</ion-label>
-                <p [style]="(messageActivated(2) ? '' : 'color: rgb(158, 2, 2);')">{{messageActivated(2) ?
+                <ion-skeleton-text *ngIf="loading['sellerInfo']"></ion-skeleton-text>
+                <p *ngIf="!loading['sellerInfo']" [style]="(messageActivated(2) ? '' : 'color: rgb(158, 2, 2);')">{{messageActivated(2) ?
                   'Ativo'
                   : 'Inativo'}}</p>
               </ion-col>

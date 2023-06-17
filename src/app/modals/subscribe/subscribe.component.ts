@@ -37,7 +37,7 @@ export class SubscribeComponent implements OnInit {
   public async getPaymentLink(subscriptionPlan: SubscriptionPlan) {
     const loading = await this.alertService.showLoading();
     const sellerId = LocalStorage.sellerId;
-    this.accountService.getPaymentLink(sellerId, subscriptionPlan.id).subscribe((response) => {
+    this.accountService.createPaymentLink(sellerId, subscriptionPlan.id).subscribe((response) => {
       if (response.success) {
         let paymentLinkResponse = response.data;
         this.browserService.openBrowser(paymentLinkResponse.init_point);

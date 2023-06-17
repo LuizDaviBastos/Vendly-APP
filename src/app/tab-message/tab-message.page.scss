@@ -11,12 +11,13 @@ ion-header::after {
 
   ion-row {
     max-width: 90%;
-    margin-left: 20px!important;
+    margin-left: 20px !important;
   }
+
   ion-title {
     padding: 0px;
   }
-  
+
   ion-grid,
   ion-row,
   ion-col {
@@ -34,7 +35,7 @@ ion-header::after {
     background-color: #F6F6F6;
 
     ion-row {
-      margin-left: 0px!important;
+      margin-left: 0px !important;
     }
   }
 
@@ -106,7 +107,7 @@ ion-item {
   background-color: #E2E2E2;
   padding: 5px;
   //margin: auto;
-  margin-left: 8px!important;
+  margin-left: 8px !important;
 
   ion-icon {
     color: #2D2D2D;
@@ -170,4 +171,10 @@ ion-item {
 
 .item-background-color {
   --ion-item-background: var(--background-white);
+}
+
+ion-skeleton-text {
+  width: 40px;
+  border-radius: 20px;
+  margin-left: 6px;
 }

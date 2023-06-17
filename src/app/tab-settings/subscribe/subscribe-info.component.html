@@ -30,7 +30,7 @@
             <skeleton-text [innerStyle]="'float: right'"></skeleton-text>
           </ng-container>
           <ng-template #labelPlan>
-            {{subscription.subscriptionPlan.name}}
+            {{subscription?.subscriptionPlan?.name}}
           </ng-template>
         </ion-label>
       </ion-col>
@@ -83,7 +83,7 @@
             <skeleton-text [innerStyle]="'float: right'"></skeleton-text>
           </ng-container>
           <ng-template #labelExpire>
-            {{getDate(subscription.expireIn)}}
+            {{getDate(subscription?.expireIn)}}
           </ng-template>
         </ion-label>
       </ion-col>
@@ -99,7 +99,7 @@
             <skeleton-text [innerStyle]="'float: right'"></skeleton-text>
           </ng-container>
           <ng-template #labelLast>
-            {{getDate(subscription.lastPayment)}}
+            {{getDate(subscription?.lastPayment)}}
           </ng-template>
         </ion-label>
       </ion-col>

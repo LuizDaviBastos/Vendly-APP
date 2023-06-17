@@ -1,4 +1,5 @@
 import { RequestResponse } from "./request-response.model";
+import { SellerMessage } from "./seller-message";
 
 export class SellerInfo extends RequestResponse<any>{
     public id: number;
@@ -16,6 +17,7 @@ export class SellerInfo extends RequestResponse<any>{
     public seller_experience: string;
     public thumbnail: Thumbnail;
     public produtosCount?: number;
+    public messages: SellerMessage[];
 }
 
 export class Thumbnail {

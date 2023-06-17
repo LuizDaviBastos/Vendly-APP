@@ -25,6 +25,7 @@ export class AuthGuardLoggedService implements CanActivate {
         this.meliService.getMeliAccountInfo(LocalStorage.getSelectedMeliAccount()?.id).subscribe((response) => {
           if (response.success) {
             LocalStorage.selectMeliAccount(response.data);
+            this.accountService.messages = response.data.messages;
           }
           else {
             this.alertService.showToastAlert(response.message);

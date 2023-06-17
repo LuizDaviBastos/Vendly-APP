@@ -3,4 +3,5 @@ export abstract class RequestResponse<T> {
     public message?: string;
     public data?: T;
     public code: number;
+    public total?: number;
 }

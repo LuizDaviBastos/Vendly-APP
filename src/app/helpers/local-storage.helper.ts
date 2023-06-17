@@ -106,14 +106,6 @@ export class LocalStorage {
         return this.seletectMeliSellerInfo != null || meliInfo != null;
     }
 
-    public static getMessage(messageType: MessageTypeEnum) {
-        const meliAccount = this.getSelectedMeliAccount();
-        const login = this.getLogin();
-        const cMeliAccount = login.data.meliAccounts.find(x => x.meliSellerId == meliAccount.id);
-        const message = cMeliAccount?.messages?.find(x => x.type == messageType) || <SellerMessage>{ activated: false, type: messageType };
-        return message;
-    }
-
     public static updateMessage(sellerMessage: SellerMessage) {
         this.meliAccountId
         const login = this.getLogin();

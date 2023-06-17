@@ -8,11 +8,14 @@ import { SubscriptionInformation } from 'src/models/subscription-Information';
 import { ExpiredResponse } from 'src/models/expired-response';
 import { SubscriptionPlan } from 'src/models/subscription-plan';
 import { PaymentHistory } from 'src/models/payment-history';
+import { SellerMessage } from 'src/models/seller-message';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AccountService {
+
+    public messages: SellerMessage[] = [];
 
     constructor(private http: HttpClientBase, private platform: Platform) {
 
@@ -46,11 +49,6 @@ export class AccountService {
         return this.http.post<RequestResponse<any>>(`api/auth/confirmRecoveryPassword`, body);
     }
 
-    public getPaymentLink(sellerId: string, subscriptionPlanId: string, isBinary: boolean = false) {
-        const params = new HttpParams().append('sellerId', sellerId,).append('subscriptionPlanId', subscriptionPlanId).append('isBinary', isBinary);
-        return this.http.get<RequestResponse<PaymentLinkResponse>>(`api/account/getPaymentLink`, { params: params });
-    }
-
     public expiredStatus(sellerId: string) {
         const params = new HttpParams().append('sellerId', sellerId);
         return this.http.get<RequestResponse<ExpiredResponse>>(`api/account/expiredStatus`, { params: params });
@@ -64,6 +62,17 @@ export class AccountService {
         return this.http.post<RequestResponse<any>>(`api/account/fcmToken`, body);
     }
 
+
+    public createPaymentLink(sellerId: string, subscriptionPlanId: string, isBinary: boolean = false) {
+        const params = new HttpParams().append('sellerId', sellerId).append('subscriptionPlanId', subscriptionPlanId).append('isBinary', isBinary);
+        return this.http.get<RequestResponse<PaymentLinkResponse>>(`api/payment/createPaymentLink`, { params: params });
+    }
+
+    public getPaymentLink(historyId: string) {
+        const params = new HttpParams().append('historyId', historyId);
+        return this.http.get<RequestResponse<PaymentLinkResponse>>(`api/payment/getPaymentLink`, { params: params });
+    }
+
     public getPaymentInformations(sellerId: string) {
         const params = new HttpParams().append('sellerId', sellerId);
         return this.http.get<RequestResponse<SubscriptionInformation>>(`api/account/getPaymentInformations`, { params: params });
@@ -73,8 +82,8 @@ export class AccountService {
         return this.http.get<RequestResponse<SubscriptionPlan[]>>(`api/payment/subscriptionList`);
     }
 
-    public getPaymentHistory(sellerId: string) {
-        const params = new HttpParams().append('sellerId', sellerId);
+    public getPaymentHistory(sellerId: string, skip: number, take: number) {
+        const params = new HttpParams().append('sellerId', sellerId).append('skip', skip).append('take', take);
         return this.http.get<RequestResponse<PaymentHistory[]>>(`api/payment/paymentHistory`, { params: params });
     }
 

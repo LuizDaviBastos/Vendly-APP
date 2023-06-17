@@ -1,4 +1,4 @@
-<ion-header no-border>
+<ion-header no-border lines="none">
     <div class="asm-header">
         <ion-grid>
             <ion-row>
@@ -7,7 +7,11 @@
                 </ion-col>
             </ion-row>
             <ion-row>
-                <ion-col><ion-title><b>Histórico de pagamentos</b></ion-title></ion-col>
+                <ion-col>
+                    <ion-title>
+                        <b>Histórico de pagamentos</b>
+                    </ion-title>
+                </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col class="description-configuration">
@@ -20,7 +24,10 @@
 </ion-header>
 
 <ion-content>
-    <ion-list lines="none">
+    <ion-row *ngIf="!history || history?.length == 0" class="notfound-container">
+        <ion-label>Nenhum registro encontrado.</ion-label>
+    </ion-row>
+    <ion-list no-border lines="none">
         <ion-item *ngFor="let item of history" class="item-background-color">
             <ion-grid>
                 <ion-row>
@@ -33,7 +40,7 @@
                 </ion-row>
                 <ion-row>
                     <ion-col size="2">
-                        <ion-label class="item-settings-label">Preço</ion-label>
+                        <ion-label class="item-settings-label">Valor</ion-label>
                     </ion-col>
                     <ion-col>
                         <ion-label class="item-setting-value ion-text-wrap">{{getFormattedPrice(item)}}</ion-label>
@@ -57,10 +64,9 @@
                     </ion-col>
                 </ion-row>
                 <ion-row *ngIf="canShowPayButton(item)">
-
                     <ion-col>
                         <div class="pay-button-container">
-                            <button class="pay-account-button">
+                            <button (click)="getPaymentLink(item)" class="pay-account-button">
                                 <div class="text-pay-container">
                                     <img class="mpago-icon" src="assets/icon/mpago.png">
                                     <label>Pagar com mercado pago</label>
@@ -72,4 +78,7 @@
             </ion-grid>
         </ion-item>
     </ion-list>
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
