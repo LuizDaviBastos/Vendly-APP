@@ -20,7 +20,7 @@
 
 <ion-content>
   <ion-list lines="none">
-    <ion-item (click)="showSubscripeInfo()" class="item-background-color">
+    <ion-item (click)="showSubscripeInfo()" class="border-start item-background-color">
       <ion-col size="4">
         <ion-label class="item-settings-label">Plano atual</ion-label>
       </ion-col>
@@ -105,14 +105,14 @@
       </ion-col>
     </ion-item>
     <div class="horizontal-line"></div>
-    <ion-item class="last-item item-background-color" [routerLink]="'payment-history'">
+    <ion-item class="last-item item-background-color border-end" [routerLink]="'payment-history'">
       <ion-col>
         <ion-label class="item-settings-label-bold">Histórico de pagamentos</ion-label>
       </ion-col>
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
 
-    <ion-item class="item-background-color delete-account-container">
+    <ion-item class="border-start border-end item-background-color delete-account-container">
       <ion-label>
         <ion-label class="pay-help-container-container">
           <b *ngIf="!expired">Pagamento antecipado</b>

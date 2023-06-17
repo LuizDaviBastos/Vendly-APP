@@ -22,7 +22,7 @@
 
 <ion-content>
   <ion-list lines="none">
-    <ion-item role="button" class="item-background-color">
+    <ion-item role="button" class="border-start item-background-color">
       <ion-label><b>Conta</b></ion-label>
     </ion-item>
     <ion-item class="item-background-color" [routerLink]="'account'">
@@ -49,14 +49,14 @@
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
     <div class="horizontal-line"></div>
-    <ion-item class="last-item item-background-color" (click)="openPrivacyPolicies()">
+    <ion-item class="border-end last-item item-background-color" (click)="openPrivacyPolicies()">
       <ion-label>
         <ion-label class="item-name">Política de Privacidade</ion-label>
       </ion-label>
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
     <div class="horizontal-line"></div>
-    <ion-item *ngIf="false" class="last-item item-background-color" disabled="disabled" [routerLink]="'account'">
+    <ion-item *ngIf="false" class="item-background-color" disabled="disabled" [routerLink]="'account'">
       <ion-label>
         <ion-label class="item-name">Contas vinculadas</ion-label>
         <p>Vincular contas do Mercado Livre</p>
@@ -72,7 +72,7 @@
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
 
-    <ion-item class="item-background-color">
+    <ion-item class="border-start item-background-color border-end">
       <ion-label>
         <ion-label><b style="color: #2D2D2D">Encerrar sessão</b></ion-label>
         <p>Essa ação encerrará sua sessão neste dispositivo</p>

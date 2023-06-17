@@ -282,3 +282,13 @@ app-step1 {
 a[class*="type-toggle"] {
   margin-right: 6px;
 }
+
+.border-start {
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+
+.border-end {
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}

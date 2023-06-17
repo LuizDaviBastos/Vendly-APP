@@ -20,7 +20,7 @@
 
 <ion-content>
   <ion-list lines="none">
-    <ion-item class="item-background-color">
+    <ion-item class="border-start item-background-color">
       <ion-col size="2">
         <ion-label class="item-settings-label">Nome</ion-label>
       </ion-col>
@@ -39,7 +39,7 @@
       </ion-col>
     </ion-item>
     <div class="horizontal-line"></div>
-    <ion-item (click)="changePassword()" class="last-item item-background-color">
+    <ion-item (click)="changePassword()" class="border-end last-item item-background-color">
       <ion-col size="2">
         <ion-label class="item-settings-label">Senha</ion-label>
       </ion-col>
@@ -50,7 +50,7 @@
     <div class="loading-info-container" *ngIf="loading['info']">
       <ion-spinner [name]="'crescent'"></ion-spinner>
     </div>
-    <ion-item *ngIf="canShowDelete && !loading['info']" class="item-background-color delete-account-container">
+    <ion-item *ngIf="canShowDelete && !loading['info']" class="border-start item-background-color delete-account-container border-end">
       <ion-label>
         <ion-label><b>Deletar conta</b></ion-label>
         <p>Esta ação não apagará as contas vinculadas do Mercado Livre.</p>

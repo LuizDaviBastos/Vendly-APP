@@ -1,46 +1,53 @@
-<ion-content class="bg-white" scrollY="true">
-
-    <ion-list class="anexo" lines="none">
-        <ion-item class="item-background-color header-item">
-            <ion-title>Anexos</ion-title>
-            <div class="edit-msg-icon-container">
-                <div style="display: flex;">
-                    <ion-icon (click)="modalController.dismiss()" style="padding: 3px;border-radius: 18px;
-                    color: #f7f7f7;
-                    background-color: #959090;" name="close"></ion-icon>
-                </div>
+<ion-header>
+    <div class="item-background-color header-item">
+        <ion-title>Anexos</ion-title>
+        <div class="edit-msg-icon-container">
+            <div style="display: flex;">
+                <ion-icon (click)="modalController.dismiss()" style="padding: 3px;border-radius: 18px;
+                color: #f7f7f7;
+                background-color: #959090;" name="close"></ion-icon>
             </div>
-        </ion-item>
+        </div>
+    </div>
+
+</ion-header>
+<ion-content class="bg-white" scrollY="true">
+    <div class="anexo">
         <div class="horizontal-line"></div>
-        <ion-item class="item-background-color footer-item bg-white attachment-content-container">
+        <div *ngIf="(attachments.length > 0); else loadingattachments"
+            class="item-background-color footer-item bg-white attachment-content-container">
             <div class="attachment-content">
-                <div *ngIf="attachments.length > 0; else loadingattachments">
-                    <ion-item class="border-bottom" *ngFor="let item of attachments; let index = index;" lines="none">
+                <div>
+                    <ion-item class="border-bottom" *ngFor="let item of attachments; let index = index;"
+                        lines="none">
                         <ion-icon name="document" slot="start"></ion-icon>
                         <ion-label>
                             <h3>{{item.name}}</h3>
                             <p>{{item.size}}</p>
                         </ion-label>
-                        <ion-icon class="trash-icon" *ngIf="!loading['delete' + item.id]" (click)="confirmDelete(item)"
-                            name="trash-outline" slot="end"></ion-icon>
+                        <ion-icon style="width: 20px;" src="assets/icon/trash.svg"
+                            *ngIf="!loading['delete' + item.id]" (click)="confirmDelete(item)" name="trash-outline"
+                            slot="end"></ion-icon>
                         <ion-spinner name="crescent" *ngIf="loading['delete' + item.id]"></ion-spinner>
                     </ion-item>
                 </div>
-                <ng-template #loadingattachments>
-                    <div>
-                        <ng-container *ngIf="loading['attachments']; else notfoundattachment">
-                            <ion-spinner style="text-align: center; margin: auto" name="crescent"></ion-spinner>
-                        </ng-container>
-                        <ng-template #notfoundattachment>
-                            <ion-label style="text-align: center; margin: auto; margin-top: 20px;">Nenhum arquivo encontrado.</ion-label>
-                        </ng-template>
-                    </div>
-
-                </ng-template>
             </div>
-        </ion-item>
+        </div>
+    </div>
 
-    </ion-list>
+    <ng-template #loadingattachments>
+
+        <div class="loading-container">
+            <ng-container *ngIf="loading['attachments']; else notfoundattachment">
+                <ion-spinner style="text-align: center; margin: auto;" name="crescent"></ion-spinner>
+            </ng-container>
+            <ng-template #notfoundattachment>
+                <div style="margin: auto">
+                    <ion-label style="text-align: center;">Nenhum arquivo encontrado.</ion-label>
+                </div>
+            </ng-template>
+        </div>
+    </ng-template>
 
 </ion-content>
 

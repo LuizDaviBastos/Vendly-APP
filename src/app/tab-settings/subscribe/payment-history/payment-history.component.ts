@@ -42,7 +42,7 @@ export class PaymentHistoryComponent implements OnInit {
   }
 
   public canShowPayButton(item: PaymentHistory) {
-    return true;item.status == PaymentStatus.Pending && !this.itemExpired(item);
+    return item.status == PaymentStatus.Pending && !this.itemExpired(item);
   }
 
   public getStatus(item: PaymentHistory) {
