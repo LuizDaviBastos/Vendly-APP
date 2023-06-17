@@ -17,7 +17,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class SubscribeComponent implements OnInit {
   public _title: string = 'Seu plano expirou';
-  public _description: string = `Ops, parece que seu plano expirou. Continue com o plano mensal e não deixe seus clientes esperando.`;
+  public _description: string = `Ops, parece que seu plano expirou. Continue com o plano e não deixe seus clientes esperando.`;
   public set title(value: string) { value && (this._title = value); }
   public set description(value: string) { value && (this._description = value); }
 

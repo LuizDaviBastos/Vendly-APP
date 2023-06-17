@@ -17,6 +17,7 @@ export class SecurityConfirmationComponent implements OnInit, OnDestroy {
   @Input('showLogout') public showLogout: boolean;
   @Input('isSignup') public isSignup: boolean;
   @Input('sellerId') public sellerId: string;
+  @Input('email') public email: string;
   @Output('onSuccess') onSuccessEvent: EventEmitter<any> = new EventEmitter();
   @Output('onError') onErrorEvent: EventEmitter<any> = new EventEmitter();
 

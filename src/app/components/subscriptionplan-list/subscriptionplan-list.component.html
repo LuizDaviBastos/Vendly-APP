@@ -1,5 +1,5 @@
-<ng-container *ngIf="!loading['plans']; loadingPlans">
-  
+<ng-container *ngIf="!loading['plans']">
+    
     <ion-card *ngFor="let subscriptionPlan of subscriptionPlans">
       <ion-card-header>
         <ion-card-title>{{subscriptionPlan.name}}</ion-card-title>
@@ -30,6 +30,6 @@
     </ion-card>
   
 </ng-container>
-<ng-template #loadingPlans>
-  <ion-spinner></ion-spinner>
-</ng-template>
+<div class="loading-container" *ngIf="loading['plans']">
+  <ion-spinner name="crescent"></ion-spinner>
+</div>

@@ -181,3 +181,23 @@ ion-skeleton-text {
     font-weight: 600;
     color: #2D2D2D
 }
+
+.pay-help-container-container {
+    display: flex;
+    margin: auto;
+    text-align: center;
+
+    b {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .pay-help-container {
+        margin-left: 8px;
+        ion-icon {
+            margin-top: auto;
+            margin-bottom: auto;
+            font-size: 17pt;
+        }
+    }
+}

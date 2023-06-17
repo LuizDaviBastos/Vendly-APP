@@ -22,14 +22,19 @@ export class Step4Component implements OnInit {
 
   ngOnInit() { }
 
+  public get email() {
+    return LocalStorage.getLogin()?.data?.email;
+  }
+
   public onError(message: string) {
 
   }
 
   public onSuccess() {
     const login = LocalStorage.getLogin();
-    if (login && login.emailNotConfirmed == false) {
-      login.emailNotConfirmed = true;
+    if (login && login.emailNotConfirmed == true) {
+      login.emailNotConfirmed = false;
+      login.data.confirmedEmail = true;
       LocalStorage.setLogin(login);
     }
     this.nextStep();

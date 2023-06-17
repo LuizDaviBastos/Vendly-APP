@@ -16,8 +16,11 @@
       </ion-row>
       <ion-row>
         <ion-col class="description">
-          <ion-row>
+          <ion-row *ngIf="!email">
             <ion-label class="ion-text-wrap">Verifique o código que foi enviado para o seu email.</ion-label>
+          </ion-row>
+          <ion-row *ngIf="email">
+            <ion-label class="ion-text-wrap">Verifique o código que foi enviado para o email "<b>{{email}}</b>"</ion-label>
           </ion-row>
         </ion-col>
       </ion-row>

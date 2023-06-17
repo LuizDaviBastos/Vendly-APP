@@ -51,16 +51,18 @@ export class FcmService {
 
         PushNotifications.addListener('pushNotificationReceived',
             (notification: PushNotificationSchema) => {
-                const id = Uteis.getRandomNumber(0, 500);
+                let id = Uteis.getRandomNumber(0, 500);
+                if(notification.data?.id) {
+                    id = notification.data.id;
+                }
                 this.alertService.showNotification(notification.title, notification.body, id);
-                this.route.navigateByUrl('/message');
             }
         );
 
         // Method called when tapping on a notification
         PushNotifications.addListener('pushNotificationActionPerformed',
             (notification: ActionPerformed) => {
-                this.route.navigateByUrl('/message');
+                this.route.navigateByUrl('/settings/subscribe-info');
             }
         );
     }

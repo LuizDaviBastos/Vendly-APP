@@ -68,7 +68,10 @@ export class SignupComponent implements OnInit {
   public async ngOnInit() {
     this.sync = false;
     this.activatedRoute.queryParamMap.subscribe(async (params) => {
-      const step = <1 | 2 | 3 | 4 | 5>+params.get('step');
+      let step = <1 | 2 | 3 | 4 | 5>+params.get('step');
+      if(LocalStorage.IsLogged && !LocalStorage.getLogin().emailNotConfirmed) {
+        step = 5;
+      }
       if (step && step == 5) {
         const loading = await this.loadingController.create({
           duration: -1,
@@ -102,7 +105,7 @@ export class SignupComponent implements OnInit {
         }
         this.sellerId = id;
         this.currentStep = step;
-      }
+      } 
     })
 
   }
@@ -135,6 +138,7 @@ export class SignupComponent implements OnInit {
     this.stepsFormGroup[5].get('sync').setValue('');
     const login = LocalStorage.getLogin();
     login.hasMeliAccount = true;
+    LocalStorage.updateHasMeliAccount(true);
 
     this.meliService.getSellerInfo(login.data.id).subscribe((response) => {
       if (response.success) {

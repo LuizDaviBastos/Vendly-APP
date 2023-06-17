@@ -6,6 +6,8 @@ import { Seller } from 'src/models/seller';
 import { SecurityConfirmationService } from 'src/services/security-confirmation-service';
 import { AccountService } from 'src/services/account-service';
 import { AlertService } from 'src/services/alert-service';
+import { SubscriptionPlan } from 'src/models/subscription-plan';
+import { SubscriptionInformation } from 'src/models/subscription-Information';
 
 @Component({
   selector: 'account-tab-settings',
@@ -20,6 +22,7 @@ export class AccountSettingsPage implements OnInit {
   
   public get canShowDelete(): boolean { return !LocalStorage.expired && !LocalStorage.isFreePeriod; }
   public loading = {};
+  public subscriptionInfo: SubscriptionInformation = new SubscriptionInformation();
 
   constructor(private route: Router, private platform: Platform,
     private navCtrl: NavController, private zone: NgZone,
@@ -30,7 +33,19 @@ export class AccountSettingsPage implements OnInit {
     private accountService: AccountService) { }
 
   ngOnInit(): void {
-
+    this.loading['info'] = true;
+    this.accountService.getPaymentInformations(LocalStorage.sellerId).subscribe((response) => {
+      this.loading['info'] = false;
+      if (response.success) {
+        this.subscriptionInfo = response.data;
+        LocalStorage.isFreePeriod = response.data.isFreePeriod;
+      } else {
+        this.alertService.showToastAlert(response.message);
+      }
+    }, (err) => { },
+      () => {
+        this.loading['info'] = false;
+      })
   }
 
   public goBack() {

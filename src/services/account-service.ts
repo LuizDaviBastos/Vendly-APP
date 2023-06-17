@@ -15,8 +15,6 @@ import { SellerMessage } from 'src/models/seller-message';
 })
 export class AccountService {
 
-    public messages: SellerMessage[] = [];
-
     constructor(private http: HttpClientBase, private platform: Platform) {
 
     }

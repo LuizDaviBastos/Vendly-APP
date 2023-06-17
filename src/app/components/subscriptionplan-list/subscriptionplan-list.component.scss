@@ -164,3 +164,12 @@ ion-footer {
 html:root {
     --ion-background-color: white!important;
 }
+
+.loading-container {
+    display: flex;
+    height: 100%;
+    ion-spinner {
+        margin: auto;
+        color: #2D2D2D;
+    }
+}

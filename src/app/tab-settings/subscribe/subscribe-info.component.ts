@@ -83,4 +83,10 @@ export class SubscribeInfoComponent implements OnInit {
       return '';
     }
   }
+
+  public showSubscripeInfo() {
+    if(this.subscription.isFreePeriod) {
+      this.modalService.showFreePeriodModal();
+    }
+  }
 }

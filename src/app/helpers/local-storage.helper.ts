@@ -62,7 +62,7 @@ export class LocalStorage {
     public static get meliAccountId(): string {
         const login = this.getLogin();
         const selectedMeli = this.getSelectedMeliAccount();
-        return login.data.meliAccounts.find(x => x.meliSellerId == selectedMeli.id).id;
+        return login.data?.meliAccounts?.find(x => x.meliSellerId == selectedMeli.id)?.id;
     }
 
     public static setToken(token: string) {
@@ -92,9 +92,9 @@ export class LocalStorage {
             this.seletectMeliSellerInfo = <SellerInfo>JSON.parse(localStorage.getItem(this.keys.meliSeller));
             if (!this.seletectMeliSellerInfo) {
                 let meliAccounts = this.getLogin()?.data?.meliAccounts;
-                if(meliAccounts?.length > 0) {
-                    return <SellerInfo>{ id: meliAccounts[0].meliSellerId };    
-                } 
+                if (meliAccounts?.length > 0) {
+                    return <SellerInfo>{ id: meliAccounts[0].meliSellerId };
+                }
                 return null;
             }
         }
@@ -107,13 +107,15 @@ export class LocalStorage {
     }
 
     public static updateMessage(sellerMessage: SellerMessage) {
-        this.meliAccountId
-        const login = this.getLogin();
-        let meliAccount = login.data.meliAccounts.find(x => x.id == this.meliAccountId);
-        let messages = meliAccount?.messages?.filter(x => x.type != sellerMessage.type) || [];
-        messages.push(sellerMessage);
-        meliAccount.messages = messages;
-        this.setLogin(login);
+        const meliAccount = this.getSelectedMeliAccount();
+        const message = meliAccount?.messages?.find(x => x.type == sellerMessage.type);
+        if(!message) {
+            meliAccount.messages.push(sellerMessage);
+        } else {
+            const newMessages = meliAccount.messages.filter(x => x.type != sellerMessage.type);
+            meliAccount.messages = [...newMessages, sellerMessage];
+            this.selectMeliAccount(meliAccount);
+        }
     }
 
     public static setCountry(country: Country) {
@@ -157,6 +159,10 @@ export class LocalStorage {
         });
     }
 
+    public static getMessage(messageType: MessageTypeEnum) {
+        const meliAccount = this.getSelectedMeliAccount();
+        return meliAccount?.messages?.find(x => x.type == messageType);
+    }
 
 
     public static updateHasMeliAccount(state: boolean) {

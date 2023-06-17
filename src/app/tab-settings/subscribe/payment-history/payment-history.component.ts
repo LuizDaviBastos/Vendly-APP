@@ -22,6 +22,7 @@ export class PaymentHistoryComponent implements OnInit {
   public skip = 0;
   public take = 10;
   public total = 0;
+  public loading = {};
   constructor(private route: Router,
     private navCtrl: NavController,
     private accountService: AccountService,
@@ -32,7 +33,7 @@ export class PaymentHistoryComponent implements OnInit {
 
 
   async ngOnInit() {
-    const sellerId = LocalStorage.sellerId;
+    this.loading['history'] = true;
     await this.loadMore();
   }
 
@@ -41,7 +42,7 @@ export class PaymentHistoryComponent implements OnInit {
   }
 
   public canShowPayButton(item: PaymentHistory) {
-    return item.status == PaymentStatus.Pending && !this.itemExpired(item);
+    return true;item.status == PaymentStatus.Pending && !this.itemExpired(item);
   }
 
   public getStatus(item: PaymentHistory) {
@@ -88,11 +89,19 @@ export class PaymentHistoryComponent implements OnInit {
     }, 500);
   }
   public async loadMore() {
-    this.skip = this.history.length;
-    if (this.skip >= this.total && this.skip != 0) return;
-    let response = await this.accountService.getPaymentHistory(this.sellerId, this.skip, this.take).toPromise()
-    this.history.push(...response.data);
-    this.total = response.total;
+    try {
+      this.skip = this.history.length;
+      if (this.skip >= this.total && this.skip != 0) return;
+      let response = await this.accountService.getPaymentHistory(this.sellerId, this.skip, this.take).toPromise()
+      this.history.push(...response.data);
+      this.total = response.total;
+    } catch(e) {
+      this.alertService.showToastAlert(e?.message || 'Houve um erro ao buscar o histórico.');
+    }
+    finally {
+      this.loading['history'] = false;
+    }
+
   }
 
   public itemExpired(item: PaymentHistory) {

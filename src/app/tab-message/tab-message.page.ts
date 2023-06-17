@@ -53,7 +53,7 @@ export class TabMessagePage implements OnInit, AfterViewInit, OnDestroy {
     return LocalStorage.getSelectedMeliAccount();
   }
   public getMessage(messageType: MessageTypeEnum) {
-    return this.accountService.messages?.find(x => x.type == messageType);//LocalStorage.getMessage(messageType);
+    return LocalStorage.getMessage(messageType);
   }
 
   public navigateTo(route: string) {
@@ -89,7 +89,6 @@ export class TabMessagePage implements OnInit, AfterViewInit, OnDestroy {
       this.loading['sellerInfo'] = false;
       if (response.success) {
         LocalStorage.selectMeliAccount(response.data);
-        this.accountService.messages = response.data.messages;
       }
       else {
         this.alertService.showToastAlert(response.message);

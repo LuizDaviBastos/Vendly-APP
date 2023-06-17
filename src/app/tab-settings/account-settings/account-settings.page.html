@@ -25,7 +25,8 @@
         <ion-label class="item-settings-label">Nome</ion-label>
       </ion-col>
       <ion-col>
-        <ion-label class="item-setting-value ion-text-wrap">{{sellerInfo?.firstName}} {{sellerInfo?.lastName}}</ion-label>
+        <ion-label class="item-setting-value ion-text-wrap">{{sellerInfo?.firstName}}
+          {{sellerInfo?.lastName}}</ion-label>
       </ion-col>
     </ion-item>
     <div class="horizontal-line"></div>
@@ -46,8 +47,10 @@
         <ion-label class="item-setting-value">Alterar senha</ion-label>
       </ion-col>
     </ion-item>
-
-    <ion-item *ngIf="canShowDelete" class="item-background-color delete-account-container">
+    <div class="loading-info-container" *ngIf="loading['info']">
+      <ion-spinner [name]="'crescent'"></ion-spinner>
+    </div>
+    <ion-item *ngIf="canShowDelete && !loading['info']" class="item-background-color delete-account-container">
       <ion-label>
         <ion-label><b>Deletar conta</b></ion-label>
         <p>Esta ação não apagará as contas vinculadas do Mercado Livre.</p>

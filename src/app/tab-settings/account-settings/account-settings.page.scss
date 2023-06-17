@@ -126,3 +126,10 @@ ion-item {
     }
 }
 
+.loading-info-container {
+    display: flex;
+    ion-spinner {
+        margin: auto;
+        color: #2D2D2D;
+    }
+}

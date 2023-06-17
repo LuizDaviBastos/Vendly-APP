@@ -24,8 +24,9 @@
 </ion-header>
 
 <ion-content>
-    <ion-row *ngIf="!history || history?.length == 0" class="notfound-container">
-        <ion-label>Nenhum registro encontrado.</ion-label>
+    <ion-row *ngIf="!history || history?.length == 0 || loading['history']" class="notfound-container">
+        <ion-spinner [name]="'crescent'" *ngIf="loading['history']"></ion-spinner>
+        <ion-label *ngIf="!loading['history']">Nenhum registro encontrado.</ion-label>
     </ion-row>
     <ion-list no-border lines="none">
         <ion-item *ngFor="let item of history" class="item-background-color">
@@ -47,8 +48,8 @@
                     </ion-col>
                 </ion-row>
                 <ion-row>
-                    <ion-col size="2">
-                        <ion-label class="item-settings-label">Data</ion-label>
+                    <ion-col size="4">
+                        <ion-label class="item-settings-label">Criado em</ion-label>
                     </ion-col>
                     <ion-col>
                         <ion-label class="item-setting-value ion-text-wrap">{{getDate(item.createdDate)}}</ion-label>
@@ -79,6 +80,6 @@
         </ion-item>
     </ion-list>
     <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        <ion-infinite-scroll-content [loadingSpinner]="'crescent'"></ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>

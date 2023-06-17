@@ -187,8 +187,12 @@ ion-skeleton-text {
 .notfound-container {
     height: 100%;
 
-    ion-label {
+    ion-label, ion-spinner {
         color: #595959;
         margin: auto;
+    }
+
+    ion-spinner {
+        font-size: 10pt;
     }
 }

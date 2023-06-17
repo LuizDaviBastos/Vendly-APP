@@ -20,7 +20,7 @@
 
 <ion-content>
   <ion-list lines="none">
-    <ion-item class="item-background-color">
+    <ion-item (click)="showSubscripeInfo()" class="item-background-color">
       <ion-col size="4">
         <ion-label class="item-settings-label">Plano atual</ion-label>
       </ion-col>
@@ -114,8 +114,19 @@
 
     <ion-item class="item-background-color delete-account-container">
       <ion-label>
-        <ion-label>
+        <ion-label class="pay-help-container-container">
           <b *ngIf="!expired">Pagamento antecipado</b>
+          <div class="pay-help-container">
+            <ion-icon id="click-trigger" name="help-circle-outline"></ion-icon>
+            <ion-popover trigger="click-trigger" triggerAction="click">
+              <ng-template>
+                <ion-content class="ion-padding">
+                  Ao fazer um pagamento antecipado, o tempo será somado com o já existente.
+                </ion-content>
+              </ng-template>
+            </ion-popover>
+          </div>
+          
           <b *ngIf="expired">Parece que seu plano expirou</b>
         </ion-label>
         <p *ngIf="!expired">Faça um pagamento antecipado para garantir o serviço sem interrupções.</p>
