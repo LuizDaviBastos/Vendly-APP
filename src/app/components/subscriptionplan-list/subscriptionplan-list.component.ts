@@ -15,10 +15,17 @@ import { LocalStorageService } from 'src/services/local-storage-service';
 })
 export class SubscriptionplanListComponent implements OnInit {
 
+
+
+  @Input('description') set description(value: string) { value && (this._description = value); }
+  @Input('hidePayButton') public hidePayButton: boolean;
+  @Input('isFree') public isFree: boolean;
+  @Input('closeModal') public closeModal: () => void;
+  @Output('onSelectedPlan') onSelectedPlan: EventEmitter<SubscriptionPlan> = new EventEmitter();
+
+  public _description: string = 'Pague com o dinheiro em conta do Mercado Pago ou cartão.';
   public subscriptionPlans: SubscriptionPlan[] = [];
   public loading = {};
-
-  @Output('onSelectedPlan') onSelectedPlan: EventEmitter<SubscriptionPlan> = new EventEmitter();
 
   constructor(private accountService: AccountService, private alertService: AlertService, private route: Router, private fcmService: FcmService,
     private localStorageService: LocalStorageService, private browserService: BrowserService) { }
@@ -29,7 +36,7 @@ export class SubscriptionplanListComponent implements OnInit {
 
   public getSubscriptionPlans() {
     this.loading['plans'] = true;
-    this.accountService.getSubscriptionPlans().subscribe((response) => {
+    this.accountService.getSubscriptionPlans(this.isFree).subscribe((response) => {
       this.loading['plans'] = false;
       this.subscriptionPlans = response.data;
     }, (err) => {
@@ -45,6 +52,10 @@ export class SubscriptionplanListComponent implements OnInit {
 
   public async logout() {
     await this.localStorageService.logout();
+  }
+
+  public isFreeOk() {
+    this.closeModal && this.closeModal();
   }
 
 }

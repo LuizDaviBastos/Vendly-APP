@@ -7,4 +7,5 @@ export class SubscriptionPlan {
  public isFree: boolean;
  public validateValue: number;
  public validateType: ValidateType;
+ public description: string;
 }

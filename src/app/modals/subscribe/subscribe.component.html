@@ -16,7 +16,7 @@
   </ion-grid>
 </ion-header>
 <ion-content lines="none">
-  <subscriptionplan-list (onSelectedPlan)="getPaymentLink($event)"></subscriptionplan-list>
+  <subscriptionplan-list [closeModal]="closeModal.bind(this)" [isFree]="isFree" [hidePayButton]="hidePaymentButton" [description]="paymentDescription" (onSelectedPlan)="getPaymentLink($event)"></subscriptionplan-list>
 </ion-content>
 <ion-footer *ngIf="false" lines="none" class="ion-no-border">
   <label>Deseja utilizar outra conta? </label>

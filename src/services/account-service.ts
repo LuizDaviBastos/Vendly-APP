@@ -76,8 +76,9 @@ export class AccountService {
         return this.http.get<RequestResponse<SubscriptionInformation>>(`api/account/getPaymentInformations`, { params: params });
     }
 
-    public getSubscriptionPlans() {
-        return this.http.get<RequestResponse<SubscriptionPlan[]>>(`api/payment/subscriptionList`);
+    public getSubscriptionPlans(isFree: boolean) {
+        const params = new HttpParams().append('isFree', isFree);
+        return this.http.get<RequestResponse<SubscriptionPlan[]>>(`api/payment/subscriptionList`, { params: params });
     }
 
     public getPaymentHistory(sellerId: string, skip: number, take: number) {
