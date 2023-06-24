@@ -16,13 +16,12 @@ import { IconModule } from 'src/components/icon-components/icon.module';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { SubscribeModule } from './modals/subscribe/subscribe.module';
-import { FreePeriodModule } from './modals/free-period/free-period.module';
 
 registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
   declarations: [AppComponent, SearchTagsDirective],
-  imports: [BrowserModule, CommonModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule, IconModule, SubscribeModule, FreePeriodModule,
+  imports: [BrowserModule, CommonModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule, IconModule, SubscribeModule,
     provideFirebaseApp(() => initializeApp({
       apiKey: "AIzaSyDy9fSBYh58zt8TT4tzed3b9-HYeau-12w",
       authDomain: "asm-app-413c2.firebaseapp.com",

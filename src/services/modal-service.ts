@@ -1,7 +1,6 @@
 import { ComponentRef, Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { SubscribeComponent } from '../app/modals/subscribe/subscribe.component';
-import { FreePeriodComponent } from 'src/app/modals/free-period/free-period.component';
 import { ContactModalComponent } from 'src/app/modals/contact-modal/contact-modal.component';
 
 @Injectable({
