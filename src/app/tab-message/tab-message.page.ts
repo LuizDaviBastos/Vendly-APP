@@ -100,7 +100,6 @@ export class TabMessagePage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public checkExpiredStatus() {
-    this.modalService.showFreePeriodModal();//TODO remove
     this.accountService.expiredStatus(LocalStorage.sellerId).subscribe((response) => {
       const notExpired = (response?.data?.notExpired);
       LocalStorage.expired = !notExpired;
