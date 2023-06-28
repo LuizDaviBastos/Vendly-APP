@@ -116,7 +116,7 @@
       <ion-label>
         <ion-label class="pay-help-container-container">
           <b *ngIf="!expired">Pagamento antecipado</b>
-          <div class="pay-help-container">
+          <div *ngIf="!expired" class="pay-help-container">
             <ion-icon id="click-trigger" name="help-circle-outline"></ion-icon>
             <ion-popover trigger="click-trigger" triggerAction="click">
               <ng-template>
