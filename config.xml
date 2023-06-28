@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets"
+<widget id="vendly" version="0.0.2" xmlns="http://www.w3.org/ns/widgets"
     xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>ASM</name>
-    <description>After seller message</description>
-    <author email="davi-sdb@hotmail.com" href="http://ionicframework.com/">P.Ideal</author>
+    <name>Vendly</name>
+    <description>Vendly - Assistente de vendas</description>
+    <author email="davi-sdb@hotmail.com" href="">Vendly Tech Solutions</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
