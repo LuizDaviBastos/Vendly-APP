@@ -13,7 +13,7 @@
     "android-pixel6-skip-build": "ionic capacitor run android --target Pixel_6_API_30_Sem_PlayStore",
     "build-android": "./build.bat",
     "start": "ionic serve",
-    "build": "npm run build:lib & ng build",
+    "build": "npm run build:lib & ionic build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
