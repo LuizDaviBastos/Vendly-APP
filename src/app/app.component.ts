@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { App, URLOpenListenerEvent } from '@capacitor/app';
 import { StatusBar } from '@capacitor/status-bar';
@@ -6,17 +6,19 @@ import { Platform } from '@ionic/angular';
 import { AlertService } from 'src/services/alert-service';
 import { FcmService } from 'src/services/fcm-service';
 import { MeliService } from 'src/services/meli-service';
+import { Deploy } from 'cordova-plugin-ionic/dist/ngx';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public loaded: boolean = false;
   constructor(private router: Router, private zone: NgZone, private platform: Platform,
     private cdr: ChangeDetectorRef, private meliService: MeliService,
-    private alertService: AlertService) {
+    private alertService: AlertService,
+    private deploy: Deploy) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if (window.navigator.platform == "Win32") {
@@ -47,5 +49,8 @@ export class AppComponent {
     });
 
   
+  }
+  async ngOnInit() {
+    await this.deploy.configure({channel: 'asm_channel'});
   }
 }
