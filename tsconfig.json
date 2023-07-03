@@ -9,19 +9,19 @@
         "projects/prosemirror-mentions/src"
       ],
       "ngx-editor": [
-        "dist/ngx-editor"
+        "./projects/ngx-editor"
       ],
       "ngx-editor/utils": [
-        "dist/ngx-editor/utils"
+        "./projects/ngx-editor/utils"
       ],
       "ngx-editor/helpers": [
-        "dist/ngx-editor/helpers"
+        "./projects/ngx-editor/helpers"
       ],
       "ngx-editor/schema": [
-        "dist/ngx-editor/schema"
+        "./projects/ngx-editor/schema"
       ],
       "ngx-editor/commands": [
-        "dist/ngx-editor/commands"
+        "./projects/ngx-editor/commands"
       ]
     },
     "declaration": false,

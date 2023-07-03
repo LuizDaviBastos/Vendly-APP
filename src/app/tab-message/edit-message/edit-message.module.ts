@@ -6,7 +6,7 @@ import { MeliService } from '../../../services/meli-service';
 import { RouterModule } from '@angular/router';
 import { EditMessagePage } from './edit-message.page';
 import { MentionModule } from 'angular-mentions';
-import { NgxEditorModule } from 'ngx-editor';
+import { NgxEditorModule } from 'ngx-editor/index';
 import { AttachmentService } from '../../../services/attachment-service';
 import { AttachmentModal } from 'src/app/modals/attachment-modal/attachment-modal.component';
 import { SkeletonLoadingModule } from 'src/app/components/skeleton-loading/skeleton-loading.module';
