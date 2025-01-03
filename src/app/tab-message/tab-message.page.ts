@@ -95,7 +95,7 @@ export class TabMessagePage implements OnInit, AfterViewInit, OnDestroy {
       }
     }, (error) => {
       this.loading['sellerInfo'] = false;
-      this.alertService.showToastAlert(error?.error?.message || 'Houve um erro tentar obter suas informações.');
+      this.alertService.showToastAlert(error?.error?.message || 'Houve um erro ao tentar obter suas informações.');
     }, () => { this.loading['sellerInfo'] = false; })
   }
 
